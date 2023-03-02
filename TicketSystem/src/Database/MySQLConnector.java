@@ -13,7 +13,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
  * @author boxro
  */
 public class MySQLConnector {
-    String addr = "snboots.ddns.net:3310/ticketsys";
+    String addr = "snboots.ddns.net:3310/ticketsys2";
     String address = "jdbc:mysql://" + addr ;
     String user = "admin";
     String pass = "titingkayad";
