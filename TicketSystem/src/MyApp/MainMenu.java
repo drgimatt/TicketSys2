@@ -74,6 +74,7 @@ public class MainMenu extends javax.swing.JFrame {
     UpdateUser updateUser;
     MySQLConnector connector;
     private String acctype, firstname, lastname, department, empid;
+    private String credTableParam = "credentials";
     private Data_Tickets mySql = new Data_Tickets();
     private ArrayList<Tickets> alltickets, solvedtickets, assignedtickets, mytickets, tickethistory, followuptickets;
     private Data_Credentials creds = new Data_Credentials();
@@ -1500,6 +1501,7 @@ public class MainMenu extends javax.swing.JFrame {
             parentPanel.add(userManagementPanel);
             parentPanel.repaint();
             parentPanel.revalidate();
+            updateTableDisplay();
     }//GEN-LAST:event_manageUserButtonActionPerformed
 
     private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
@@ -1534,7 +1536,7 @@ public class MainMenu extends javax.swing.JFrame {
         model = (DefaultTableModel) userManagerTable.getModel();
         int selectedRow = userManagerTable.getSelectedRow();
         if (userManagerTable.getSelectedRowCount()==1){
-            updateUser = new UpdateUser();
+            updateUser = new UpdateUser(getAcctype(),getDepartment());
             updateUser.setVisible(true);        
         try {
             updateUser.populateflds((userManagerTable.getValueAt(selectedRow, 0).toString()));
@@ -1708,6 +1710,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void depComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depComboBoxActionPerformed
         // TODO add your handling code here:
+        // Insert provision on which if current user is an administrator, allow assigning of employee if the department selected is where the admin belongs to
         String department = depComboBox.getSelectedItem().toString();
         Data_Tickets emp = new Data_Tickets();
         String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + department + "'";
@@ -2048,6 +2051,8 @@ public class MainMenu extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2193,7 +2198,7 @@ public class MainMenu extends javax.swing.JFrame {
     }
     
     protected void setInterface(String x) {
-        System.out.println("User Type: " + x);
+        System.out.println("User Type: " + getAcctype());
         System.out.println("First Name: " + getFirstname());
         System.out.println("Last Name: " + getLastname());
         System.out.println("Department: " + getDepartment());
@@ -2207,13 +2212,21 @@ public class MainMenu extends javax.swing.JFrame {
             jLabel28.setVisible(false);
             jLabel29.setVisible(false);
         }
-        if ("Administrator".equals(x)) {
+        else if ("Administrator".equals(x)) {
             manageUserButton.setVisible(true);
+            depComboBox.setEnabled(false);
+            assigneeComboBox1.setVisible(false);
+            jLabel17.setVisible(false);
+            credTableParam = "credentials WHERE department = '" + getDepartment() + "'";System.out.println(credTableParam);
+        }
+        else if ("Superadmin".equals(x)) {
+            manageUserButton.setVisible(true);
+            credTableParam = "credentials";
         }
         jLabel3.setText("Are you ready to work on your tickets, " + getFirstname() + " " + getLastname() + "?");
     }
     private void updateTableDisplay(){   
-    user = creds.ShowRec("credentials");    
+    user = creds.ShowRec(credTableParam);    
     model = (DefaultTableModel) userManagerTable.getModel();
     model.setRowCount(0);
     for(Credentials u: user) {    

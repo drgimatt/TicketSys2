@@ -8,6 +8,13 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import Database.Credentials;
 import Database.Data_Credentials;
 import Database.EncryptionDecryption;
+import Database.MySQLConnector;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
@@ -36,7 +43,24 @@ public class UpdateUser extends javax.swing.JFrame {
         setResizable(false);
     }
     
+    public UpdateUser(String privilage, String department){
+        this.privilage = privilage;
+        this.department = department;
+        initComponents();
+        FrameCenter.centerJFrame(this);
+        setResizable(false);
+        setInterface(privilage);
+    }
+    
+    private String privilage, firstname, lastname, department, empid, username;
+    Connection myConn = null;
+    Statement myStmt = null;
+    ResultSet myRes = null;    
+    String acctype = "";
+    String usern = "";
+    String cdept = "";
     Login login;
+    boolean enableAccType = false;
     int num = 0;
     List<String> array = new ArrayList<>();
     /**
@@ -127,8 +151,18 @@ public class UpdateUser extends javax.swing.JFrame {
         acctypeSel.setBackground(new java.awt.Color(0, 102, 204));
         acctypeSel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acctypeSel.setForeground(new java.awt.Color(255, 255, 255));
-        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator" }));
+        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator", "Superadmin" }));
         acctypeSel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        acctypeSel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                acctypeSelItemStateChanged(evt);
+            }
+        });
+        acctypeSel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acctypeSelActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel8.setText("Middle Name:");
@@ -506,6 +540,85 @@ public class UpdateUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_genderFldActionPerformed
 
+    private void acctypeSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acctypeSelActionPerformed
+        // TODO add your handling code here:
+        if (enableAccType == true){
+        if(acctypeSel.getSelectedItem() == "Superadmin"){
+        String qry = "SELECT * FROM credentials WHERE acctype='Superadmin'";
+        try {
+            myConn = MySQLConnector.getInstance().getConnection();
+            myStmt=myConn.createStatement();
+            myRes = myStmt.executeQuery(qry);
+            System.out.println(qry);
+                if (myRes.next()) {
+                    System.out.println(myRes.getString(3));
+                    System.out.println(myRes.getString(14));
+                    if (myRes.getString(14).equals("Superadmin")) {
+                        if(myRes.getString(3).equals(usern) && myRes.getString(14).equals("Superadmin")){
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
+                            acctypeSel.setSelectedIndex(0);
+                        }
+                    }
+                }        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (PropertyVetoException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    finally{
+                        if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
+                        if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
+                        if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}
+                    }
+        }        
+      } 
+    }//GEN-LAST:event_acctypeSelActionPerformed
+
+    private void acctypeSelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_acctypeSelItemStateChanged
+        // TODO add your handling code here:
+//        if(acctypeSel.getSelectedItem() == "Superadmin"){
+//        String qry = "SELECT * FROM credentials WHERE acctype='Superadmin'";
+//        try {
+//            myConn = MySQLConnector.getInstance().getConnection();
+//            myStmt=myConn.createStatement();
+//            myRes = myStmt.executeQuery(qry);
+//            System.out.println(qry);
+//                if (myRes.next()) {
+//                    System.out.println(myRes.getString(3));
+//                    System.out.println(myRes.getString(14));
+//                    if (myRes.getString(14).equals("Superadmin")) {
+//                        if(myRes.getString(3).equals(usern) && myRes.getString(14).equals("Superadmin")){
+//                        }
+//                        else{
+//                            JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
+//                            acctypeSel.setSelectedIndex(0);
+//                        }
+//                    }
+//                    else{
+//                    }
+//
+//                }        
+//                    } catch (SQLException ex) {
+//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (PropertyVetoException ex) {
+//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                    finally{
+//                        if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
+//                        if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
+//                        if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}
+//                    }
+//        
+//        }        
+//                
+    }//GEN-LAST:event_acctypeSelItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -617,6 +730,7 @@ public class UpdateUser extends javax.swing.JFrame {
             Data_Credentials creds = new Data_Credentials();
             String parameters = "credentials WHERE empnum = '" + t + "'";
             userinfo = creds.ShowRec(parameters);
+            
             for(Credentials u: userinfo){
                 empIDFld.setText(u.getEmpnum());
                 posFld.setText(u.getPosition());
@@ -635,9 +749,31 @@ public class UpdateUser extends javax.swing.JFrame {
                 birthday.setDate(format.parse(u.getBday()));
                 dateStart.setDate(format.parse(u.getStartdate()));
                 num = u.getNum();
+                acctype = u.getActType();
+                usern = u.getU_name();
+                cdept = u.getDepartment();
+                enableAccType = true;
             }
         } catch (Exception ex) {
             Logger.getLogger(UpdateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    protected void setInterface(String x) {
+        System.out.println("User Type: " + x);
+        System.out.println("Department: " + getDepartment());
+        if ("Administrator".equals(x)) {
+            deptFld.setEnabled(false);
+            acctypeSel.setEnabled(false);
+        }
+    }
+
+    public String getPrivilage() {
+        return privilage;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
 }

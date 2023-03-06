@@ -164,11 +164,15 @@ public class Login extends javax.swing.JFrame {
                             System.out.println(fname);
                             System.out.println(lname);
                             System.out.println(dept);                            
-                            if (acctype.equals("Administrator") || acctype.equals("Employee")) {
+                            if (acctype.equals("Administrator") || acctype.equals("Employee") || acctype.equals("Superadmin")) {
                                 MainMenu user = new MainMenu(acctype,fname,lname,dept,emp);
                                 user.show();
+                                dispose();
                             }
-                            dispose();
+                            else{
+                            JOptionPane.showMessageDialog(null, "Account Type is not supported", "Information Test", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            
                         } else {
                             JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
                             usernameFld.setText("");

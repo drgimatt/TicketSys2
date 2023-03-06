@@ -8,6 +8,13 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import Database.Credentials;
 import Database.Data_Credentials;
 import Database.EncryptionDecryption;
+import Database.MySQLConnector;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
@@ -19,6 +26,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
+
 
 /**
  *
@@ -35,6 +44,9 @@ public class NewUser extends javax.swing.JFrame {
         setResizable(false);
     }
     
+    Connection myConn = null;
+    Statement myStmt = null;
+    ResultSet myRes = null;
     Login login;
     List<String> array = new ArrayList<>();
 
@@ -126,8 +138,13 @@ public class NewUser extends javax.swing.JFrame {
         acctypeSel.setBackground(new java.awt.Color(0, 102, 204));
         acctypeSel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acctypeSel.setForeground(new java.awt.Color(255, 255, 255));
-        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator" }));
+        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator", "Superadmin" }));
         acctypeSel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        acctypeSel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acctypeSelActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel8.setText("Middle Name:");
@@ -507,6 +524,40 @@ public class NewUser extends javax.swing.JFrame {
     private void genderFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderFldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_genderFldActionPerformed
+
+    private void acctypeSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acctypeSelActionPerformed
+        // TODO add your handling code here:
+        if(acctypeSel.getSelectedItem() == "Superadmin"){
+        String qry = "SELECT COUNT(*) FROM credentials WHERE acctype='Superadmin'";
+        try {
+            myConn = MySQLConnector.getInstance().getConnection();
+            myStmt=myConn.createStatement();
+            myRes = myStmt.executeQuery(qry);
+            System.out.println(qry);
+                if (myRes.next()) {
+                    if (myRes.getString(1).equals("0")) {
+                        //JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Information Test", JOptionPane.INFORMATION_MESSAGE);
+                    }else {
+                        JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
+                        acctypeSel.setSelectedIndex(0);
+                    }
+                }        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (PropertyVetoException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    finally{
+                        if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
+                        if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
+                        if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}
+                    }
+        
+        }
+        
+    }//GEN-LAST:event_acctypeSelActionPerformed
 
     /**
      * @param args the command line arguments
