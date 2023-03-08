@@ -1967,7 +1967,9 @@ public class MainMenu extends javax.swing.JFrame {
         modifyTicket.addActionListener(new ActionListener(){
         
             public void actionPerformed(ActionEvent e){
-            int selectedRow =  allTicketTable.getSelectedRow();    
+            int selectedRow =  allTicketTable.getSelectedRow();
+            String dept = allTicketTable.getValueAt(selectedRow,3).toString();
+            if((getDepartment().equals(dept) && getAcctype().equals("Administrator")) || getAcctype().equals("Superadmin")){
             parentPanel.removeAll();
             parentPanel.add(indivTicketPanel);
             parentPanel.repaint();
@@ -2002,7 +2004,10 @@ public class MainMenu extends javax.swing.JFrame {
             for (Tickets t : tickethistory) {
             model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
             }
-            updateTableDisplay();                
+            updateTableDisplay();
+            }else{
+                JOptionPane.showMessageDialog(null, "Modifying Tickets of other Deparment is not allowed!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
             }
            
         });
@@ -2335,7 +2340,7 @@ public class MainMenu extends javax.swing.JFrame {
             manageUserButton.setVisible(true);
             depComboBox.setEnabled(false);
             depComboBox3.setEnabled(false);
-            credTableParam = "credentials WHERE department = '" + getDepartment() + "'";
+            credTableParam = "credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
         }
         else if ("Superadmin".equals(x)) {
             manageUserButton.setVisible(true);
