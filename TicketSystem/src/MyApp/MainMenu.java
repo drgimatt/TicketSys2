@@ -1596,7 +1596,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
         // TODO add your handling code here:
-        newUser = new NewUser();
+        newUser = new NewUser(getAcctype(),getDepartment());
         newUser.setVisible(true);
     }//GEN-LAST:event_createUserButtonActionPerformed
 
@@ -1605,8 +1605,11 @@ public class MainMenu extends javax.swing.JFrame {
         if (userManagerTable.getSelectedRowCount()==1){
             int ans = JOptionPane.showOptionDialog(this,"Are you sure you want to delete this entry?", "Delete User", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Yes", "No"}, JOptionPane.YES_OPTION);
             if (ans == JOptionPane.YES_OPTION){
-            if(userManagerTable.getValueAt(userManagerTable.getSelectedRow(), 1).toString().equals(empid)){    
+            if(userManagerTable.getValueAt(userManagerTable.getSelectedRow(), 0).toString().equals(getEmpid())){    
                 JOptionPane.showMessageDialog(null, "Credential deletion aborted. You tried to delete your own record", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (userManagerTable.getValueAt(userManagerTable.getSelectedRow(), 7).toString().equals(getAcctype())){
+                JOptionPane.showMessageDialog(null, "Credential deletion aborted. You tried to delete an " + getAcctype() +".", "Error", JOptionPane.ERROR_MESSAGE);
             }           
             else{ 
             creds.deleteRowSpec(userManagerTable.getValueAt(userManagerTable.getSelectedRow(), 0).toString());
@@ -1816,6 +1819,15 @@ public class MainMenu extends javax.swing.JFrame {
         Object[] emplist = emp.employeeList(param).toArray();
         assigneeComboBox1.setModel(new DefaultComboBoxModel(emplist));
         assigneeComboBox1.addItem("N/A");
+        if((getAcctype().equals("Administrator") && getDepartment().equals(depComboBox3.getSelectedItem())) || getAcctype().equals("Superadmin")){
+            assigneeComboBox1.setVisible(true);
+            jLabel17.setVisible(true);
+        }
+        else {
+            assigneeComboBox1.setVisible(false);
+            jLabel17.setVisible(false);
+        }
+        
     }//GEN-LAST:event_depComboBox3ActionPerformed
 
     private void assigneeComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assigneeComboBox1ActionPerformed
@@ -2365,7 +2377,6 @@ public class MainMenu extends javax.swing.JFrame {
         else if ("Administrator".equals(x)) {
             manageUserButton.setVisible(true);
             depComboBox.setEnabled(false);
-            depComboBox3.setEnabled(false);
             credTableParam = "credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
         }
         else if ("Superadmin".equals(x)) {

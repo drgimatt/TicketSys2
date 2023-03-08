@@ -763,6 +763,7 @@ public class UpdateUser extends javax.swing.JFrame {
         System.out.println("User Type: " + x);
         System.out.println("Department: " + getDepartment());
         if ("Administrator".equals(x)) {
+            deptFld.setSelectedItem(getDepartment());
             deptFld.setEnabled(false);
             acctypeSel.setEnabled(false);
         }

@@ -44,6 +44,16 @@ public class NewUser extends javax.swing.JFrame {
         setResizable(false);
     }
     
+    public NewUser(String privilage, String department){
+        this.privilage = privilage;
+        this.department = department;
+        initComponents();
+        FrameCenter.centerJFrame(this);
+        setResizable(false);
+        setInterface(privilage);
+    }    
+    
+    private String privilage, firstname, lastname, department, empid, username;
     Connection myConn = null;
     Statement myStmt = null;
     ResultSet myRes = null;
@@ -660,4 +670,24 @@ public class NewUser extends javax.swing.JFrame {
         birthday.setCalendar(null);
         dateStart.setCalendar(null);
     }
+    
+    protected void setInterface(String x) {
+        System.out.println("User Type: " + x);
+        System.out.println("Department: " + getDepartment());
+        if ("Administrator".equals(x)) {
+            deptFld.setSelectedItem(getDepartment());
+            deptFld.setEnabled(false);
+            acctypeSel.setSelectedItem("Employee");
+            acctypeSel.setEnabled(false);
+        }
+    }
+
+    public String getPrivilage() {
+        return privilage;
+    }
+
+    public String getDepartment() {
+        return department;
+    }    
+    
 }
