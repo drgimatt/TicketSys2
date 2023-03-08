@@ -1585,7 +1585,7 @@ public class MainMenu extends javax.swing.JFrame {
         int followup = 0;
         Object[] emplist = ticket.employeeList(param).toArray();
         assigneeComboBox1.setModel(new DefaultComboBoxModel(emplist));
-        if(acctype.equals("Administrator")){
+        if(acctype.equals("Administrator") || acctype.equals("Superadmin")){
         AssignedPersonnel = assigneeComboBox1.getSelectedItem().toString();
         }
         else{
@@ -1947,7 +1947,7 @@ public class MainMenu extends javax.swing.JFrame {
            
         });         
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3 && allTicketTable.getSelectedRow() != -1){
-            if(getAcctype().equals("Administrator")){
+            if(getAcctype().equals("Administrator") || getAcctype().equals("Superadmin")){
                 userPop.add(modifyTicket);
             }
             userPop.show(allTicketTable, evt.getX(), evt.getY());
