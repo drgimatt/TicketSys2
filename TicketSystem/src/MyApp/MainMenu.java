@@ -128,6 +128,15 @@ public class MainMenu extends javax.swing.JFrame {
         allTicketTable = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         refreshTableButton6 = new javax.swing.JButton();
+        filterBy = new javax.swing.JLabel();
+        ticketType = new javax.swing.JComboBox<>();
+        ticketTypeL = new javax.swing.JLabel();
+        priorityL = new javax.swing.JLabel();
+        priority = new javax.swing.JComboBox<>();
+        dept = new javax.swing.JComboBox<>();
+        deptL = new javax.swing.JLabel();
+        status = new javax.swing.JComboBox<>();
+        jLabel34 = new javax.swing.JLabel();
         solvedTicketsPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         solvedTicketsTable = new javax.swing.JTable();
@@ -650,27 +659,82 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        filterBy.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        filterBy.setText("Filter by:");
+
+        ticketType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ticketType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ticketTypeActionPerformed(evt);
+            }
+        });
+
+        ticketTypeL.setText("Ticket Type");
+
+        priorityL.setText("Priority");
+
+        priority.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        dept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        deptL.setText("Department");
+
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel34.setText("Status");
+
         javax.swing.GroupLayout allTicketsPanelLayout = new javax.swing.GroupLayout(allTicketsPanel);
         allTicketsPanel.setLayout(allTicketsPanelLayout);
         allTicketsPanelLayout.setHorizontalGroup(
             allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
             .addGroup(allTicketsPanelLayout.createSequentialGroup()
-                .addGap(404, 404, 404)
+                .addGap(33, 33, 33)
+                .addComponent(filterBy)
+                .addGap(96, 96, 96)
+                .addComponent(ticketTypeL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(priorityL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(deptL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(refreshTableButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(320, 320, 320)
+                .addComponent(refreshTableButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         allTicketsPanelLayout.setVerticalGroup(
             allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
-                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(refreshTableButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE)
+                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(refreshTableButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filterBy)
+                    .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ticketTypeL)
+                    .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priorityL)
+                    .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deptL)
+                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34))
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
 
@@ -1418,12 +1482,12 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, assignedTicketsPanelLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jLabel23)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(assignedTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(refreshTableButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(assignedTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(refreshTableButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
@@ -2012,6 +2076,10 @@ public class MainMenu extends javax.swing.JFrame {
         updateTableDisplay();
     }//GEN-LAST:event_refreshTableButton6ActionPerformed
 
+    private void ticketTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ticketTypeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2075,6 +2143,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JComboBox<String> depComboBox;
     private javax.swing.JComboBox<String> depComboBox3;
+    private javax.swing.JComboBox<String> dept;
+    private javax.swing.JLabel deptL;
+    private javax.swing.JLabel filterBy;
     private javax.swing.JPanel indivTicketPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2099,6 +2170,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2130,8 +2202,10 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTextField newTicketName;
     private javax.swing.JPanel optionsPanel;
     private javax.swing.JPanel parentPanel;
+    private javax.swing.JComboBox<String> priority;
     private javax.swing.JComboBox<String> priorityComboBox;
     private javax.swing.JComboBox<String> priorityComboBox1;
+    private javax.swing.JLabel priorityL;
     private javax.swing.JButton refreshTableButton;
     private javax.swing.JButton refreshTableButton1;
     private javax.swing.JButton refreshTableButton4;
@@ -2142,14 +2216,17 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton solvedTickets;
     private javax.swing.JPanel solvedTicketsPanel;
     private javax.swing.JTable solvedTicketsTable;
+    private javax.swing.JComboBox<String> status;
     private javax.swing.JTable ticketHistoryTable;
     private javax.swing.JTextField ticketNameTxtField;
     private javax.swing.JTextArea ticketNotesTextArea;
     private javax.swing.JLabel ticketNumberLbl1;
     private javax.swing.JLabel ticketNumberLbl4;
     private javax.swing.JTextArea ticketTxtArea;
+    private javax.swing.JComboBox<String> ticketType;
     private javax.swing.JComboBox<String> ticketTypeComboBox;
     private javax.swing.JComboBox<String> ticketTypeComboBox1;
+    private javax.swing.JLabel ticketTypeL;
     private javax.swing.JButton updateTicketButton;
     private javax.swing.JButton updateUserButton;
     private javax.swing.JPanel userManagementPanel;
