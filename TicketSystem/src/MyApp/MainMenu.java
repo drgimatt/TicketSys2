@@ -1656,19 +1656,18 @@ public class MainMenu extends javax.swing.JFrame {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String TicketID = ticketNumberLbl4.getText();
         ArrayList<Tickets> ticketinfo;
-        String parameters = "SELECT m1.* FROM ticketsys.masterrecord m1 LEFT JOIN ticketsys.masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + TicketID + "'";
+        String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + TicketID + "'";
         ticketinfo = ticket.ShowRecSpec(parameters);
         String TicketName = ticketNameTxtField.getText();
         String TicketDesc = ticketTxtArea.getText();
         String TicketType = ticketTypeComboBox.getSelectedItem().toString();
         String PriorityLevel = priorityComboBox.getSelectedItem().toString();
         String AssignedDepartment = depComboBox.getSelectedItem().toString();
+        String person = assigneeComboBox.getSelectedItem().toString();
         String OldRevCount = "";
         int NewRevCount = 0;
         String DateCreated = "";
         String Creator = "";
-        String person = "";
-        String dept = "";
         String Notes = ticketNotesTextArea.getText();
         for (Tickets t: ticketinfo){
         OldRevCount = Integer.toString(t.getRevcount());
@@ -1676,7 +1675,6 @@ public class MainMenu extends javax.swing.JFrame {
         NewRevCount = increment;
         DateCreated = t.getDateCreated();
         Creator = t.getCreator();
-        person = t.getPersonnel();
         }
         System.out.println(OldRevCount);
         System.out.println(NewRevCount);
@@ -1687,9 +1685,9 @@ public class MainMenu extends javax.swing.JFrame {
         int followup = 0;
         if(getAcctype().equals("Employee")){
         AssignedPersonnel = person;
-        AssignedDepartment = dept;
         }
         List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
+        array.forEach(System.out::println);
         if (checkFields(array).equals("valid")){
         Tickets information = new Tickets(TicketID, NewRevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
         ticket.deleteRowParam("alltickets", information, " AND RevisionCount = '" + OldRevCount + "'");
@@ -1755,7 +1753,7 @@ public class MainMenu extends javax.swing.JFrame {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String TicketID = ticketNumberLbl4.getText();
                 ArrayList<Tickets> ticketinfo;
-                String parameters = "SELECT m1.* FROM ticketsys.masterrecord m1 LEFT JOIN ticketsys.masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + TicketID + "'";
+                String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + TicketID + "'";
                 ticketinfo = ticket.ShowRecSpec(parameters);
                 String TicketName = ticketNameTxtField.getText();
                 String TicketDesc = ticketTxtArea.getText();
@@ -1854,12 +1852,12 @@ public class MainMenu extends javax.swing.JFrame {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ArrayList<Tickets> ticketinfo;
             Data_Tickets ticket = new Data_Tickets();
-            String parameters = "SELECT m1.* FROM ticketsys.masterrecord m1 LEFT JOIN ticketsys.masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
+            String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
             ticketinfo = ticket.ShowRecSpec(parameters);
             ticketNumberLbl4.setText(id);
-            ticketTypeComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,1).toString());
-            priorityComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,2).toString());
-            depComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,3).toString());
+            ticketTypeComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,2).toString());
+            priorityComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,3).toString());
+            depComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,4).toString());
             for(Tickets t: ticketinfo){
             ticketNameTxtField.setText(t.getTitle());
             ticketTxtArea.setText(t.getDesc());
@@ -1871,8 +1869,9 @@ public class MainMenu extends javax.swing.JFrame {
             if (t.getPersonnel().equals("N/A")){   
             assigneeComboBox.addItem("N/A");
             assigneeComboBox.setSelectedItem("N/A");
-            }             
+            }else{             
             assigneeComboBox.setSelectedItem(t.getPersonnel());
+            }
             } 
             tickethistory = mySql.ShowRecSpec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
             model = (DefaultTableModel) ticketHistoryTable.getModel();
@@ -1907,7 +1906,7 @@ public class MainMenu extends javax.swing.JFrame {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ArrayList<Tickets> ticketinfo;
             Data_Tickets ticket = new Data_Tickets();
-            String parameters = "SELECT m1.* FROM ticketsys.masterrecord m1 LEFT JOIN ticketsys.masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
+            String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
             ticketinfo = ticket.ShowRecSpec(parameters);
             ticketNumberLbl4.setText(id);
             ticketTypeComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,1).toString());
@@ -2206,18 +2205,15 @@ public class MainMenu extends javax.swing.JFrame {
         if ("Employee".equals(x)) {
             manageUserButton.setVisible(false);
             assigneeComboBox1.setVisible(false);
-            assigneeComboBox.setVisible(false);
-            depComboBox.setVisible(false);
+            assigneeComboBox.setEnabled(false);
+            depComboBox.setEnabled(false);
             jLabel17.setVisible(false);
-            jLabel28.setVisible(false);
-            jLabel29.setVisible(false);
         }
         else if ("Administrator".equals(x)) {
             manageUserButton.setVisible(true);
             depComboBox.setEnabled(false);
-            assigneeComboBox1.setVisible(false);
-            jLabel17.setVisible(false);
-            credTableParam = "credentials WHERE department = '" + getDepartment() + "'";System.out.println(credTableParam);
+            depComboBox3.setEnabled(false);
+            credTableParam = "credentials WHERE department = '" + getDepartment() + "'";
         }
         else if ("Superadmin".equals(x)) {
             manageUserButton.setVisible(true);
@@ -2244,13 +2240,13 @@ public class MainMenu extends javax.swing.JFrame {
     for (Tickets t : followuptickets) {
     model.addRow(new Object[]{t.getId(), t.getTitle(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateCreated(), t.getDateUpdated()});
     }
-    solvedtickets = mySql.ShowRecSpec("SELECT m1.* FROM ticketsys.masterrecord m1 LEFT JOIN ticketsys.masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';");
+    solvedtickets = mySql.ShowRecSpec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';");
     model = (DefaultTableModel) solvedTicketsTable.getModel();
     model.setRowCount(0);
     for (Tickets t : solvedtickets) {
     model.addRow(new Object[]{t.getId(), t.getTitle(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel()});
     }
-    assignedtickets= mySql.ShowRecSpec("SELECT * FROM alltickets WHERE AssignedPersonnel = '" + getFirstname() + " " + getLastname() + "'");
+    assignedtickets= mySql.ShowRecSpec("SELECT * FROM alltickets WHERE AssignedPersonnel = '" + getFirstname() + " " + getLastname() + "' AND Status = 'Open'");
     model = (DefaultTableModel) assignedTicketTable.getModel();
     model.setRowCount(0);
     for (Tickets t : assignedtickets) {
