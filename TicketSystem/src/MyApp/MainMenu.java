@@ -27,6 +27,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import raven.glasspanepopup.DefaultOption;
+import raven.glasspanepopup.GlassPanePopup;
 
 /**
  *
@@ -47,6 +49,7 @@ public class MainMenu extends javax.swing.JFrame {
         allTicketTable.setAutoCreateRowSorter(true);
         assignedTicketTable.setAutoCreateRowSorter(true);
         solvedTicketsTable.setAutoCreateRowSorter(true);
+        GlassPanePopup.install(this);
     }
 
     public MainMenu(String acctype, String firstname, String lastname, String department, String empid) {
@@ -109,6 +112,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        cmd = new javax.swing.JButton();
         userManagementPanel = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         userManagerTable = new javax.swing.JTable();
@@ -351,29 +355,44 @@ public class MainMenu extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(0, 102, 102));
         jSeparator2.setForeground(new java.awt.Color(0, 102, 102));
 
+        cmd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/notif.png"))); // NOI18N
+        cmd.setBorder(null);
+        cmd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout defPanelLayout = new javax.swing.GroupLayout(defPanel);
         defPanel.setLayout(defPanelLayout);
         defPanelLayout.setHorizontalGroup(
             defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defPanelLayout.createSequentialGroup()
-                .addContainerGap(202, Short.MAX_VALUE)
-                .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(defPanelLayout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(213, 213, 213))
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defPanelLayout.createSequentialGroup()
+                        .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(defPanelLayout.createSequentialGroup()
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(213, 213, 213))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defPanelLayout.createSequentialGroup()
+                        .addComponent(cmd)
+                        .addGap(77, 77, 77))))
         );
         defPanelLayout.setVerticalGroup(
             defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(defPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
+                .addComponent(cmd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1504,6 +1523,7 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().add(parentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 0, 980, 575));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void myTicketsBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTicketsBttnActionPerformed
@@ -2125,6 +2145,11 @@ public class MainMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ticketTypeActionPerformed
 
+    private void cmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActionPerformed
+        // TODO add your handling code here:
+        GlassPanePopup.showPopup(new Notification());
+    }//GEN-LAST:event_cmdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2179,6 +2204,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton cancelModifyButton;
     private javax.swing.JButton cancelTicketBttn;
     private javax.swing.JButton closeTicketButton;
+    private javax.swing.JButton cmd;
     private javax.swing.JButton createTicket;
     private javax.swing.JButton createTicketBttn;
     private javax.swing.JPanel createTicketPanel;
