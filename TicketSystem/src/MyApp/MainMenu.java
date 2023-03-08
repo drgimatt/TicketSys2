@@ -2085,12 +2085,14 @@ public class MainMenu extends javax.swing.JFrame {
     private void ticketTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketTypeActionPerformed
         // TODO add your handling code here:
         // Filter by Ticket Type
+        
+         /*
         int ticketTypeFilter = ticketType.getSelectedIndex();
         
         DefaultTableModel model = (DefaultTableModel) allTicketTable.getModel();
         model.setRowCount(0);
         
-        /*
+       
         iComparator<String> comparator = new Comparator<String>() {
         public int compare(String s1, String s2) {
         String[] strings1 = s1.split("\\s");
