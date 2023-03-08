@@ -2118,9 +2118,10 @@ public class MainMenu extends javax.swing.JFrame {
             }
         }
 );
-        */
+        
     }
 };
+        */
         
     }//GEN-LAST:event_ticketTypeActionPerformed
 
