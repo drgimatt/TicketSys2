@@ -67,10 +67,10 @@ public class MainMenu extends javax.swing.JFrame {
         allTicketTable.setAutoCreateRowSorter(true);
         assignedTicketTable.setAutoCreateRowSorter(true);
         solvedTicketsTable.setAutoCreateRowSorter(true);
-        setInterface(acctype);        
+        setInterface(acctype);
+        GlassPanePopup.install(this);        
     }
-    
-    
+   
     
     Login login;
     NewUser newUser;
