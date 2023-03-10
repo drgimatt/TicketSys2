@@ -10,45 +10,56 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
  *
- * @author boxro
+ * @OriginalAuthor - @drgimatt
+ * MySQLConnector - Responsible for handling the connections between the Application 
+ * and the SQL Database.
+ *
  */
 public class MySQLConnector {
-    String addr = "snboots.ddns.net:3310/ticketsys2";
-    String address = "jdbc:mysql://" + addr ;
-    String user = "admin";
-    String pass = "titingkayad";
+    String url = "192.168.1.50:3310/ticketsys2";
+    String address = "jdbc:mysql://" + url ;
+    String username = "admin";
+    String password = "titingkayad";
     
-    private static MySQLConnector datasource;
-    private BasicDataSource ds;
+    private static MySQLConnector instance;
+    private BasicDataSource dataSource;
+    
+    /**
+     * Sets the Pooled Connection parameters for the connection to the SQL Server.
+     */    
     
     public MySQLConnector()throws IOException, SQLException, PropertyVetoException{
- 
 
-
-            ds = new BasicDataSource();
-            ds.setUrl(address);
-            ds.setUsername(user);
-            ds.setPassword(pass);
+            dataSource = new BasicDataSource();
+            dataSource.setUrl(address);
+            dataSource.setUsername(username);
+            dataSource.setPassword(password);
  
- 
-            ds.setMinIdle(5);
-            ds.setMaxIdle(10);
-            ds.setMaxOpenPreparedStatements(50);
+            dataSource.setMinIdle(5);
+            dataSource.setMaxIdle(10);
+            dataSource.setMaxOpenPreparedStatements(50);
   
-}
+    }
+
+    /**
+     * Creates a single instance of the connection to prevent degradation.
+     */ 
     
     public static MySQLConnector getInstance() throws IOException, SQLException, PropertyVetoException {
-        if (datasource == null) {
-            datasource = new MySQLConnector();
-            return datasource;
+        if (instance == null) {
+            instance = new MySQLConnector();
+            return instance;
         } else {
-            return datasource;
+            return instance;
         }
     }
 
-    public Connection getConnection() throws SQLException {
-        return this.ds.getConnection();
-    }    
+    /**
+     * Creates the connection the server using the supplied parameters.
+     */     
     
+    public Connection getConnection() throws SQLException {
+        return this.dataSource.getConnection();
+    }    
     
 }

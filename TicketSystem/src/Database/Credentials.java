@@ -6,62 +6,65 @@ package Database;
 
 /**
  *
- * @author boxro
+ * @OriginalAuthor @drgimatt
+ * Credentials class contains the user credentials and personal information for
+ * the employee.
+ * 
  */
 public class Credentials {
     private int num;
-    private String empnum;    
-    private String u_name;
-    private String pass;    
+    private String empNum;    
+    private String userName;
+    private String password;    
     private String email;       
-    private String f_name;
-    private String m_name;
-    private String l_name;
+    private String firstName;
+    private String middleName;
+    private String lastName;
     private int age;
-    private String bday;
-    private String phonenum;
+    private String birthday;
+    private String phoneNum;
     private String gender;
     private String residence;
-    private String actType;
-    private String startdate;
+    private String acctType;
+    private String startDate;
     private String department;
     private String position;
 
     public Credentials(String empnum, String u_name, String pass, String email, String f_name, String m_name, String l_name, int age, String bday, String phonenum, String gender, String residence, String actType, String startdate, String department, String position) {
-        this.empnum = empnum;
-        this.u_name = u_name;
-        this.pass = pass;
+        this.empNum = empnum;
+        this.userName = u_name;
+        this.password = pass;
         this.email = email;
-        this.f_name = f_name;
-        this.m_name = m_name;
-        this.l_name = l_name;
+        this.firstName = f_name;
+        this.middleName = m_name;
+        this.lastName = l_name;
         this.age = age;
-        this.bday = bday;
-        this.phonenum = phonenum;
+        this.birthday = bday;
+        this.phoneNum = phonenum;
         this.gender = gender;
         this.residence = residence;
-        this.actType = actType;
-        this.startdate = startdate;
+        this.acctType = actType;
+        this.startDate = startdate;
         this.department = department;
         this.position = position;
     }
 
     public Credentials(int num, String empnum, String u_name, String pass, String email, String f_name, String m_name, String l_name, int age, String bday, String phonenum, String gender, String residence, String actType, String startdate, String department, String position) {
         this.num = num;
-        this.empnum = empnum;
-        this.u_name = u_name;
-        this.pass = pass;
+        this.empNum = empnum;
+        this.userName = u_name;
+        this.password = pass;
         this.email = email;
-        this.f_name = f_name;
-        this.m_name = m_name;
-        this.l_name = l_name;
+        this.firstName = f_name;
+        this.middleName = m_name;
+        this.lastName = l_name;
         this.age = age;
-        this.bday = bday;
-        this.phonenum = phonenum;
+        this.birthday = bday;
+        this.phoneNum = phonenum;
         this.gender = gender;
         this.residence = residence;
-        this.actType = actType;
-        this.startdate = startdate;
+        this.acctType = actType;
+        this.startDate = startdate;
         this.department = department;
         this.position = position;
     }
@@ -72,15 +75,15 @@ public class Credentials {
     }
 
     public String getEmpnum() {
-        return empnum;
+        return empNum;
     }
 
     public String getU_name() {
-        return u_name;
+        return userName;
     }
 
     public String getPass() {
-        return pass;
+        return password;
     }
 
     public String getEmail() {
@@ -88,15 +91,15 @@ public class Credentials {
     }
 
     public String getF_name() {
-        return f_name;
+        return firstName;
     }
 
     public String getM_name() {
-        return m_name;
+        return middleName;
     }
 
     public String getL_name() {
-        return l_name;
+        return lastName;
     }
 
     public int getAge() {
@@ -104,11 +107,11 @@ public class Credentials {
     }
 
     public String getBday() {
-        return bday;
+        return birthday;
     }
 
     public String getPhonenum() {
-        return phonenum;
+        return phoneNum;
     }
 
     public String getGender() {
@@ -120,11 +123,11 @@ public class Credentials {
     }
 
     public String getActType() {
-        return actType;
+        return acctType;
     }
 
     public String getStartdate() {
-        return startdate;
+        return startDate;
     }
 
     public String getDepartment() {

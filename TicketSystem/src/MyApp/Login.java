@@ -4,16 +4,11 @@
  */
 package MyApp;
 
+import Database.Credentials;
 import Database.Data_Credentials;
 import Database.EncryptionDecryption;
-import Database.MySQLConnector;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,7 +16,10 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author True Gaming
+ * @OriginalAuthors @drgimatt, @paulreonal, & @YumenoRetort
+ * Login - JFrame containing the Login Screen. 
+ * It also contains the Login Process.
+ * 
  */
 public class Login extends javax.swing.JFrame {
 
@@ -32,11 +30,12 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         FrameCenter.centerJFrame(this);
     }
-    NewUser newUser;
-    MainMenu mainMenu;
-    Connection myConn = null;
-    Statement myStmt = null;
-    ResultSet myRes = null;
+    
+    MainMenu menu;
+    Data_Credentials login = new Data_Credentials();
+    ArrayList<Credentials> user;
+    String username, password, accType, fname, lname, dept, empID = "";
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,9 +134,9 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
 
-        Data_Credentials login = new Data_Credentials();
-        String username = usernameFld.getText();
-        String password = passwordFld.getText();
+        
+        username = usernameFld.getText();
+        password = passwordFld.getText();
 
         // Check if the username and password fields are not blank
         if (username.trim().isEmpty()|| password.trim().isEmpty()) {
@@ -148,53 +147,45 @@ public class Login extends javax.swing.JFrame {
                     // Encrypt the password
                     // Check if encryption was successful
                     // Query the credentials table to check if the entered username and encrypted password match
-                    String qry = "SELECT * FROM credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
+                    String qry = "credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
+                    accType = "";
+                    fname = "";
+                    lname = "";
+                    dept = "";
+                    empID = "";
                     try {
-                        myConn = MySQLConnector.getInstance().getConnection();
-                        myStmt=myConn.createStatement();
-                        myRes = myStmt.executeQuery(qry);
-                        System.out.println(qry);
-                        if (myRes.next()) {
-                            String acctype = myRes.getString(14);
-                            String fname = myRes.getString(6);
-                            String lname = myRes.getString(8);
-                            String dept = myRes.getString(16);
-                            String emp = myRes.getString(2);
-                            System.out.println(acctype);
-                            System.out.println(fname);
-                            System.out.println(lname);
-                            System.out.println(dept);                            
-                            if (acctype.equals("Administrator") || acctype.equals("Employee") || acctype.equals("Superadmin")) {
-                                MainMenu user = new MainMenu(acctype,fname,lname,dept,emp);
-                                user.show();
-                                dispose();
+                        user = login.ShowRec(qry);
+                        if (!user.isEmpty()) {
+                            for(Credentials u: user){
+                                accType = u.getActType();
+                                fname = u.getF_name();
+                                lname = u.getL_name();
+                                dept = u.getDepartment();
+                                empID = u.getEmpnum();            
+                                if (accType.equals("Administrator") || accType.equals("Employee") || accType.equals("Superadmin")) {
+                                    menu = new MainMenu(accType,fname,lname,dept,empID);
+                                    menu.show();
+                                    dispose();
+                                    break;
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null, "Account Type is not supported", "Information Test", JOptionPane.INFORMATION_MESSAGE);
+                                    break;
+                                }
                             }
-                            else{
-                            JOptionPane.showMessageDialog(null, "Account Type is not supported", "Information Test", JOptionPane.INFORMATION_MESSAGE);
-                            }
-                            
                         } else {
                             JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
                             usernameFld.setText("");
                             passwordFld.setText("");
                         }
-                        
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    finally{
-                        if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
-                        if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
-                        if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}
-                    }
                     
                 } catch (Exception ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }                  
+                }                              
+
+                } catch (Exception ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }                 
 
         }
     }//GEN-LAST:event_loginBtnActionPerformed

@@ -13,15 +13,15 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author boxro
+ * @OriginalAuthor @drgimatt
+ * TicketHistory - A JFrame that is responsible in displaying the Ticket's History once invoked.
+ * 
  */
 public class TicketHistory extends javax.swing.JFrame {
 
     private Data_Tickets mySql = new Data_Tickets();
-    private ArrayList<Tickets> tickethistory;
+    private ArrayList<Tickets> history;
     String ticketid;
-
-
     DefaultTableModel model;
     
     /**
@@ -55,12 +55,12 @@ public class TicketHistory extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         notesHistory = new javax.swing.JTextArea();
         titleHistory = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        TicketHistory = new javax.swing.JLabel();
+        TicketDescription = new javax.swing.JLabel();
+        TicketName = new javax.swing.JLabel();
+        TicketNotes = new javax.swing.JLabel();
         creatorHistory = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
+        Creator = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,24 +105,24 @@ public class TicketHistory extends javax.swing.JFrame {
 
         titleHistory.setEditable(false);
 
-        jLabel23.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel23.setText("Ticket History - ");
+        TicketHistory.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        TicketHistory.setForeground(new java.awt.Color(0, 102, 204));
+        TicketHistory.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TicketHistory.setText("Ticket History - ");
 
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel20.setText("Ticket Description");
+        TicketDescription.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        TicketDescription.setText("Ticket Description");
 
-        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel21.setText("Ticket Name");
+        TicketName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        TicketName.setText("Ticket Name");
 
-        jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel22.setText("Ticket Notes");
+        TicketNotes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        TicketNotes.setText("Ticket Notes");
 
         creatorHistory.setEditable(false);
 
-        jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel24.setText("Creator");
+        Creator.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        Creator.setText("Creator");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,9 +130,9 @@ public class TicketHistory extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(jLabel20)
+                .addComponent(TicketDescription)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel22)
+                .addComponent(TicketNotes)
                 .addGap(172, 172, 172))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,35 +148,35 @@ public class TicketHistory extends javax.swing.JFrame {
                                             .addComponent(jScrollPane2))
                                         .addGap(18, 18, 18))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel21)
+                                        .addComponent(TicketName)
                                         .addGap(337, 337, 337)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel24)
+                                    .addComponent(Creator)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                                         .addComponent(creatorHistory))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(317, 317, 317)
-                        .addComponent(jLabel23)))
+                        .addComponent(TicketHistory)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jLabel23)
+                .addComponent(TicketHistory)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel24))
+                    .addComponent(TicketName)
+                    .addComponent(Creator))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(creatorHistory, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(titleHistory))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel20))
+                    .addComponent(TicketNotes, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TicketDescription))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,8 +192,8 @@ public class TicketHistory extends javax.swing.JFrame {
     private void ticketHistoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ticketHistoryTableMouseClicked
         // TODO add your handling code here:
     int selectedRow = ticketHistoryTable.getSelectedRow();
-    tickethistory = mySql.ShowRecSpec("SELECT * FROM masterrecord WHERE TicketID = '" + ticketid + "' AND RevisionCount = '" + ticketHistoryTable.getValueAt(selectedRow,0).toString() + "'");
-    for (Tickets t : tickethistory){
+    history = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + ticketid + "' AND RevisionCount = '" + ticketHistoryTable.getValueAt(selectedRow,0).toString() + "'");
+    for (Tickets t : history){
     titleHistory.setText(t.getTitle());
     descHistory.setText(t.getDesc());
     creatorHistory.setText(t.getCreator());
@@ -202,11 +202,11 @@ public class TicketHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_ticketHistoryTableMouseClicked
 
     private void initialView(){
-    jLabel23.setText("Ticket History - " + ticketid);
-    tickethistory = mySql.ShowRecSpec("SELECT * FROM masterrecord WHERE TicketID = '" + ticketid + "' ORDER BY RevisionCount ASC");
+    TicketHistory.setText("Ticket History - " + ticketid);
+    history = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + ticketid + "' ORDER BY RevisionCount ASC");
     model = (DefaultTableModel) ticketHistoryTable.getModel();
     model.setRowCount(0);
-    for (Tickets t : tickethistory) {
+    for (Tickets t : history) {
     model.addRow(new Object[]{t.getRevcount(), t.getStatus(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel()});
     titleHistory.setText(t.getTitle());
     descHistory.setText(t.getDesc());
@@ -258,19 +258,16 @@ public class TicketHistory extends javax.swing.JFrame {
     public void setTicketid(String ticketid) {
         this.ticketid = ticketid;
     }
-
-    
-    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Creator;
+    private javax.swing.JLabel TicketDescription;
+    private javax.swing.JLabel TicketHistory;
+    private javax.swing.JLabel TicketName;
+    private javax.swing.JLabel TicketNotes;
     private javax.swing.JTextField creatorHistory;
     private javax.swing.JTextArea descHistory;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

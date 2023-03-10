@@ -9,8 +9,12 @@ import javax.swing.*;
 
 /**
  *
- * @author User
+ * @Originalauthor @CarLowSanity
+ * FrameCenter - Centers the JFrame on the screen by means of 
+ * calculating the frame's position against the screen's resolution.
+ * 
  */
+
 public class FrameCenter { 
     public static void centerJFrame(JFrame frameToCenter){
         Rectangle screenSize = frameToCenter.getGraphicsConfiguration().getBounds();

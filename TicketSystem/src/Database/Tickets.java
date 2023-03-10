@@ -6,7 +6,9 @@ package Database;
 
 /**
  *
- * @author boxro
+ * @OriginalAuthor - @drgimatt
+ * Tickets class contains the tickets for the employee.
+ * 
  */
 public class Tickets {
     private String id;
@@ -24,6 +26,8 @@ public class Tickets {
     private String notes;
     private int followup;
 
+    // Constructor for creating a ticket with all attributes    
+    
     public Tickets(String id, int revcount, String title, String desc, String type, String priority, String department, String personnel, String dateCreated, String dateUpdated, String status, String creator, String notes, int followup) {
         this.id = id;
         this.revcount = revcount;
@@ -41,6 +45,8 @@ public class Tickets {
         this.followup = followup;
     }    
     
+    // Constructor for creating a ticket with all attributes except revision count and follow-up status
+    
     public Tickets(String id, String title, String desc, String type, String priority, String department, String personnel, String dateCreated, String dateUpdated, String status, String creator, String notes) {
         this.id = id;
         this.title = title;
@@ -56,6 +62,8 @@ public class Tickets {
         this.notes = notes;
     }
 
+    // Constructor for creating a ticket with all attributes except ID, revision count and follow-up status
+    
     public Tickets(String title, String desc, String type, String priority, String department, String personnel, String dateCreated, String dateUpdated, String status, String creator, String notes) {
         this.title = title;
         this.desc = desc;

@@ -8,13 +8,6 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import Database.Credentials;
 import Database.Data_Credentials;
 import Database.EncryptionDecryption;
-import Database.MySQLConnector;
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
@@ -31,7 +24,9 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author True Gaming
+ * @OriginalAuthors @drgimatt & @YumenoRetort
+ * NewUser - JFrame containing the User creation function of the system.
+ * 
  */
 public class NewUser extends javax.swing.JFrame {
 
@@ -54,11 +49,11 @@ public class NewUser extends javax.swing.JFrame {
     }    
     
     private String privilage, firstname, lastname, department, empid, username;
-    Connection myConn = null;
-    Statement myStmt = null;
-    ResultSet myRes = null;
+
     Login login;
-    List<String> array = new ArrayList<>();
+    List<String> array = new ArrayList<>();    
+    Data_Credentials creds = new Data_Credentials();
+    ArrayList<Credentials> user;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -482,7 +477,6 @@ public class NewUser extends javax.swing.JFrame {
         }
 
         String empnum = empIDFld.getText();
-
         String gender = genderFld.getText();
         String resi = resFld.getText();
         String dep = deptFld.getSelectedItem().toString();
@@ -540,33 +534,15 @@ public class NewUser extends javax.swing.JFrame {
         if(acctypeSel.getSelectedItem() == "Superadmin"){
         String qry = "SELECT COUNT(*) FROM credentials WHERE acctype='Superadmin'";
         try {
-            myConn = MySQLConnector.getInstance().getConnection();
-            myStmt=myConn.createStatement();
-            myRes = myStmt.executeQuery(qry);
-            System.out.println(qry);
-                if (myRes.next()) {
-                    if (myRes.getString(1).equals("0")) {
-                        //JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Information Test", JOptionPane.INFORMATION_MESSAGE);
-                    }else {
+            user = creds.ShowRec(qry);          
+                if (!user.isEmpty() && user.get(1).equals("0")) {
                         JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
                         acctypeSel.setSelectedIndex(0);
-                    }
                 }        
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    finally{
-                        if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
-                        if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
-                        if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}
-                    }
-        
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
     }//GEN-LAST:event_acctypeSelActionPerformed
 
     /**

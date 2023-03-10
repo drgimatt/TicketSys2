@@ -15,7 +15,8 @@ import java.awt.geom.RoundRectangle2D;
 
 /**
  *
- * @author vashtileonie
+ * @OriginalAuthor @vashtileonie
+ * 
  */
 public class Notification extends javax.swing.JPanel {
 

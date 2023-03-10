@@ -8,13 +8,6 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import Database.Credentials;
 import Database.Data_Credentials;
 import Database.EncryptionDecryption;
-import Database.MySQLConnector;
-import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
@@ -30,7 +23,9 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author True Gaming
+ * @OriginalAuthors @drgimatt & @YumenoRetort
+ * UpdateUser - JFrame containing the User update function of the system.
+ * 
  */
 public class UpdateUser extends javax.swing.JFrame {
 
@@ -53,12 +48,8 @@ public class UpdateUser extends javax.swing.JFrame {
     }
     
     private String privilage, firstname, lastname, department, empid, username;
-    Connection myConn = null;
-    Statement myStmt = null;
-    ResultSet myRes = null;    
-    String acctype = "";
-    String usern = "";
-    String cdept = "";
+    Data_Credentials creds = new Data_Credentials();
+    ArrayList<Credentials> user;    
     Login login;
     boolean enableAccType = false;
     int num = 0;
@@ -544,79 +535,22 @@ public class UpdateUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (enableAccType == true){
         if(acctypeSel.getSelectedItem() == "Superadmin"){
-        String qry = "SELECT * FROM credentials WHERE acctype='Superadmin'";
+        String qry = "SELECT COUNT(*) FROM credentials WHERE acctype='Superadmin'";
         try {
-            myConn = MySQLConnector.getInstance().getConnection();
-            myStmt=myConn.createStatement();
-            myRes = myStmt.executeQuery(qry);
-            System.out.println(qry);
-                if (myRes.next()) {
-                    System.out.println(myRes.getString(3));
-                    System.out.println(myRes.getString(14));
-                    if (myRes.getString(14).equals("Superadmin")) {
-                        if(myRes.getString(3).equals(usern) && myRes.getString(14).equals("Superadmin")){
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
-                            acctypeSel.setSelectedIndex(0);
-                        }
-                    }
+            user = creds.ShowRec(qry);          
+                if (!user.isEmpty() && user.get(1).equals("0")) {
+                        JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
+                        acctypeSel.setSelectedIndex(0);
                 }        
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (PropertyVetoException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    finally{
-                        if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
-                        if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
-                        if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}
-                    }
-        }        
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }       
       } 
     }//GEN-LAST:event_acctypeSelActionPerformed
 
     private void acctypeSelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_acctypeSelItemStateChanged
-        // TODO add your handling code here:
-//        if(acctypeSel.getSelectedItem() == "Superadmin"){
-//        String qry = "SELECT * FROM credentials WHERE acctype='Superadmin'";
-//        try {
-//            myConn = MySQLConnector.getInstance().getConnection();
-//            myStmt=myConn.createStatement();
-//            myRes = myStmt.executeQuery(qry);
-//            System.out.println(qry);
-//                if (myRes.next()) {
-//                    System.out.println(myRes.getString(3));
-//                    System.out.println(myRes.getString(14));
-//                    if (myRes.getString(14).equals("Superadmin")) {
-//                        if(myRes.getString(3).equals(usern) && myRes.getString(14).equals("Superadmin")){
-//                        }
-//                        else{
-//                            JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
-//                            acctypeSel.setSelectedIndex(0);
-//                        }
-//                    }
-//                    else{
-//                    }
-//
-//                }        
-//                    } catch (SQLException ex) {
-//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (PropertyVetoException ex) {
-//                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                    finally{
-//                        if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
-//                        if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
-//                        if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}
-//                    }
-//        
-//        }        
-//                
+        // TODO add your handling code here:      
     }//GEN-LAST:event_acctypeSelItemStateChanged
 
     /**
@@ -749,9 +683,9 @@ public class UpdateUser extends javax.swing.JFrame {
                 birthday.setDate(format.parse(u.getBday()));
                 dateStart.setDate(format.parse(u.getStartdate()));
                 num = u.getNum();
-                acctype = u.getActType();
-                usern = u.getU_name();
-                cdept = u.getDepartment();
+                String acctype = u.getActType();
+                String usern = u.getU_name();
+                String cdept = u.getDepartment();
                 enableAccType = true;
             }
         } catch (Exception ex) {
@@ -759,7 +693,7 @@ public class UpdateUser extends javax.swing.JFrame {
         }
     }
     
-    protected void setInterface(String x) {
+    private void setInterface(String x) {
         System.out.println("User Type: " + x);
         System.out.println("Department: " + getDepartment());
         if ("Administrator".equals(x)) {

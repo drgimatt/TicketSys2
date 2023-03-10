@@ -14,8 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
+ * 
+ * @OriginalAuthor @drgimatt
+ * Data_Credentials class implements the methods specified in the Data Interface 
+ * and uses the Credentials and MySQLConnector class.
  *
- * @author boxro
  */
 public class Data_Credentials implements Data<Credentials>{
     Connection myConn = null;
@@ -24,7 +27,7 @@ public class Data_Credentials implements Data<Credentials>{
     
     public ArrayList<Credentials> ShowRec(String table)
     {
-        ArrayList<Credentials> user=new ArrayList<Credentials>();
+        ArrayList<Credentials> user = new ArrayList<Credentials>();
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();		
@@ -152,12 +155,12 @@ public class Data_Credentials implements Data<Credentials>{
             if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}        
         }        
     } 
-    public void deleteRow(String table, Credentials user)
+    public void deleteRow(String table, String parameters)
     {
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();
-            String qry = "DELETE FROM" + table + " WHERE num = '" + user.getNum() + "'";
+            String qry = "DELETE FROM " + table + "WHERE num = " + parameters + "";
             System.out.println(qry);
             myStmt.executeUpdate(qry);
             myStmt.close();
@@ -177,31 +180,7 @@ public class Data_Credentials implements Data<Credentials>{
             if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}        
         }         
     }
-    public void deleteRowSpec(String num)
-    {
-        try{
-            myConn = MySQLConnector.getInstance().getConnection();
-            myStmt=myConn.createStatement();
-            String qry = "DELETE FROM credentials WHERE num = " + num + "";
-            System.out.println(qry);
-            myStmt.executeUpdate(qry);
-            myStmt.close();
-            JOptionPane.showMessageDialog(null, "Entry deleted");            
-        }
-        catch (SQLException ex)
-        {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        } catch (IOException ex) {
-            Logger.getLogger(Data_Credentials.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Data_Credentials.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
-            if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
-            if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}        
-        }         
-    } 
+ 
       
    
 }

@@ -15,7 +15,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
- * @author boxro
+ * @OriginalAuthor @drgimatt
+ * Data_Tickets class implements the methods specified in the Data Interface 
+ * and uses the Tickets and MySQLConnector class.
+ * 
  */
 public class Data_Tickets implements Data<Tickets> {
     Connection myConn = null;
@@ -72,7 +75,7 @@ public class Data_Tickets implements Data<Tickets> {
         }        
     } 
     
-    public ArrayList<Tickets> ShowRec(String table)
+    public ArrayList<Tickets> ShowRec(String parameters)
     {
         ArrayList<Tickets> ticket=new ArrayList<Tickets>();
         try{
@@ -101,35 +104,6 @@ public class Data_Tickets implements Data<Tickets> {
         }
         return ticket;
     }     
-
-    public ArrayList<Tickets> ShowRecSpec(String parameters)
-    {
-        ArrayList<Tickets> ticket=new ArrayList<Tickets>();
-        try{
-            myConn = MySQLConnector.getInstance().getConnection();
-            myStmt=myConn.createStatement();
-            System.out.println(parameters);
-	    myRes = myStmt.executeQuery(parameters);
-	    while(myRes.next())
-            {
-                ticket.add(new Tickets(myRes.getString("TicketID"),myRes.getInt("RevisionCount"), myRes.getString("SubjectTitle"), myRes.getString("SubjectDesc"), myRes.getString("TicketType"), myRes.getString("PriorityLevel"), myRes.getString("AssignedDepartment"), myRes.getString("AssignedPersonnel"), myRes.getString("DateCreated"), myRes.getString("DateUpdated"), myRes.getString("Status"), myRes.getString("Creator"), myRes.getString("Notes"), myRes.getInt("FollowUp")));
-            }				
-        }
-	catch(SQLException ex)
-	{
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-	} catch (IOException ex) {
-            Logger.getLogger(Data_Tickets.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Data_Tickets.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
-            if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
-            if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}        
-        }
-        return ticket;
-    }
     
         public void addRow(String table, Tickets ticket)
     {
@@ -206,37 +180,12 @@ public class Data_Tickets implements Data<Tickets> {
             if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}        
         }        
     }        
-        public void deleteRowParam(String table, Tickets ticket, String param)
+        public void deleteRow(String table, String parameters)
     {
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();
-            String qry = "DELETE FROM " + table + " WHERE TicketID = " + ticket.getId() + param;
-            System.out.println(qry);
-            myStmt.executeUpdate(qry);
-            myStmt.close();
-            System.out.println("Entry deleted");           
-        }
-        catch (SQLException ex)
-        {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        } catch (IOException ex) {
-            Logger.getLogger(Data_Tickets.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Data_Tickets.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            if (myRes != null) try { myRes.close(); } catch (SQLException e) {e.printStackTrace();}
-            if (myStmt != null) try { myStmt.close(); } catch (SQLException e) {e.printStackTrace();}
-            if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}        
-        }        
-    }
-        public void deleteRow(String table, Tickets ticket)
-    {
-        try{
-            myConn = MySQLConnector.getInstance().getConnection();
-            myStmt=myConn.createStatement();
-            String qry = "DELETE FROM " + table + " WHERE TicketID = " + ticket.getId();
+            String qry = "DELETE FROM " + table + " WHERE TicketID = " + parameters;
             System.out.println(qry);
             myStmt.executeUpdate(qry);
             myStmt.close();

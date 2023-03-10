@@ -32,7 +32,10 @@ import raven.glasspanepopup.GlassPanePopup;
 
 /**
  *
- * @author True Gaming
+ * @OriginalAuthors @drgimatt, @paulreonal, @YumenoRetort
+ * MainMenu - JFrame containing the Main Menu 
+ * and the Primary functions of Ticket Management System.
+ * 
  */
 public class MainMenu extends javax.swing.JFrame {
 
@@ -1612,7 +1615,7 @@ public class MainMenu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Credential deletion aborted. You tried to delete an " + getAcctype() +".", "Error", JOptionPane.ERROR_MESSAGE);
             }           
             else{ 
-            creds.deleteRowSpec(userManagerTable.getValueAt(userManagerTable.getSelectedRow(), 0).toString());
+            creds.deleteRow("credentials",userManagerTable.getValueAt(userManagerTable.getSelectedRow(), 0).toString());
             updateTableDisplay();}
             }
         } else {
@@ -1750,7 +1753,7 @@ public class MainMenu extends javax.swing.JFrame {
         String TicketID = ticketNumberLbl4.getText();
         ArrayList<Tickets> ticketinfo;
         String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + TicketID + "'";
-        ticketinfo = ticket.ShowRecSpec(parameters);
+        ticketinfo = ticket.ShowRec(parameters);
         String TicketName = ticketNameTxtField.getText();
         String TicketDesc = ticketTxtArea.getText();
         String TicketType = ticketTypeComboBox.getSelectedItem().toString();
@@ -1783,10 +1786,10 @@ public class MainMenu extends javax.swing.JFrame {
         array.forEach(System.out::println);
         if (checkFields(array).equals("valid")){
         Tickets information = new Tickets(TicketID, NewRevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
-        ticket.deleteRowParam("alltickets", information, " AND RevisionCount = '" + OldRevCount + "'");
+        ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + OldRevCount + "'");
         ticket.addRow("alltickets", information);
         ticket.addRow("masterrecord", information);
-        tickethistory = mySql.ShowRecSpec("SELECT * FROM masterrecord WHERE TicketID = '" + TicketID + "' ORDER BY RevisionCount ASC");
+        tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + TicketID + "' ORDER BY RevisionCount ASC");
         model = (DefaultTableModel) ticketHistoryTable.getModel();
         model.setRowCount(0);
         for (Tickets t : tickethistory) {
@@ -1856,7 +1859,7 @@ public class MainMenu extends javax.swing.JFrame {
                 String TicketID = ticketNumberLbl4.getText();
                 ArrayList<Tickets> ticketinfo;
                 String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + TicketID + "'";
-                ticketinfo = ticket.ShowRecSpec(parameters);
+                ticketinfo = ticket.ShowRec(parameters);
                 String TicketName = ticketNameTxtField.getText();
                 String TicketDesc = ticketTxtArea.getText();
                 String TicketType = ticketTypeComboBox.getSelectedItem().toString();
@@ -1889,9 +1892,9 @@ public class MainMenu extends javax.swing.JFrame {
                 List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
                 if (checkFields(array).equals("valid")){
                 Tickets information = new Tickets(TicketID, NewRevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
-                ticket.deleteRowParam("alltickets", information, " AND RevisionCount = '" + OldRevCount + "'");
+                ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + OldRevCount + "'");
                 ticket.addRow("masterrecord", information);
-                tickethistory = mySql.ShowRecSpec("SELECT * FROM masterrecord WHERE TicketID = '" + TicketID + "' ORDER BY RevisionCount ASC");
+                tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + TicketID + "' ORDER BY RevisionCount ASC");
                 model = (DefaultTableModel) ticketHistoryTable.getModel();
                 model.setRowCount(0);
                 for (Tickets t : tickethistory) {
@@ -1922,7 +1925,7 @@ public class MainMenu extends javax.swing.JFrame {
             ArrayList<Tickets> ticketinfo;
             Data_Tickets ticket = new Data_Tickets();
             String parameters = "SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY Number ASC";
-            ticketinfo = ticket.ShowRecSpec(parameters);
+            ticketinfo = ticket.ShowRec(parameters);
             ticketTypeComboBox.setSelectedItem(ticketHistoryTable.getValueAt(selectedRow,1).toString());
             priorityComboBox.setSelectedItem(ticketHistoryTable.getValueAt(selectedRow,5).toString());
             depComboBox.setSelectedItem(ticketHistoryTable.getValueAt(selectedRow,3).toString());
@@ -1955,7 +1958,7 @@ public class MainMenu extends javax.swing.JFrame {
             ArrayList<Tickets> ticketinfo;
             Data_Tickets ticket = new Data_Tickets();
             String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
-            ticketinfo = ticket.ShowRecSpec(parameters);
+            ticketinfo = ticket.ShowRec(parameters);
             ticketNumberLbl4.setText(id);
             ticketTypeComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,2).toString());
             priorityComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,3).toString());
@@ -1975,7 +1978,7 @@ public class MainMenu extends javax.swing.JFrame {
             assigneeComboBox.setSelectedItem(t.getPersonnel());
             }
             } 
-            tickethistory = mySql.ShowRecSpec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
+            tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
             model = (DefaultTableModel) ticketHistoryTable.getModel();
             model.setRowCount(0);
             for (Tickets t : tickethistory) {
@@ -2011,7 +2014,7 @@ public class MainMenu extends javax.swing.JFrame {
             ArrayList<Tickets> ticketinfo;
             Data_Tickets ticket = new Data_Tickets();
             String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
-            ticketinfo = ticket.ShowRecSpec(parameters);
+            ticketinfo = ticket.ShowRec(parameters);
             ticketNumberLbl4.setText(id);
             ticketTypeComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,1).toString());
             priorityComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,2).toString());
@@ -2030,7 +2033,7 @@ public class MainMenu extends javax.swing.JFrame {
             } else
             assigneeComboBox.setSelectedItem(t.getPersonnel());
             } 
-            tickethistory = mySql.ShowRecSpec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
+            tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
             model = (DefaultTableModel) ticketHistoryTable.getModel();
             model.setRowCount(0);
             for (Tickets t : tickethistory) {
@@ -2392,31 +2395,31 @@ public class MainMenu extends javax.swing.JFrame {
     for(Credentials u: user) {    
     model.addRow(new Object[] {u.getEmpnum(),u.getF_name(),u.getM_name(),u.getL_name(),u.getPhonenum(),u.getEmail(),u.getBday(),u.getActType(),u.getDepartment(),u.getPosition(),u.getStartdate(),u.getGender()});
     }
-    alltickets = mySql.ShowRecSpec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
+    alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
     model = (DefaultTableModel) allTicketTable.getModel();
     model.setRowCount(0);
     for (Tickets t : alltickets) {
     model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel(), t.getStatus()});
     }
-    followuptickets = mySql.ShowRecSpec("SELECT * FROM alltickets WHERE AssignedPersonnel = '" + getFirstname() + " " + getLastname() + "' AND FollowUp = 1");
+    followuptickets = mySql.ShowRec("SELECT * FROM alltickets WHERE AssignedPersonnel = '" + getFirstname() + " " + getLastname() + "' AND FollowUp = 1");
     model = (DefaultTableModel) requestsTicketTable.getModel();
     model.setRowCount(0);
     for (Tickets t : followuptickets) {
     model.addRow(new Object[]{t.getId(), t.getTitle(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateCreated(), t.getDateUpdated()});
     }
-    solvedtickets = mySql.ShowRecSpec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';");
+    solvedtickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';");
     model = (DefaultTableModel) solvedTicketsTable.getModel();
     model.setRowCount(0);
     for (Tickets t : solvedtickets) {
     model.addRow(new Object[]{t.getId(), t.getTitle(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel()});
     }
-    assignedtickets= mySql.ShowRecSpec("SELECT * FROM alltickets WHERE AssignedPersonnel = '" + getFirstname() + " " + getLastname() + "' AND Status = 'Open'");
+    assignedtickets= mySql.ShowRec("SELECT * FROM alltickets WHERE AssignedPersonnel = '" + getFirstname() + " " + getLastname() + "' AND Status = 'Open'");
     model = (DefaultTableModel) assignedTicketTable.getModel();
     model.setRowCount(0);
     for (Tickets t : assignedtickets) {
     model.addRow(new Object[]{t.getId(), t.getTitle(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateCreated() ,t.getDateUpdated()});
     } 
-    mytickets = mySql.ShowRecSpec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount and m1.Creator = m2.Creator) WHERE m2.RevisionCount IS NULL HAVING m1.Creator = '" + getFirstname() + " " + getLastname() + "' ORDER BY TicketID ASC");
+    mytickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount and m1.Creator = m2.Creator) WHERE m2.RevisionCount IS NULL HAVING m1.Creator = '" + getFirstname() + " " + getLastname() + "' ORDER BY TicketID ASC");
     model = (DefaultTableModel) myTicketTable.getModel();
     model.setRowCount(0);
     for (Tickets t : mytickets) {
