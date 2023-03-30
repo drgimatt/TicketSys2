@@ -82,8 +82,11 @@ public class Data_Tickets implements Data<Tickets> {
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();	
             String qry = "SELECT * FROM alltickets";
-	    myRes = myStmt.executeQuery(qry);
-            System.out.println(qry);
+            if(parameters.isBlank()){
+            parameters = qry;
+            }
+	    myRes = myStmt.executeQuery(parameters);
+            System.out.println(parameters);
 	    while(myRes.next())
             {
                 ticket.add(new Tickets(myRes.getString("TicketID"),myRes.getInt("RevisionCount"), myRes.getString("SubjectTitle"), myRes.getString("SubjectDesc"), myRes.getString("TicketType"), myRes.getString("PriorityLevel"), myRes.getString("AssignedDepartment"), myRes.getString("AssignedPersonnel"), myRes.getString("DateCreated"), myRes.getString("DateUpdated"), myRes.getString("Status"), myRes.getString("Creator"), myRes.getString("Notes"), myRes.getInt("FollowUp")));
