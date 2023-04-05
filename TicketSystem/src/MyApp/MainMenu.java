@@ -2141,15 +2141,77 @@ public class MainMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ticketTypeActionPerformed
 
-    private void createTicket(){
-    
+    private void manipulateTicket(ArrayList<String> stringParam, String option){
+        
+        //DON'T USE YET!!
+        Data_Tickets ticket = new Data_Tickets();
+        Tickets information = null;
+        
+        long now = System.currentTimeMillis();
+        Timestamp tstamp = new Timestamp(now);
+        
+        String TicketID = stringParam.get(0),
+        TicketName = stringParam.get(1),
+        TicketDesc = stringParam.get(2),
+        TicketType = stringParam.get(3),
+        PriorityLevel = stringParam.get(4),
+        AssignedDepartment = stringParam.get(5),
+        DateCreated = stringParam.get(6),
+        Creator = stringParam.get(7),
+        Notes = stringParam.get(8),
+        AssignedPersonnel = stringParam.get(9),
+        DateUpdated = tstamp.toString(),
+        Status = stringParam.get(12);
+        int RevCount = Integer.parseInt(stringParam.get(10)),
+        followup = Integer.parseInt(stringParam.get(11));
+        
+        List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
+        
+        if (checkFields(array).equals("valid")){
+        information = new Tickets(TicketID, RevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
+
+        switch(option){
+            case "Create":
+                ticket.addRow("alltickets", information);
+                ticket.addRow("masterrecord", information);
+                JOptionPane.showMessageDialog(null, "Ticket has been created. Your ticket number is " + TicketID + ".","Ticket Created",JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "Update":
+                ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + Integer.toString(RevCount-1)+ "'");
+                ticket.addRow("alltickets", information);
+                ticket.addRow("masterrecord", information);
+                JOptionPane.showMessageDialog(null, "Ticket has been updated","Ticket Updated",JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "Reopen":
+                break;
+            case "Close":
+                ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + RevCount + "'");
+                ticket.addRow("masterrecord", information);
+                JOptionPane.showMessageDialog(null, "Ticket has been closed","Ticket Closed",JOptionPane.INFORMATION_MESSAGE);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "No method has been selected!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        }  
+        
+        else{
+        JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        updateTableDisplay();                
+
     }
     
-    private void updateTicket(){
+    private void createTicket(ArrayList<String> stringParam){
+    
+    }    
+    
+    private void updateTicket(ArrayList<String> stringParam){
     
     }
 
-    private void deleteTicket(){
+    private void deleteTicket(ArrayList<String> stringParam){
     
     }
 
