@@ -25,8 +25,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.RowFilter;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import raven.glasspanepopup.DefaultOption;
 import raven.glasspanepopup.GlassPanePopup;
 
@@ -86,8 +88,7 @@ public class MainMenu extends javax.swing.JFrame {
     private Data_Credentials creds = new Data_Credentials();
     private ArrayList<Credentials> user;
     DefaultTableModel model;
-
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1564,7 +1565,7 @@ public class MainMenu extends javax.swing.JFrame {
         updateTableDisplay();        
         
     }//GEN-LAST:event_solvedTicketsActionPerformed
-
+  
     private void createTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTicketActionPerformed
         // TODO add your handling code here:
         parentPanel.removeAll();
@@ -1675,63 +1676,41 @@ public class MainMenu extends javax.swing.JFrame {
         long now = System.currentTimeMillis();
         Timestamp tstamp = new Timestamp(now);
         Date currentdate = new Date();
-        String TicketID = sdl.format(currentdate) + ticket.tallyCount("alltickets") ;
-        String TicketName = newTicketName.getText();
-        String TicketDesc = createTicketTxtArea.getText();
-        String TicketType = ticketTypeComboBox1.getSelectedItem().toString();
-        String PriorityLevel = priorityComboBox1.getSelectedItem().toString();
-        String AssignedDepartment = depComboBox3.getSelectedItem().toString();
-        int RevCount = 0;
+        String parameters = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + depComboBox3.getSelectedItem().toString() + "'";
+        String RevCount = "0";
         String Creator = getFirstname() + " " + getLastname();
-        String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + AssignedDepartment + "'";
-        String notes = "";
+        String DateCreated = tstamp.toString();
         String AssignedPersonnel = "";
-        int followup = 0;
-        Object[] emplist = ticket.employeeList(param).toArray();
-        assigneeComboBox1.setModel(new DefaultComboBoxModel(emplist));
+//        Object[] emplist = ticket.employeeList(parameters).toArray();
+//        assigneeComboBox1.setModel(new DefaultComboBoxModel(emplist));
         if(acctype.equals("Administrator") || acctype.equals("Superadmin")){
         AssignedPersonnel = assigneeComboBox1.getSelectedItem().toString();
         }
         else{
         AssignedPersonnel = "N/A";
         }
-        String DateCreated = tstamp.toString();
-        String DateUpdated = tstamp.toString();
-        String Status = "Open";
-        List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
-        
-        if (checkFields(array).equals("not valid")){
-            JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-        Tickets information = new Tickets(TicketID, RevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, notes, followup);
-        ticket.addRow("alltickets", information);
-        ticket.addRow("masterrecord", information);
-        JOptionPane.showMessageDialog(null, "Ticket has been created. Your ticket number is " + TicketID + ".","Ticket Created",JOptionPane.INFORMATION_MESSAGE);
-        resetCreateFields();                
-        }
+        ArrayList<String> ticketInfo = new ArrayList<String>();
+        ticketInfo.add(sdl.format(currentdate) + ticket.tallyCount("alltickets")); //TicketID
+        ticketInfo.add(newTicketName.getText()); //TicketName
+        ticketInfo.add(createTicketTxtArea.getText()); //TicketDescription
+        ticketInfo.add(ticketTypeComboBox1.getSelectedItem().toString()); //TicketType
+        ticketInfo.add(priorityComboBox1.getSelectedItem().toString()); //Priority
+        ticketInfo.add(depComboBox3.getSelectedItem().toString()); //TicketDepartment
+        ticketInfo.add(DateCreated); //DateCreated
+        ticketInfo.add(Creator); //Creator
+        ticketInfo.add(""); //TicketNotes
+        ticketInfo.add(AssignedPersonnel); //AssignedPPersonel
+        ticketInfo.add(RevCount); //RevisionCount
+        ticketInfo.add("0"); //Followup
+        ticketInfo.add("Open"); //Status
+        manipulateTicket(ticketInfo,"Create");        
+        parentPanel.removeAll();
+        parentPanel.add(defPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        resetCreateFields();         
     }//GEN-LAST:event_createTicketBttnActionPerformed
-    
-    
-    private String checkFields(List<String> strings){
-        for (String s : strings) {
-        if (s == null || s.trim().isEmpty()) {
-            System.out.println(s);
-            return "not valid";
-        }
-    }
-        return "valid";
-    }
-    
-    private void resetCreateFields(){
-        newTicketName.setText("");
-        createTicketTxtArea.setText("");
-        ticketTypeComboBox1.setSelectedIndex(0);
-        priorityComboBox1.setSelectedIndex(0);
-        depComboBox3.setSelectedIndex(0);
-        assigneeComboBox1.setSelectedIndex(0);
-    }
-    
+
     private void newTicketNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTicketNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newTicketNameActionPerformed
@@ -1752,60 +1731,37 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void updateTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTicketButtonActionPerformed
         // TODO add your handling code here:
-        Data_Tickets ticket = new Data_Tickets();
-        SimpleDateFormat sdl = new SimpleDateFormat("yyyyMM");
-        long now = System.currentTimeMillis();
-        Timestamp tstamp = new Timestamp(now);
-        Date currentdate = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String TicketID = ticketNumberLbl4.getText();
-        ArrayList<Tickets> ticketinfo;
-        String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + TicketID + "'";
-        ticketinfo = ticket.ShowRec(parameters);
-        String TicketName = ticketNameTxtField.getText();
-        String TicketDesc = ticketTxtArea.getText();
-        String TicketType = ticketTypeComboBox.getSelectedItem().toString();
-        String PriorityLevel = priorityComboBox.getSelectedItem().toString();
-        String AssignedDepartment = depComboBox.getSelectedItem().toString();
-        String person = assigneeComboBox.getSelectedItem().toString();
-        String OldRevCount = "";
-        int NewRevCount = 0;
-        String DateCreated = "";
+        String RevCount = "";
         String Creator = "";
-        String Notes = ticketNotesTextArea.getText();
-        for (Tickets t: ticketinfo){
-        OldRevCount = Integer.toString(t.getRevcount());
-        int increment = t.getRevcount()+1;        
-        NewRevCount = increment;
+        String DateCreated = "";
+        Data_Tickets ticket = new Data_Tickets();
+        ArrayList<Tickets> oldInfo;
+        String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + ticketNumberLbl4.getText() + "'";
+        oldInfo = ticket.ShowRec(parameters);
+        for (Tickets t: oldInfo){
+        RevCount = Integer.toString(t.getRevcount()+1);
         DateCreated = t.getDateCreated();
         Creator = t.getCreator();
-        }
-        String AssignedPersonnel = (String)assigneeComboBox.getSelectedItem();
-        System.out.println(AssignedPersonnel);
-        String DateUpdated = tstamp.toString();
-        String Status = "Open";
-        int followup = 0;
-        if(getAcctype().equals("Employee")){
-        AssignedPersonnel = person;
-        }
-        List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
-        array.forEach(System.out::println);
-        if (checkFields(array).equals("valid")){
-        Tickets information = new Tickets(TicketID, NewRevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
-        ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + OldRevCount + "'");
-        ticket.addRow("alltickets", information);
-        ticket.addRow("masterrecord", information);
-        tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + TicketID + "' ORDER BY RevisionCount ASC");
-        model = (DefaultTableModel) ticketHistoryTable.getModel();
-        model.setRowCount(0);
-        for (Tickets t : tickethistory) {
-        model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
-        }
-        updateTableDisplay();
-        JOptionPane.showMessageDialog(null, "Ticket has been updated","Ticket Updated",JOptionPane.INFORMATION_MESSAGE);
-        }else{
-        JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        } 
+        ArrayList<String> ticketInfo = new ArrayList<String>();
+        ticketInfo.add(ticketNumberLbl4.getText()); //TicketID
+        ticketInfo.add(ticketNameTxtField.getText()); //TicketName
+        ticketInfo.add(ticketTxtArea.getText()); //TicketDescription
+        ticketInfo.add(ticketTypeComboBox.getSelectedItem().toString()); //TicketType
+        ticketInfo.add(priorityComboBox.getSelectedItem().toString()); //Priority
+        ticketInfo.add(depComboBox.getSelectedItem().toString()); //TicketDepartment
+        ticketInfo.add(DateCreated); //DateCreated
+        ticketInfo.add(Creator); //Creator
+        ticketInfo.add(ticketNotesTextArea.getText()); //TicketNotes
+        ticketInfo.add(assigneeComboBox.getSelectedItem().toString()); //AssignedPPersonel
+        ticketInfo.add(RevCount); //RevisionCount
+        ticketInfo.add("0"); //Followup
+        ticketInfo.add("Open"); //Status
+        manipulateTicket(ticketInfo,"Update");        
+        parentPanel.removeAll();
+        parentPanel.add(defPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();  
     }//GEN-LAST:event_updateTicketButtonActionPerformed
 
     private void depComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depComboBoxActionPerformed
@@ -1869,20 +1825,22 @@ public class MainMenu extends javax.swing.JFrame {
                 Creator = t.getCreator();
                 } 
                 ArrayList<String> ticketInfo = new ArrayList<String>();
-                ticketInfo.add(ticketNumberLbl4.getText());
-                ticketInfo.add(ticketNameTxtField.getText());
-                ticketInfo.add(ticketTxtArea.getText());
-                ticketInfo.add(ticketTypeComboBox.getSelectedItem().toString());
-                ticketInfo.add(priorityComboBox.getSelectedItem().toString());
-                ticketInfo.add(depComboBox.getSelectedItem().toString());
-                ticketInfo.add(DateCreated);
-                ticketInfo.add(Creator);
-                ticketInfo.add(ticketNotesTextArea.getText());
-                ticketInfo.add(assigneeComboBox.getSelectedItem().toString());
-                ticketInfo.add(RevCount);
-                closeTicket(ticketInfo);
+                ticketInfo.add(ticketNumberLbl4.getText()); //TicketID
+                ticketInfo.add(ticketNameTxtField.getText()); //TicketName
+                ticketInfo.add(ticketTxtArea.getText()); //TicketDescription
+                ticketInfo.add(ticketTypeComboBox.getSelectedItem().toString()); //TicketType
+                ticketInfo.add(priorityComboBox.getSelectedItem().toString()); //Priority
+                ticketInfo.add(depComboBox.getSelectedItem().toString()); //TicketDepartment
+                ticketInfo.add(DateCreated); //DateCreated
+                ticketInfo.add(Creator); //Creator
+                ticketInfo.add(ticketNotesTextArea.getText()); //TicketNotes
+                ticketInfo.add(assigneeComboBox.getSelectedItem().toString()); //AssignedPPersonel
+                ticketInfo.add(RevCount); //RevisionCount
+                ticketInfo.add("0"); //Followup
+                ticketInfo.add("Closed"); //Status
+                manipulateTicket(ticketInfo,"Close");
                 parentPanel.removeAll();
-                parentPanel.add(assignedTicketsPanel);
+                parentPanel.add(defPanel);
                 parentPanel.repaint();
                 parentPanel.revalidate();               
                 } 
@@ -2101,8 +2059,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void ticketTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketTypeActionPerformed
         // TODO add your handling code here:
         // Filter by Ticket Type
-        
-         /*
+        /*
+         
         int ticketTypeFilter = ticketType.getSelectedIndex();
         
         DefaultTableModel model = (DefaultTableModel) allTicketTable.getModel();
@@ -2137,117 +2095,10 @@ public class MainMenu extends javax.swing.JFrame {
         
     }
 };
-        */
+      */  
         
     }//GEN-LAST:event_ticketTypeActionPerformed
 
-    private void manipulateTicket(ArrayList<String> stringParam, String option){
-        
-        //DON'T USE YET!!
-        Data_Tickets ticket = new Data_Tickets();
-        Tickets information = null;
-        
-        long now = System.currentTimeMillis();
-        Timestamp tstamp = new Timestamp(now);
-        
-        String TicketID = stringParam.get(0),
-        TicketName = stringParam.get(1),
-        TicketDesc = stringParam.get(2),
-        TicketType = stringParam.get(3),
-        PriorityLevel = stringParam.get(4),
-        AssignedDepartment = stringParam.get(5),
-        DateCreated = stringParam.get(6),
-        Creator = stringParam.get(7),
-        Notes = stringParam.get(8),
-        AssignedPersonnel = stringParam.get(9),
-        DateUpdated = tstamp.toString(),
-        Status = stringParam.get(12);
-        int RevCount = Integer.parseInt(stringParam.get(10)),
-        followup = Integer.parseInt(stringParam.get(11));
-        
-        List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
-        
-        if (checkFields(array).equals("valid")){
-        information = new Tickets(TicketID, RevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
-
-        switch(option){
-            case "Create":
-                ticket.addRow("alltickets", information);
-                ticket.addRow("masterrecord", information);
-                JOptionPane.showMessageDialog(null, "Ticket has been created. Your ticket number is " + TicketID + ".","Ticket Created",JOptionPane.INFORMATION_MESSAGE);
-                break;
-            case "Update":
-                ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + Integer.toString(RevCount-1)+ "'");
-                ticket.addRow("alltickets", information);
-                ticket.addRow("masterrecord", information);
-                JOptionPane.showMessageDialog(null, "Ticket has been updated","Ticket Updated",JOptionPane.INFORMATION_MESSAGE);
-                break;
-            case "Reopen":
-                break;
-            case "Close":
-                ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + RevCount + "'");
-                ticket.addRow("masterrecord", information);
-                JOptionPane.showMessageDialog(null, "Ticket has been closed","Ticket Closed",JOptionPane.INFORMATION_MESSAGE);
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "No method has been selected!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        }  
-        
-        else{
-        JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        updateTableDisplay();                
-
-    }
-    
-    private void createTicket(ArrayList<String> stringParam){
-    
-    }    
-    
-    private void updateTicket(ArrayList<String> stringParam){
-    
-    }
-
-    private void deleteTicket(ArrayList<String> stringParam){
-    
-    }
-
-    private void closeTicket(ArrayList<String> stringParam){
-        Data_Tickets ticket = new Data_Tickets();
-        SimpleDateFormat sdl = new SimpleDateFormat("yyyyMM");
-        long now = System.currentTimeMillis();
-        Timestamp tstamp = new Timestamp(now);
-        Date currentdate = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String TicketID = stringParam.get(0),
-        TicketName = stringParam.get(1),
-        TicketDesc = stringParam.get(2),
-        TicketType = stringParam.get(3),
-        PriorityLevel = stringParam.get(4),
-        AssignedDepartment = stringParam.get(5),
-        DateCreated = stringParam.get(6),
-        Creator = stringParam.get(7),
-        Notes = stringParam.get(8),
-        AssignedPersonnel = stringParam.get(9),
-        DateUpdated = tstamp.toString();
-        String Status = "Closed";
-        int RevCount = Integer.parseInt(stringParam.get(10));
-        int followup = 0;
-        List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
-        if (checkFields(array).equals("valid")){
-        Tickets information = new Tickets(TicketID, RevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
-        ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + RevCount + "'");
-        ticket.addRow("masterrecord", information);
-        JOptionPane.showMessageDialog(null, "Ticket has been closed","Ticket Closed",JOptionPane.INFORMATION_MESSAGE);
-        updateTableDisplay();                
-        } else{
-        JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
-        }        
-    }    
-    
     private void cmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActionPerformed
         // TODO add your handling code here:
         GlassPanePopup.showPopup(new Notification());
@@ -2255,6 +2106,31 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void filterTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTableButtonActionPerformed
         // TODO add your handling code here:
+    alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
+    model = (DefaultTableModel) allTicketTable.getModel();
+    model.setRowCount(0);
+    for (Tickets t : alltickets) {
+    model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel(), t.getStatus()});
+    }
+    String type = ticketType.getSelectedItem().toString();
+    String Priority = priority.getSelectedItem().toString();
+    String department = dept.getSelectedItem().toString();
+    String stats = status.getSelectedItem().toString(); 
+    
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+    
+    List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
+    if(type != "All")
+    filters.add(RowFilter.regexFilter(type, 1));
+    if(Priority != "All")
+    filters.add(RowFilter.regexFilter(Priority, 2));
+    if(department != "All")    
+    filters.add(RowFilter.regexFilter(department, 3));
+    if(stats != "All")    
+    filters.add(RowFilter.regexFilter(stats, 6));    
+    sorter.setRowFilter(RowFilter.andFilter(filters));
+    allTicketTable.setRowSorter(sorter);
+
     }//GEN-LAST:event_filterTableButtonActionPerformed
 
     /**
@@ -2295,8 +2171,7 @@ public class MainMenu extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
-        
-        
+ 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2476,6 +2351,7 @@ public class MainMenu extends javax.swing.JFrame {
         }
         jLabel3.setText("Are you ready to work on your tickets, " + getFirstname() + " " + getLastname() + "?");
     }
+    
     private void updateTableDisplay(){   
     user = creds.ShowRec(credTableParam);    
     model = (DefaultTableModel) userManagerTable.getModel();
@@ -2520,4 +2396,79 @@ public class MainMenu extends javax.swing.JFrame {
     model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
     }    
     }
+    
+    private String checkFields(List<String> strings){
+        for (String s : strings) {
+        if (s == null || s.trim().isEmpty()) {
+            System.out.println(s);
+            return "not valid";
+        }
+    }
+        return "valid";
+    }
+    
+    private void manipulateTicket(ArrayList<String> stringParam, String option){
+        Data_Tickets ticket = new Data_Tickets();
+        Tickets information = null;
+        
+        long now = System.currentTimeMillis();
+        Timestamp tstamp = new Timestamp(now);
+        
+        String TicketID = stringParam.get(0),
+        TicketName = stringParam.get(1),
+        TicketDesc = stringParam.get(2),
+        TicketType = stringParam.get(3),
+        PriorityLevel = stringParam.get(4),
+        AssignedDepartment = stringParam.get(5),
+        DateCreated = stringParam.get(6),
+        Creator = stringParam.get(7),
+        Notes = stringParam.get(8),
+        AssignedPersonnel = stringParam.get(9),
+        DateUpdated = tstamp.toString(),
+        Status = stringParam.get(12);
+        int RevCount = Integer.parseInt(stringParam.get(10)),
+        followup = Integer.parseInt(stringParam.get(11));
+        
+        List<String> array = Arrays.asList(TicketID, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator);
+        
+        if (checkFields(array).equals("valid")){
+        information = new Tickets(TicketID, RevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
+
+        switch(option){
+            case "Create":
+                ticket.addRow("alltickets", information);
+                ticket.addRow("masterrecord", information);
+                JOptionPane.showMessageDialog(null, "Ticket has been created. Your ticket number is " + TicketID + ".","Ticket Created",JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "Update":
+                ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + Integer.toString(RevCount-1)+ "'");
+                ticket.addRow("alltickets", information);
+                ticket.addRow("masterrecord", information);
+                JOptionPane.showMessageDialog(null, "Ticket has been updated","Ticket Updated",JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "Close":
+                ticket.deleteRow("alltickets", TicketID + " AND RevisionCount = '" + RevCount + "'");
+                ticket.addRow("masterrecord", information);
+                JOptionPane.showMessageDialog(null, "Ticket has been closed","Ticket Closed",JOptionPane.INFORMATION_MESSAGE);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "No method has been selected!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        }  
+        
+        else{
+        JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        updateTableDisplay();                
+    }
+    
+    private void resetCreateFields(){
+        newTicketName.setText("");
+        createTicketTxtArea.setText("");
+        ticketTypeComboBox1.setSelectedIndex(0);
+        priorityComboBox1.setSelectedIndex(0);
+        depComboBox3.setSelectedIndex(0);
+        assigneeComboBox1.setSelectedIndex(0);
+    }    
 }
