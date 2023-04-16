@@ -8,6 +8,7 @@ import Database.Credentials;
 import Database.Data_Credentials;
 import Database.EncryptionDecryption;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,6 +99,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, 140, 40));
+
+        usernameFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameFldKeyPressed(evt);
+            }
+        });
         jPanel1.add(usernameFld, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 290, -1));
 
         exitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/exitButton.png"))); // NOI18N
@@ -109,6 +116,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 60, 30));
+
+        passwordFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFldKeyPressed(evt);
+            }
+        });
         jPanel1.add(passwordFld, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 330, 290, -1));
 
         LoginBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/LoginBackground.png"))); // NOI18N
@@ -133,67 +146,84 @@ public class Login extends javax.swing.JFrame {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-
-        
-        username = usernameFld.getText();
-        password = passwordFld.getText();
-
-        // Check if the username and password fields are not blank
-        if (username.trim().isEmpty()|| password.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-                try {
-                    EncryptionDecryption hash = new EncryptionDecryption();
-                    // Encrypt the password
-                    // Check if encryption was successful
-                    // Query the credentials table to check if the entered username and encrypted password match
-                    String qry = "credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
-                    accType = "";
-                    fname = "";
-                    lname = "";
-                    dept = "";
-                    empID = "";
-                    try {
-                        user = login.ShowRec(qry);
-                        if (!user.isEmpty()) {
-                            for(Credentials u: user){
-                                accType = u.getActType();
-                                fname = u.getF_name();
-                                lname = u.getL_name();
-                                dept = u.getDepartment();
-                                empID = u.getEmpnum();            
-                                if (accType.equals("Administrator") || accType.equals("Employee") || accType.equals("Superadmin")) {
-                                    menu = new MainMenu(accType,fname,lname,dept,empID);
-                                    menu.show();
-                                    dispose();
-                                    break;
-                                }
-                                else{
-                                    JOptionPane.showMessageDialog(null, "Account Type is not supported", "Information Test", JOptionPane.INFORMATION_MESSAGE);
-                                    break;
-                                }
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
-                            usernameFld.setText("");
-                            passwordFld.setText("");
-                        }
-                    
-                } catch (Exception ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }                              
-
-                } catch (Exception ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }                 
-
-        }
+        executeLogin();
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_exitBtnActionPerformed
+
+    private void executeLogin (){
+        username = usernameFld.getText();
+        password = passwordFld.getText();
+
+        // Check if the username and password fields are not blank
+        if (username.trim().isEmpty()|| password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+        else {
+            try {
+                EncryptionDecryption hash = new EncryptionDecryption();
+                // Encrypt the password
+                // Check if encryption was successful
+                // Query the credentials table to check if the entered username and encrypted password match
+                String qry = "credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
+                accType = "";
+                fname = "";
+                lname = "";
+                dept = "";
+                empID = "";
+                try {
+                    user = login.ShowRec(qry);
+                    if (!user.isEmpty()) {
+                        for(Credentials u: user){
+                            accType = u.getActType();
+                            fname = u.getF_name();
+                            lname = u.getL_name();
+                            dept = u.getDepartment();
+                            empID = u.getEmpnum();            
+                            if (accType.equals("Administrator") || accType.equals("Employee") || accType.equals("Superadmin")) {
+                                menu = new MainMenu(accType,fname,lname,dept,empID);
+                                menu.show();
+                                dispose();
+                                break;
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Account Type is not supported", "Information Test", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
+                        usernameFld.setText("");
+                        passwordFld.setText("");
+                    }
+
+            } catch (Exception ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }                              
+
+            } catch (Exception ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }                 
+
+        }
+}
+    
+    private void usernameFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFldKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            executeLogin();
+        }
+    }//GEN-LAST:event_usernameFldKeyPressed
+
+    private void passwordFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFldKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            executeLogin();
+        }
+    }//GEN-LAST:event_passwordFldKeyPressed
 
     /**
      * @param args the command line arguments

@@ -1681,8 +1681,6 @@ public class MainMenu extends javax.swing.JFrame {
         String Creator = getFirstname() + " " + getLastname();
         String DateCreated = tstamp.toString();
         String AssignedPersonnel = "";
-//        Object[] emplist = ticket.employeeList(parameters).toArray();
-//        assigneeComboBox1.setModel(new DefaultComboBoxModel(emplist));
         if(acctype.equals("Administrator") || acctype.equals("Superadmin")){
         AssignedPersonnel = assigneeComboBox1.getSelectedItem().toString();
         }
