@@ -397,9 +397,9 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(defPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defPanelLayout.createSequentialGroup()
-                        .addGap(0, 198, Short.MAX_VALUE)
+                        .addGap(0, 162, Short.MAX_VALUE)
                         .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defPanelLayout.createSequentialGroup()
                                 .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -2158,10 +2158,13 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void homeBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBttnActionPerformed
         // TODO add your handling code here:
-        MainMenu home = new MainMenu();
-        home.show();
+        //MainMenu home = new MainMenu();
+        parentPanel.removeAll();
+        parentPanel.add(defPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
         
-        dispose();
+       //dispose();
     }//GEN-LAST:event_homeBttnActionPerformed
 
     /**
