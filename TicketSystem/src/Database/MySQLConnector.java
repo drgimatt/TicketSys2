@@ -16,7 +16,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
  *
  */
 public class MySQLConnector {
-    String url = "192.168.1.50:3310/ticketsys2";
+    String url = "snboots.ddns.net:3310/ticketsys2";
     String address = "jdbc:mysql://" + url ;
     String username = "admin";
     String password = "titingkayad";
