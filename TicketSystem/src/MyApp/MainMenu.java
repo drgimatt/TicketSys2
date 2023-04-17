@@ -136,6 +136,12 @@ public class MainMenu extends javax.swing.JFrame {
         search = new javax.swing.JLabel();
         searchBox = new javax.swing.JTextField();
         searchTableButton = new javax.swing.JButton();
+        dateCreatedStart = new com.toedter.calendar.JDateChooser();
+        dateUpdatedStart = new com.toedter.calendar.JDateChooser();
+        dateCreated = new javax.swing.JLabel();
+        dateUpdated = new javax.swing.JLabel();
+        dateCreatedEnd = new com.toedter.calendar.JDateChooser();
+        dateUpdatedEnd = new com.toedter.calendar.JDateChooser();
         userManagementPanel = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         userManagerTable = new javax.swing.JTable();
@@ -447,33 +453,33 @@ public class MainMenu extends javax.swing.JFrame {
         allTicketTable.setAutoCreateRowSorter(true);
         allTicketTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Ticket Number", "Ticket Type", "Priority", "Department", "Date Updated", "Assignee", "Status"
+                "Ticket Number", "Ticket Type", "Priority", "Department", "Date Created", "Date Updated", "Assignee", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -558,77 +564,112 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        dateCreated.setText("Date Created");
+
+        dateUpdated.setText("Date Updated");
+
         javax.swing.GroupLayout allTicketsPanelLayout = new javax.swing.GroupLayout(allTicketsPanel);
         allTicketsPanel.setLayout(allTicketsPanelLayout);
         allTicketsPanelLayout.setHorizontalGroup(
             allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2)
             .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                .addGap(423, 423, 423)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(allTicketsPanelLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(allTicketsPanelLayout.createSequentialGroup()
-                        .addComponent(search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchBox))
-                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
                         .addComponent(filterBy)
                         .addGap(18, 18, 18)
-                        .addComponent(ticketTypeL)
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ticketTypeL)
+                            .addComponent(priorityL))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(priority, 0, 98, Short.MAX_VALUE)
+                            .addComponent(ticketType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(priorityL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(deptL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deptL)
+                            .addComponent(jLabel34))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel34)
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dept, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(status, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                                .addComponent(dateCreated)
+                                .addGap(18, 18, 18)
+                                .addComponent(dateCreatedStart, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                                .addComponent(dateUpdated)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dateUpdatedStart, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                        .addComponent(search)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(searchBox)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filterTableButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchTableButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateCreatedEnd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(dateUpdatedEnd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(searchTableButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(resetFieldsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addGroup(allTicketsPanelLayout.createSequentialGroup()
-                .addGap(397, 397, 397)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(resetFieldsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterTableButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
         );
         allTicketsPanelLayout.setVerticalGroup(
             allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(allTicketsPanelLayout.createSequentialGroup()
-                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(filterBy)
-                            .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ticketTypeL)
-                            .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priorityL)
-                            .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deptL)
-                            .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel34)
-                            .addComponent(filterTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
+                                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(deptL)
+                                            .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ticketTypeL)
+                                            .addComponent(dateCreated))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(dateCreatedStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dateCreatedEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(6, 6, 6)))
+                                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(priorityL)
+                                        .addComponent(jLabel34)
+                                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateUpdatedStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateUpdated))
+                                    .addComponent(dateUpdatedEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
+                                .addComponent(filterBy)
+                                .addGap(26, 26, 26)))
                         .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(search)
                             .addComponent(searchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
-                        .addComponent(resetFieldsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(searchTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(resetFieldsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filterTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         parentPanel.add(allTicketsPanel, "card4");
@@ -1920,76 +1961,6 @@ public class MainMenu extends javax.swing.JFrame {
         resetCreateFields();
     }//GEN-LAST:event_resetTicketBttn1ActionPerformed
 
-    private void allTicketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTicketTableMouseClicked
-        // TODO add your handling code here:
-        JPopupMenu userPop = new JPopupMenu("Additional Options");
-        JMenuItem modifyTicket = new JMenuItem("Modify Ticket");
-        JMenuItem showHistory = new JMenuItem("Ticket History");
-        userPop.add(showHistory);
-        modifyTicket.addActionListener(new ActionListener(){
-        
-            public void actionPerformed(ActionEvent e){
-            int selectedRow =  allTicketTable.getSelectedRow();
-            String dept = allTicketTable.getValueAt(selectedRow,3).toString();
-            if((getDepartment().equals(dept) && getAcctype().equals("Administrator")) || getAcctype().equals("Superadmin")){
-            parentPanel.removeAll();
-            parentPanel.add(indivTicketPanel);
-            parentPanel.repaint();
-            parentPanel.revalidate();
-            String id = allTicketTable.getValueAt(selectedRow,0).toString();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            ArrayList<Tickets> ticketinfo;
-            Data_Tickets ticket = new Data_Tickets();
-            String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
-            ticketinfo = ticket.ShowRec(parameters);
-            ticketNumberLbl4.setText(id);
-            ticketTypeComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,1).toString());
-            priorityComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,2).toString());
-            depComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,3).toString());
-            for(Tickets t: ticketinfo){
-            ticketNameTxtField.setText(t.getTitle());
-            ticketTxtArea.setText(t.getDesc());
-            String department = depComboBox.getSelectedItem().toString();
-            Data_Tickets emp = new Data_Tickets();
-            String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + department + "'";
-            Object[] emplist = emp.employeeList(param).toArray();
-            assigneeComboBox.setModel(new DefaultComboBoxModel(emplist));
-            if (t.getPersonnel().equals("N/A")){   
-            assigneeComboBox.addItem("N/A");
-            assigneeComboBox.setSelectedItem("N/A");
-            } else
-            assigneeComboBox.setSelectedItem(t.getPersonnel());
-            } 
-            tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
-            model = (DefaultTableModel) ticketHistoryTable.getModel();
-            model.setRowCount(0);
-            for (Tickets t : tickethistory) {
-            model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
-            }
-            updateTableDisplay();
-            }else{
-                JOptionPane.showMessageDialog(null, "Modifying Tickets of other Deparment is not allowed!", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            }
-           
-        });
-        showHistory.addActionListener(new ActionListener(){
-        
-            public void actionPerformed(ActionEvent e){
-                int selectedRow = allTicketTable.getSelectedRow();
-                TicketHistory history = new TicketHistory(allTicketTable.getValueAt(selectedRow, 0).toString());
-                history.show();
-            }
-           
-        });         
-        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3 && allTicketTable.getSelectedRow() != -1){
-            if(getAcctype().equals("Administrator") || getAcctype().equals("Superadmin")){
-                userPop.add(modifyTicket);
-            }
-            userPop.show(allTicketTable, evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_allTicketTableMouseClicked
-
     private void requestsTicketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestsTicketTableMouseClicked
         // TODO add your handling code here:
         if (requestsTicketTable.getSelectedRowCount()==1){
@@ -2044,93 +2015,10 @@ public class MainMenu extends javax.swing.JFrame {
         updateTableDisplay();
     }//GEN-LAST:event_refreshTableButton5ActionPerformed
 
-    private void resetFieldsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFieldsButtonActionPerformed
-        // TODO add your handling code here:
-        ticketType.setSelectedIndex(0);
-        priority.setSelectedIndex(0);
-        dept.setSelectedIndex(0);
-        status.setSelectedIndex(0);
-        searchBox.setText("");
-        allTicketTable.setRowSorter(null);
-        updateTableDisplay();
-    }//GEN-LAST:event_resetFieldsButtonActionPerformed
-
-    private void ticketTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketTypeActionPerformed
-        // TODO add your handling code here:
-        // Filter by Ticket Type
-        /*
-         
-        int ticketTypeFilter = ticketType.getSelectedIndex();
-        
-        DefaultTableModel model = (DefaultTableModel) allTicketTable.getModel();
-        model.setRowCount(0);
-        
-       
-        iComparator<String> comparator = new Comparator<String>() {
-        public int compare(String s1, String s2) {
-        String[] strings1 = s1.split("\\s");
-        String[] strings2 = s2.split("\\s");
-        return strings1[strings1.length - 1]
-            .compareTo(strings2[strings2.length - 1]);
-        
-        table.getSelectionModel().addListSelectionListener(
-        new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent event) {
-                int viewRow = table.getSelectedRow();
-                if (viewRow < 0) {
-                    //Selection got filtered away.
-                    statusText.setText("");
-                } else {
-                    int modelRow = 
-                        table.convertRowIndexToModel(viewRow);
-                    statusText.setText(
-                        String.format("Selected Row in view: %d. " +
-                            "Selected Row in model: %d.", 
-                            viewRow, modelRow));
-                }
-            }
-        }
-);
-        
-    }
-};
-      */  
-        
-    }//GEN-LAST:event_ticketTypeActionPerformed
-
     private void cmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActionPerformed
         // TODO add your handling code here:
         GlassPanePopup.showPopup(new Notification());
     }//GEN-LAST:event_cmdActionPerformed
-
-    private void filterTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTableButtonActionPerformed
-        // TODO add your handling code here:
-    alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
-    model = (DefaultTableModel) allTicketTable.getModel();
-    model.setRowCount(0);
-    for (Tickets t : alltickets) {
-    model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel(), t.getStatus()});
-    }
-    String type = ticketType.getSelectedItem().toString();
-    String Priority = priority.getSelectedItem().toString();
-    String department = dept.getSelectedItem().toString();
-    String stats = status.getSelectedItem().toString(); 
-    
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
-    
-    List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
-    if(type != "All")
-    filters.add(RowFilter.regexFilter(type, 1));
-    if(Priority != "All")
-    filters.add(RowFilter.regexFilter(Priority, 2));
-    if(department != "All")    
-    filters.add(RowFilter.regexFilter(department, 3));
-    if(stats != "All")    
-    filters.add(RowFilter.regexFilter(stats, 6));    
-    sorter.setRowFilter(RowFilter.andFilter(filters));
-    allTicketTable.setRowSorter(sorter);
-
-    }//GEN-LAST:event_filterTableButtonActionPerformed
 
     private void homeBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBttnActionPerformed
         // TODO add your handling code here:
@@ -2212,28 +2100,237 @@ public class MainMenu extends javax.swing.JFrame {
         updateTableDisplay();
     }//GEN-LAST:event_myTicketsBttnActionPerformed
 
+    private void searchTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTableButtonActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
+        model = (DefaultTableModel) allTicketTable.getModel();
+        model.setRowCount(0);
+        for (Tickets t : alltickets) {
+            Date dCreate;
+            Date dUpdate;
+            try {
+                dCreate = sdf.parse(t.getDateCreated());
+                dUpdate = sdf.parse(t.getDateUpdated());
+                model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), dCreate, dUpdate, t.getPersonnel(), t.getStatus()});
+            } catch (ParseException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+        String text = searchBox.getText();
+        if (text.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        }
+        allTicketTable.setRowSorter(sorter);
+    }//GEN-LAST:event_searchTableButtonActionPerformed
+
     private void searchBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchBoxActionPerformed
 
-    private void searchTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTableButtonActionPerformed
+    private void filterTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTableButtonActionPerformed
         // TODO add your handling code here:
-    alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
-    model = (DefaultTableModel) allTicketTable.getModel();
-    model.setRowCount(0);
-    for (Tickets t : alltickets) {
-    model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel(), t.getStatus()});
-    }
-    
-    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);     
-    String text = searchBox.getText();
-    if (text.trim().length() == 0) {
-    sorter.setRowFilter(null);
-    } else {
-    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-    }
-    allTicketTable.setRowSorter(sorter);
-    }//GEN-LAST:event_searchTableButtonActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
+        model = (DefaultTableModel) allTicketTable.getModel();
+        model.setRowCount(0);
+        for (Tickets t : alltickets) {
+            Date dCreate;
+            Date dUpdate;
+            try {
+                dCreate = sdf.parse(t.getDateCreated());
+                dUpdate = sdf.parse(t.getDateUpdated());
+                model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), dCreate, dUpdate, t.getPersonnel(), t.getStatus()});
+            } catch (ParseException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        String type = ticketType.getSelectedItem().toString();
+        String Priority = priority.getSelectedItem().toString();
+        String department = dept.getSelectedItem().toString();
+        String stats = status.getSelectedItem().toString();
+        Date startDateCreated;
+        Date endDateCreated;
+        Date startDateUpdated;
+        Date endDateUpdated;     
+
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+
+        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
+        if(type != "All")
+        filters.add(RowFilter.regexFilter(type, 1));
+        if(Priority != "All")
+        filters.add(RowFilter.regexFilter(Priority, 2));
+        if(department != "All")
+        filters.add(RowFilter.regexFilter(department, 3));
+        if(stats != "All")
+        filters.add(RowFilter.regexFilter(stats, 7));
+        try {
+            startDateCreated = dateCreatedStart.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.AFTER, startDateCreated, 4)); 
+        } catch (Exception ex) {
+            //Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(null, "Startdate was not provided.","Missing Startdate",JOptionPane.ERROR_MESSAGE);
+            //System.out.println("Blank field - Birthdate");
+        }
+        try {
+            endDateCreated = dateCreatedEnd.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.BEFORE, endDateCreated, 4)); 
+        } catch (Exception ex) {
+            //Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(null, "Startdate was not provided.","Missing Startdate",JOptionPane.ERROR_MESSAGE);
+            //System.out.println("Blank field - Birthdate");
+        }
+        try {
+            startDateUpdated = dateUpdatedStart.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.AFTER, startDateUpdated, 5)); 
+        } catch (Exception ex) {
+            //Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(null, "Startdate was not provided.","Missing Startdate",JOptionPane.ERROR_MESSAGE);
+            //System.out.println("Blank field - Birthdate");
+        }
+        try {
+            endDateUpdated = dateUpdatedEnd.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.BEFORE, endDateUpdated, 5)); 
+        } catch (Exception ex) {
+            //Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(null, "Startdate was not provided.","Missing Startdate",JOptionPane.ERROR_MESSAGE);
+            //System.out.println("Blank field - Birthdate");
+        }        
+        sorter.setRowFilter(RowFilter.andFilter(filters));
+        allTicketTable.setRowSorter(sorter);
+    }//GEN-LAST:event_filterTableButtonActionPerformed
+
+    private void ticketTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketTypeActionPerformed
+        // TODO add your handling code here:
+        // Filter by Ticket Type
+        /*
+
+        int ticketTypeFilter = ticketType.getSelectedIndex();
+
+        DefaultTableModel model = (DefaultTableModel) allTicketTable.getModel();
+        model.setRowCount(0);
+
+        iComparator<String> comparator = new Comparator<String>() {
+            public int compare(String s1, String s2) {
+                String[] strings1 = s1.split("\\s");
+                String[] strings2 = s2.split("\\s");
+                return strings1[strings1.length - 1]
+                .compareTo(strings2[strings2.length - 1]);
+
+                table.getSelectionModel().addListSelectionListener(
+                    new ListSelectionListener() {
+                        public void valueChanged(ListSelectionEvent event) {
+                            int viewRow = table.getSelectedRow();
+                            if (viewRow < 0) {
+                                //Selection got filtered away.
+                                statusText.setText("");
+                            } else {
+                                int modelRow =
+                                table.convertRowIndexToModel(viewRow);
+                                statusText.setText(
+                                    String.format("Selected Row in view: %d. " +
+                                        "Selected Row in model: %d.",
+                                        viewRow, modelRow));
+                            }
+                        }
+                    }
+                );
+
+            }
+        };
+        */
+
+    }//GEN-LAST:event_ticketTypeActionPerformed
+
+    private void resetFieldsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFieldsButtonActionPerformed
+        // TODO add your handling code here:
+        ticketType.setSelectedIndex(0);
+        priority.setSelectedIndex(0);
+        dept.setSelectedIndex(0);
+        status.setSelectedIndex(0);
+        searchBox.setText("");
+        allTicketTable.setRowSorter(null);
+        dateCreatedStart.setCalendar(null);
+        dateCreatedEnd.setCalendar(null);
+        dateUpdatedStart.setCalendar(null);
+        dateUpdatedEnd.setCalendar(null);
+        updateTableDisplay();
+    }//GEN-LAST:event_resetFieldsButtonActionPerformed
+
+    private void allTicketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTicketTableMouseClicked
+        // TODO add your handling code here:
+        JPopupMenu userPop = new JPopupMenu("Additional Options");
+        JMenuItem modifyTicket = new JMenuItem("Modify Ticket");
+        JMenuItem showHistory = new JMenuItem("Ticket History");
+        userPop.add(showHistory);
+        modifyTicket.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                int selectedRow =  allTicketTable.getSelectedRow();
+                String dept = allTicketTable.getValueAt(selectedRow,3).toString();
+                if((getDepartment().equals(dept) && getAcctype().equals("Administrator")) || getAcctype().equals("Superadmin")){
+                    parentPanel.removeAll();
+                    parentPanel.add(indivTicketPanel);
+                    parentPanel.repaint();
+                    parentPanel.revalidate();
+                    String id = allTicketTable.getValueAt(selectedRow,0).toString();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    ArrayList<Tickets> ticketinfo;
+                    Data_Tickets ticket = new Data_Tickets();
+                    String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
+                    ticketinfo = ticket.ShowRec(parameters);
+                    ticketNumberLbl4.setText(id);
+                    ticketTypeComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,1).toString());
+                    priorityComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,2).toString());
+                    depComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,3).toString());
+                    for(Tickets t: ticketinfo){
+                        ticketNameTxtField.setText(t.getTitle());
+                        ticketTxtArea.setText(t.getDesc());
+                        String department = depComboBox.getSelectedItem().toString();
+                        Data_Tickets emp = new Data_Tickets();
+                        String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + department + "'";
+                        Object[] emplist = emp.employeeList(param).toArray();
+                        assigneeComboBox.setModel(new DefaultComboBoxModel(emplist));
+                        if (t.getPersonnel().equals("N/A")){
+                            assigneeComboBox.addItem("N/A");
+                            assigneeComboBox.setSelectedItem("N/A");
+                        } else
+                        assigneeComboBox.setSelectedItem(t.getPersonnel());
+                    }
+                    tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
+                    model = (DefaultTableModel) ticketHistoryTable.getModel();
+                    model.setRowCount(0);
+                    for (Tickets t : tickethistory) {
+                        model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
+                    }
+                    updateTableDisplay();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Modifying Tickets of other Deparment is not allowed!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        });
+        showHistory.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                int selectedRow = allTicketTable.getSelectedRow();
+                TicketHistory history = new TicketHistory(allTicketTable.getValueAt(selectedRow, 0).toString());
+                history.show();
+            }
+
+        });
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3 && allTicketTable.getSelectedRow() != -1){
+            if(getAcctype().equals("Administrator") || getAcctype().equals("Superadmin")){
+                userPop.add(modifyTicket);
+            }
+            userPop.show(allTicketTable, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_allTicketTableMouseClicked
     
   
     /**
@@ -2295,6 +2392,12 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel createTicketPanel;
     private javax.swing.JTextArea createTicketTxtArea;
     private javax.swing.JButton createUserButton;
+    private javax.swing.JLabel dateCreated;
+    private com.toedter.calendar.JDateChooser dateCreatedEnd;
+    private com.toedter.calendar.JDateChooser dateCreatedStart;
+    private javax.swing.JLabel dateUpdated;
+    private com.toedter.calendar.JDateChooser dateUpdatedEnd;
+    private com.toedter.calendar.JDateChooser dateUpdatedStart;
     private javax.swing.JPanel defPanel;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JComboBox<String> depComboBox;
@@ -2467,10 +2570,20 @@ public class MainMenu extends javax.swing.JFrame {
     model.addRow(new Object[] {u.getEmpnum(),u.getF_name(),u.getM_name(),u.getL_name(),u.getPhonenum(),u.getEmail(),u.getBday(),u.getActType(),u.getDepartment(),u.getPosition(),u.getStartdate(),u.getGender()});
     }
     alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     model = (DefaultTableModel) allTicketTable.getModel();
     model.setRowCount(0);
     for (Tickets t : alltickets) {
-    model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel(), t.getStatus()});
+        Date dCreate;
+        Date dUpdate;
+        try {
+            dCreate = sdf.parse(t.getDateCreated());
+            dUpdate = sdf.parse(t.getDateUpdated());
+            model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), dCreate, dUpdate, t.getPersonnel(), t.getStatus()});
+        } catch (ParseException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     followuptickets = mySql.ShowRec("SELECT * FROM alltickets WHERE AssignedPersonnel = '" + getFirstname() + " " + getLastname() + "' AND FollowUp = 1");
     model = (DefaultTableModel) requestsTicketTable.getModel();

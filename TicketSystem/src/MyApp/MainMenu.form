@@ -435,84 +435,132 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="423" max="-2" attributes="0"/>
+                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="filterBy" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="ticketTypeL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="priorityL" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="priority" pref="98" max="32767" attributes="0"/>
+                                  <Component id="ticketType" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="deptL" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="dept" max="32767" attributes="0"/>
+                                  <Component id="status" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="dateCreated" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="dateCreatedStart" min="-2" pref="109" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="dateUpdated" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="dateUpdatedStart" min="-2" pref="109" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                           <Group type="102" attributes="0">
                               <Component id="search" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="searchBox" max="32767" attributes="0"/>
                           </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="dateCreatedEnd" alignment="1" pref="131" max="32767" attributes="0"/>
+                          <Component id="dateUpdatedEnd" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="filterBy" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="ticketTypeL" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="ticketType" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="priorityL" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="priority" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="deptL" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="dept" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="status" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="searchTableButton" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="filterTableButton" alignment="1" min="-2" pref="79" max="-2" attributes="0"/>
-                          <Component id="searchTableButton" alignment="1" min="-2" pref="79" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="resetFieldsButton" min="-2" pref="79" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="397" max="-2" attributes="0"/>
-                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="resetFieldsButton" alignment="1" min="-2" pref="79" max="-2" attributes="0"/>
+                          <Component id="filterTableButton" alignment="1" min="-2" pref="79" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="filterBy" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ticketType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ticketTypeL" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="priority" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="priorityL" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="dept" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="deptL" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="status" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="filterTableButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="ticketType" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="deptL" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="dept" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="ticketTypeL" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="dateCreated" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="dateCreatedStart" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="dateCreatedEnd" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="priority" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="priorityL" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="status" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="dateUpdatedStart" alignment="0" max="-2" attributes="0"/>
+                                              <Component id="dateUpdated" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="dateUpdatedEnd" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="filterBy" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="search" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="searchBox" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="searchTableButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="resetFieldsButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="413" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="resetFieldsButton" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="filterTableButton" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" min="-2" pref="435" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -529,11 +577,12 @@
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="20">
+                      <Table columnCount="8" rowCount="20">
                         <Column editable="false" title="Ticket Number" type="java.lang.Object"/>
                         <Column editable="false" title="Ticket Type" type="java.lang.Object"/>
                         <Column editable="false" title="Priority" type="java.lang.Object"/>
                         <Column editable="false" title="Department" type="java.lang.Object"/>
+                        <Column editable="false" title="Date Created" type="java.lang.Object"/>
                         <Column editable="false" title="Date Updated" type="java.lang.Object"/>
                         <Column editable="false" title="Assignee" type="java.lang.Object"/>
                         <Column editable="false" title="Status" type="java.lang.Object"/>
@@ -541,6 +590,16 @@
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -767,6 +826,24 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchTableButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="dateCreatedStart">
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="dateUpdatedStart">
+            </Component>
+            <Component class="javax.swing.JLabel" name="dateCreated">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Date Created"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="dateUpdated">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Date Updated"/>
+              </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="dateCreatedEnd">
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="dateUpdatedEnd">
             </Component>
           </SubComponents>
         </Container>
