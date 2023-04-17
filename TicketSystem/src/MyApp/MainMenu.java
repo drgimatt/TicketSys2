@@ -122,7 +122,7 @@ public class MainMenu extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         allTicketTable = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        refreshTableButton6 = new javax.swing.JButton();
+        resetFieldsButton = new javax.swing.JButton();
         filterBy = new javax.swing.JLabel();
         ticketType = new javax.swing.JComboBox<>();
         ticketTypeL = new javax.swing.JLabel();
@@ -133,6 +133,9 @@ public class MainMenu extends javax.swing.JFrame {
         status = new javax.swing.JComboBox<>();
         jLabel34 = new javax.swing.JLabel();
         filterTableButton = new javax.swing.JButton();
+        search = new javax.swing.JLabel();
+        searchBox = new javax.swing.JTextField();
+        searchTableButton = new javax.swing.JButton();
         userManagementPanel = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         userManagerTable = new javax.swing.JTable();
@@ -489,14 +492,14 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("All Tickets");
 
-        refreshTableButton6.setBackground(new java.awt.Color(0, 153, 255));
-        refreshTableButton6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        refreshTableButton6.setForeground(new java.awt.Color(255, 255, 255));
-        refreshTableButton6.setText("REFRESH");
-        refreshTableButton6.setBorder(new javax.swing.border.MatteBorder(null));
-        refreshTableButton6.addActionListener(new java.awt.event.ActionListener() {
+        resetFieldsButton.setBackground(new java.awt.Color(255, 102, 102));
+        resetFieldsButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        resetFieldsButton.setForeground(new java.awt.Color(255, 255, 255));
+        resetFieldsButton.setText("RESET");
+        resetFieldsButton.setBorder(new javax.swing.border.MatteBorder(null));
+        resetFieldsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshTableButton6ActionPerformed(evt);
+                resetFieldsButtonActionPerformed(evt);
             }
         });
 
@@ -524,7 +527,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel34.setText("Status");
 
-        filterTableButton.setBackground(new java.awt.Color(255, 102, 102));
+        filterTableButton.setBackground(new java.awt.Color(0, 153, 255));
         filterTableButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         filterTableButton.setForeground(new java.awt.Color(255, 255, 255));
         filterTableButton.setText("FILTER");
@@ -535,61 +538,97 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        search.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        search.setText("Search:");
+
+        searchBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBoxActionPerformed(evt);
+            }
+        });
+
+        searchTableButton.setBackground(new java.awt.Color(0, 153, 255));
+        searchTableButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        searchTableButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchTableButton.setText("SEARCH");
+        searchTableButton.setBorder(new javax.swing.border.MatteBorder(null));
+        searchTableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTableButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout allTicketsPanelLayout = new javax.swing.GroupLayout(allTicketsPanel);
         allTicketsPanel.setLayout(allTicketsPanelLayout);
         allTicketsPanelLayout.setHorizontalGroup(
             allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2)
             .addGroup(allTicketsPanelLayout.createSequentialGroup()
-                .addGap(385, 385, 385)
+                .addGap(33, 33, 33)
+                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                        .addComponent(search)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchBox))
+                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                        .addComponent(filterBy)
+                        .addGap(18, 18, 18)
+                        .addComponent(ticketTypeL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(priorityL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(deptL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filterTableButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTableButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(resetFieldsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+            .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                .addGap(397, 397, 397)
                 .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(allTicketsPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(filterBy)
-                .addGap(18, 18, 18)
-                .addComponent(ticketTypeL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(priorityL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(deptL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel34)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(filterTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(refreshTableButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
         );
         allTicketsPanelLayout.setVerticalGroup(
             allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filterBy)
-                    .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ticketTypeL)
-                    .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priorityL)
-                    .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deptL)
-                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel34)
-                    .addComponent(refreshTableButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(allTicketsPanelLayout.createSequentialGroup()
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(filterBy)
+                            .addComponent(ticketType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ticketTypeL)
+                            .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priorityL)
+                            .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deptL)
+                            .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel34)
+                            .addComponent(filterTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(search)
+                            .addComponent(searchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
+                        .addComponent(resetFieldsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         parentPanel.add(allTicketsPanel, "card4");
@@ -1562,58 +1601,7 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void myTicketsBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTicketsBttnActionPerformed
-        // TODO add your handling code here:
-        parentPanel.removeAll();
-        parentPanel.add(myTicketsPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-        updateTableDisplay();
-    }//GEN-LAST:event_myTicketsBttnActionPerformed
-
-    private void allTicketsBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allTicketsBttnActionPerformed
-        // TODO add your handling code here:
-        parentPanel.removeAll();
-        parentPanel.add(allTicketsPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-        updateTableDisplay();
-    }//GEN-LAST:event_allTicketsBttnActionPerformed
-
-    private void solvedTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solvedTicketsActionPerformed
-        // TODO add your handling code here:
-        parentPanel.removeAll();
-        parentPanel.add(solvedTicketsPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-        updateTableDisplay();        
-        
-    }//GEN-LAST:event_solvedTicketsActionPerformed
   
-    private void createTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTicketActionPerformed
-        // TODO add your handling code here:
-        parentPanel.removeAll();
-        parentPanel.add(createTicketPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-        String department = depComboBox3.getSelectedItem().toString();
-        Data_Tickets emp = new Data_Tickets();
-        String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + department + "'";
-        Object[] emplist = emp.employeeList(param).toArray();
-        assigneeComboBox1.setModel(new DefaultComboBoxModel(emplist));
-        assigneeComboBox1.addItem("N/A");
-    }//GEN-LAST:event_createTicketActionPerformed
-
-    private void logoutBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBttnActionPerformed
-        int ans = JOptionPane.showOptionDialog(this,"Do you want to logoff?", "Logout User", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Yes", "No"}, JOptionPane.YES_OPTION);
-        if (ans == JOptionPane.YES_OPTION){
-            login = new Login();
-            login.setVisible(true);
-            dispose();
-        }
-    }//GEN-LAST:event_logoutBttnActionPerformed
-
     private void cancelTicketBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTicketBttnActionPerformed
         // TODO add your handling code here:
         parentPanel.removeAll();
@@ -1621,15 +1609,6 @@ public class MainMenu extends javax.swing.JFrame {
         parentPanel.repaint();
         parentPanel.revalidate();
     }//GEN-LAST:event_cancelTicketBttnActionPerformed
-
-    private void manageUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUserButtonActionPerformed
-        // TODO add your handling code here:
-            parentPanel.removeAll();
-            parentPanel.add(userManagementPanel);
-            parentPanel.repaint();
-            parentPanel.revalidate();
-            updateTableDisplay();
-    }//GEN-LAST:event_manageUserButtonActionPerformed
 
     private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
         // TODO add your handling code here:
@@ -1821,15 +1800,6 @@ public class MainMenu extends javax.swing.JFrame {
     private void assigneeComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assigneeComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_assigneeComboBox1ActionPerformed
-
-    private void assignedTicketsBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignedTicketsBttnActionPerformed
-        // TODO add your handling code here:
-        parentPanel.removeAll();
-        parentPanel.add(assignedTicketsPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-        updateTableDisplay();
-    }//GEN-LAST:event_assignedTicketsBttnActionPerformed
 
     private void closeTicketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeTicketButtonActionPerformed
         // TODO add your handling code here:
@@ -2074,10 +2044,16 @@ public class MainMenu extends javax.swing.JFrame {
         updateTableDisplay();
     }//GEN-LAST:event_refreshTableButton5ActionPerformed
 
-    private void refreshTableButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTableButton6ActionPerformed
+    private void resetFieldsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFieldsButtonActionPerformed
         // TODO add your handling code here:
+        ticketType.setSelectedIndex(0);
+        priority.setSelectedIndex(0);
+        dept.setSelectedIndex(0);
+        status.setSelectedIndex(0);
+        searchBox.setText("");
+        allTicketTable.setRowSorter(null);
         updateTableDisplay();
-    }//GEN-LAST:event_refreshTableButton6ActionPerformed
+    }//GEN-LAST:event_resetFieldsButtonActionPerformed
 
     private void ticketTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketTypeActionPerformed
         // TODO add your handling code here:
@@ -2163,10 +2139,103 @@ public class MainMenu extends javax.swing.JFrame {
         parentPanel.add(defPanel);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
-       //dispose();
+
+        //dispose();
     }//GEN-LAST:event_homeBttnActionPerformed
 
+    private void assignedTicketsBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignedTicketsBttnActionPerformed
+        // TODO add your handling code here:
+        parentPanel.removeAll();
+        parentPanel.add(assignedTicketsPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        updateTableDisplay();
+    }//GEN-LAST:event_assignedTicketsBttnActionPerformed
+
+    private void manageUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUserButtonActionPerformed
+        // TODO add your handling code here:
+        parentPanel.removeAll();
+        parentPanel.add(userManagementPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        updateTableDisplay();
+    }//GEN-LAST:event_manageUserButtonActionPerformed
+
+    private void logoutBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBttnActionPerformed
+        int ans = JOptionPane.showOptionDialog(this,"Do you want to logoff?", "Logout User", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Yes", "No"}, JOptionPane.YES_OPTION);
+        if (ans == JOptionPane.YES_OPTION){
+            login = new Login();
+            login.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_logoutBttnActionPerformed
+
+    private void createTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTicketActionPerformed
+        // TODO add your handling code here:
+        parentPanel.removeAll();
+        parentPanel.add(createTicketPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        String department = depComboBox3.getSelectedItem().toString();
+        Data_Tickets emp = new Data_Tickets();
+        String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + department + "'";
+        Object[] emplist = emp.employeeList(param).toArray();
+        assigneeComboBox1.setModel(new DefaultComboBoxModel(emplist));
+        assigneeComboBox1.addItem("N/A");
+    }//GEN-LAST:event_createTicketActionPerformed
+
+    private void solvedTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solvedTicketsActionPerformed
+        // TODO add your handling code here:
+        parentPanel.removeAll();
+        parentPanel.add(solvedTicketsPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        updateTableDisplay();
+
+    }//GEN-LAST:event_solvedTicketsActionPerformed
+
+    private void allTicketsBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allTicketsBttnActionPerformed
+        // TODO add your handling code here:
+        parentPanel.removeAll();
+        parentPanel.add(allTicketsPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        updateTableDisplay();
+    }//GEN-LAST:event_allTicketsBttnActionPerformed
+
+    private void myTicketsBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTicketsBttnActionPerformed
+        // TODO add your handling code here:
+        parentPanel.removeAll();
+        parentPanel.add(myTicketsPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+        updateTableDisplay();
+    }//GEN-LAST:event_myTicketsBttnActionPerformed
+
+    private void searchBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchBoxActionPerformed
+
+    private void searchTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTableButtonActionPerformed
+        // TODO add your handling code here:
+    alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
+    model = (DefaultTableModel) allTicketTable.getModel();
+    model.setRowCount(0);
+    for (Tickets t : alltickets) {
+    model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateUpdated(), t.getPersonnel(), t.getStatus()});
+    }
+    
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);     
+    String text = searchBox.getText();
+    if (text.trim().length() == 0) {
+    sorter.setRowFilter(null);
+    } else {
+    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+    }
+    allTicketTable.setRowSorter(sorter);
+    }//GEN-LAST:event_searchTableButtonActionPerformed
+    
+  
     /**
      * @param args the command line arguments
      */
@@ -2299,9 +2368,12 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton refreshTableButton1;
     private javax.swing.JButton refreshTableButton4;
     private javax.swing.JButton refreshTableButton5;
-    private javax.swing.JButton refreshTableButton6;
     private javax.swing.JTable requestsTicketTable;
+    private javax.swing.JButton resetFieldsButton;
     private javax.swing.JButton resetTicketBttn1;
+    private javax.swing.JLabel search;
+    private javax.swing.JTextField searchBox;
+    private javax.swing.JButton searchTableButton;
     private javax.swing.JButton solvedTickets;
     private javax.swing.JPanel solvedTicketsPanel;
     private javax.swing.JTable solvedTicketsTable;
