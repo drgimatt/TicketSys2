@@ -26,7 +26,7 @@ public class Notification extends javax.swing.JPanel {
     public Notification() {
         initComponents();
         setOpaque(false);
-        panel.setLayout(new MigLayout("insert 0, fillx, wrap", "[fill]"));
+        panel.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
         loadNotif();
     }
     
