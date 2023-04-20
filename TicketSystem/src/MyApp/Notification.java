@@ -12,6 +12,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
+import net.miginfocom.swing.MigLayout;
+
 
 /**
  *
@@ -24,6 +26,12 @@ public class Notification extends javax.swing.JPanel {
     public Notification() {
         initComponents();
         setOpaque(false);
+        panel.setLayout(new MigLayout("insert 0, fillx, wrap", "[fill]"));
+        loadNotif();
+    }
+    
+    private void loadNotif(){
+        panel.add(new Item("User A assigned Task 1","2 hours ago"));
     }
     
     @Override
@@ -76,7 +84,7 @@ public class Notification extends javax.swing.JPanel {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 351, Short.MAX_VALUE)
+            .addGap(0, 628, Short.MAX_VALUE)
         );
 
         scroll.setViewportView(panel);
