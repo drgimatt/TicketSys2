@@ -2509,11 +2509,17 @@ public class MainMenu extends javax.swing.JFrame {
             assigneeComboBox.setEnabled(false);
             depComboBox.setEnabled(false);
             jLabel17.setVisible(false);
+            
+            dept.setEnabled(false);
+            dept.setSelectedItem(getDepartment());
         }
         else if ("Administrator".equals(x)) {
             manageUserButton.setVisible(true);
             depComboBox.setEnabled(false);
             credTableParam = "credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
+            
+            dept.setEnabled(false);
+            dept.setSelectedItem(getDepartment());
         }
         else if ("Superadmin".equals(x)) {
             manageUserButton.setVisible(true);
@@ -2574,7 +2580,74 @@ public class MainMenu extends javax.swing.JFrame {
     model.setRowCount(0);
     for (Tickets t : tickethistory) {
     model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
-    }    
+    } 
+    
+    filterByDept();
+    }
+    
+    private void filterByDept() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        alltickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL ORDER BY TicketID DESC");
+        model = (DefaultTableModel) allTicketTable.getModel();
+        model.setRowCount(0);
+        for (Tickets t : alltickets) {
+            Date dCreate;
+            Date dUpdate;
+            try {
+                dCreate = sdf.parse(t.getDateCreated());
+                dUpdate = sdf.parse(t.getDateUpdated());
+                model.addRow(new Object[]{t.getId(), t.getType(), t.getPriority(), t.getDepartment(), dCreate, dUpdate, t.getPersonnel(), t.getStatus()});
+            } catch (ParseException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        String type = ticketType.getSelectedItem().toString();
+        String Priority = priority.getSelectedItem().toString();
+        String department = dept.getSelectedItem().toString();
+        String stats = status.getSelectedItem().toString();
+        Date startDateCreated;
+        Date endDateCreated;
+        Date startDateUpdated;
+        Date endDateUpdated;     
+
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+
+        List<RowFilter<DefaultTableModel, Object>> filters = new ArrayList<>();
+        if(type != "All")
+        filters.add(RowFilter.regexFilter(type, 1));
+        if(Priority != "All")
+        filters.add(RowFilter.regexFilter(Priority, 2));
+        if(department != "All")
+        filters.add(RowFilter.regexFilter(department, 3));
+        if(stats != "All")
+        filters.add(RowFilter.regexFilter(stats, 7));
+        try {
+            startDateCreated = dateCreatedStart.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.AFTER, startDateCreated, 4)); 
+        } catch (Exception ex) {
+            System.out.println("Blank Date Created Start Date");
+        }
+        try {
+            endDateCreated = dateCreatedEnd.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.BEFORE, endDateCreated, 4)); 
+        } catch (Exception ex) {
+            System.out.println("Blank Date Created End Date");
+        }
+        try {
+            startDateUpdated = dateUpdatedStart.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.AFTER, startDateUpdated, 5)); 
+        } catch (Exception ex) {
+            System.out.println("Blank Date Updated Start Date");
+        }
+        try {
+            endDateUpdated = dateUpdatedEnd.getDate();
+            filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.BEFORE, endDateUpdated, 5)); 
+        } catch (Exception ex) {
+            System.out.println("Blank Date Updated End Date");
+        }        
+        sorter.setRowFilter(RowFilter.andFilter(filters));
+        allTicketTable.setRowSorter(sorter);
     }
     
     private String checkFields(List<String> strings){
