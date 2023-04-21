@@ -1297,6 +1297,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        ticketNameTxtField.setEditable(false);
         ticketNameTxtField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         ticketTxtArea.setEditable(false);

@@ -2212,6 +2212,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="ticketNameTxtField">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                 </Component>
