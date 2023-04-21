@@ -6,8 +6,10 @@ package MyApp;
 
 import Database.Credentials;
 import Database.Data_Credentials;
+import Database.Data_Notification;
 import Database.Data_Tickets;
 import Database.MySQLConnector;
+import Database.NotificationInfo;
 import Database.Tickets;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.event.ActionEvent;
@@ -1907,42 +1909,6 @@ public class MainMenu extends javax.swing.JFrame {
         int row = assignedTicketTable.rowAtPoint(evt.getPoint());
         int col = assignedTicketTable.columnAtPoint(evt.getPoint());
         if (row >= 0 && col >= 0) {
-            /*parentPanel.removeAll();
-            parentPanel.add(indivTicketPanel);
-            parentPanel.repaint();
-            parentPanel.revalidate();
-            String id = assignedTicketTable.getValueAt(selectedRow,0).toString();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            ArrayList<Tickets> ticketinfo;
-            Data_Tickets ticket = new Data_Tickets();
-            String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
-            ticketinfo = ticket.ShowRec(parameters);
-            ticketNumberLbl4.setText(id);
-            ticketTypeComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,2).toString());
-            priorityComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,3).toString());
-            depComboBox.setSelectedItem(assignedTicketTable.getValueAt(selectedRow,4).toString());
-            for(Tickets t: ticketinfo){
-            ticketNameTxtField.setText(t.getTitle());
-            ticketTxtArea.setText(t.getDesc());
-            String department = depComboBox.getSelectedItem().toString();
-            Data_Tickets emp = new Data_Tickets();
-            String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + department + "'";
-            Object[] emplist = emp.employeeList(param).toArray();
-            assigneeComboBox.setModel(new DefaultComboBoxModel(emplist));
-            if (t.getPersonnel().equals("N/A")){   
-            assigneeComboBox.addItem("N/A");
-            assigneeComboBox.setSelectedItem("N/A");
-            }else{             
-            assigneeComboBox.setSelectedItem(t.getPersonnel());
-            }
-            } 
-            tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
-            model = (DefaultTableModel) ticketHistoryTable.getModel();
-            model.setRowCount(0);
-            for (Tickets t : tickethistory) {
-            model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
-            }
-            updateTableDisplay();*/
             utilizeModifyTicket(assignedTicketTable, "Assigned");
         }        
     }//GEN-LAST:event_assignedTicketTableMouseClicked
@@ -2008,7 +1974,23 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void cmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActionPerformed
         // TODO add your handling code here:
-        GlassPanePopup.showPopup(new Notification());
+        Notification test = new Notification();
+        
+        Data_Notification notify = new Data_Notification();
+        ArrayList<NotificationInfo> notif;
+        notif = notify.ShowRec("SELECT * FROM notification WHERE user_to_notify = '" + getFirstname() + " " + getLastname() + "' AND seen_by_user = '" + 0 + "'");
+        for (NotificationInfo n : notif){
+            if(n.getEventID() == 1){
+            test.loadNotif("A new ticket has been assigned. Check the Assigned Tickets table.", n.getDate());
+            }
+            else if(n.getEventID() == 2){
+            test.loadNotif("Your created ticket has been closed. Check the My Tickets table.", n.getDate());
+            }
+            else if(n.getEventID() == 3){
+            test.loadNotif("Your ticket has been created successfully. Check the My Ticket table for its status.", n.getDate());
+            }
+        }
+        GlassPanePopup.showPopup(test);
     }//GEN-LAST:event_cmdActionPerformed
 
     private void homeBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBttnActionPerformed
@@ -2228,46 +2210,6 @@ public class MainMenu extends javax.swing.JFrame {
                 int selectedRow =  allTicketTable.getSelectedRow();
                 String dept = allTicketTable.getValueAt(selectedRow,3).toString();
                 if((getDepartment().equals(dept) && getAcctype().equals("Administrator")) || getAcctype().equals("Superadmin")){
-                    /*parentPanel.removeAll();
-                    parentPanel.add(indivTicketPanel);
-                    parentPanel.repaint();
-                    parentPanel.revalidate();
-                    
-                    String id = allTicketTable.getValueAt(selectedRow,0).toString();
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    ArrayList<Tickets> ticketinfo;
-                    Data_Tickets ticket = new Data_Tickets();
-                    String parameters = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING TicketID = '" + id + "'";
-                    ticketinfo = ticket.ShowRec(parameters);
-                    
-                    ticketNumberLbl4.setText(id);
-                    ticketTypeComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,1).toString());
-                    priorityComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,2).toString());
-                    depComboBox.setSelectedItem(allTicketTable.getValueAt(selectedRow,3).toString());
-                    
-                    for(Tickets t: ticketinfo){
-                        ticketNameTxtField.setText(t.getTitle());
-                        ticketTxtArea.setText(t.getDesc());
-                        String department = depComboBox.getSelectedItem().toString();
-                        Data_Tickets emp = new Data_Tickets();
-                        String param = "SELECT DISTINCT CONCAT(firstname, ' ', lastname) AS combined FROM credentials WHERE department = '" + department + "'";
-                        Object[] emplist = emp.employeeList(param).toArray();
-                        assigneeComboBox.setModel(new DefaultComboBoxModel(emplist));
-                        if (t.getPersonnel().equals("N/A")){
-                            assigneeComboBox.addItem("N/A");
-                            assigneeComboBox.setSelectedItem("N/A");
-                        } else
-                        assigneeComboBox.setSelectedItem(t.getPersonnel());
-                    }
-                    
-                    tickethistory = mySql.ShowRec("SELECT * FROM masterrecord WHERE TicketID = '" + id + "' ORDER BY RevisionCount ASC");
-                    model = (DefaultTableModel) ticketHistoryTable.getModel();
-                    model.setRowCount(0);
-                    for (Tickets t : tickethistory) {
-                        model.addRow(new Object[]{t.getRevcount(), t.getDateUpdated(), t.getStatus(), t.getDepartment(), t.getPersonnel(), t.getPriority()});
-                    }
-                    
-                    updateTableDisplay();*/
                     utilizeModifyTicket(allTicketTable, "All");
                 }else{
                     JOptionPane.showMessageDialog(null, "Modifying Tickets of other Deparment is not allowed!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -2662,7 +2604,9 @@ public class MainMenu extends javax.swing.JFrame {
     
     private void manipulateTicket(ArrayList<String> stringParam, String option){
         Data_Tickets ticket = new Data_Tickets();
+        Data_Notification notify = new Data_Notification();
         Tickets information = null;
+        NotificationInfo notif = null;
         
         long now = System.currentTimeMillis();
         Timestamp tstamp = new Timestamp(now);
@@ -2686,11 +2630,16 @@ public class MainMenu extends javax.swing.JFrame {
         
         if (checkFields(array).equals("valid")){
         information = new Tickets(TicketID, RevCount, TicketName, TicketDesc, TicketType, PriorityLevel, AssignedDepartment, AssignedPersonnel, DateCreated, DateUpdated, Status, Creator, Notes, followup);
-
+        
+        
         switch(option){
             case "Create":
                 ticket.addRow("alltickets", information);
                 ticket.addRow("masterrecord", information);
+                notif = new NotificationInfo(AssignedPersonnel, getFirstname() + " " + getLastname(), 1, 0, DateUpdated);
+                notify.addRow("notification", notif);
+                notif = new NotificationInfo(getFirstname() + " " + getLastname(), getFirstname() + " " + getLastname(), 3, 0, DateUpdated);
+                notify.addRow("notification", notif);                
                 JOptionPane.showMessageDialog(null, "Ticket has been created. Your ticket number is " + TicketID + ".","Ticket Created",JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "Update":

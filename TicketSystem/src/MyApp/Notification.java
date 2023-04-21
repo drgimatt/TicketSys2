@@ -27,11 +27,17 @@ public class Notification extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         panel.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
-        loadNotif();
     }
+    public Notification(String info, String date) {
+        initComponents();
+        setOpaque(false);
+        panel.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
+        loadNotif(info, date);
+    }    
     
-    private void loadNotif(){
-        panel.add(new Item("User A assigned Task 1","2 hours ago"));
+    public void loadNotif(String info, String date){
+        //panel.add(new Item("User A assigned Task 1","2 hours ago"));
+        panel.add(new Item(info,date));
     }
     
     @Override
