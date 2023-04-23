@@ -16,6 +16,7 @@ import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import net.miginfocom.swing.MigLayout;
+import raven.glasspanepopup.GlassPanePopup;
 
 
 /**
@@ -156,7 +157,7 @@ public class Notification extends javax.swing.JPanel {
         for(NotificationInfo n: notif){
         notify.editRow("UPDATE notification SET seen_by_user = '2' WHERE id = '" + n.getId() + "'", n);
         }
-        //insert code to remove the panel
+        GlassPanePopup.closePopupAll();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
