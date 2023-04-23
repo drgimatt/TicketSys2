@@ -89,7 +89,7 @@ public class Data_Notification implements Data<NotificationInfo> {
             System.out.println(parameters);
 	    while(myRes.next())
             {
-                notif.add(new NotificationInfo(myRes.getString("id"),myRes.getString("user_to_notify"),myRes.getString("user_who_fired_event"),myRes.getString("event_type"),myRes.getInt("seen_by_user"),myRes.getString("date")));
+                notif.add(new NotificationInfo(myRes.getString("id"),myRes.getString("user_to_notify"),myRes.getString("user_who_fired_event"),myRes.getString("event_type"),myRes.getInt("seen_by_user"),myRes.getString("date"),myRes.getString("ticketid")));
             }				
         }
 	catch(SQLException ex)
@@ -113,7 +113,7 @@ public class Data_Notification implements Data<NotificationInfo> {
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();
-            String qry = "INSERT INTO " + table + "(user_to_notify, user_who_fired_event, event_id, seen_by_user, date)" +  " VALUES ('" + notif.getNotifyUser() + "', '" + notif.getEventUser() + "', '" + notif.getEventType() + "', '"  + notif.getSeenNotif() + "', '"  + notif.getDate() + "')";
+            String qry = "INSERT INTO " + table + "(user_to_notify, user_who_fired_event, event_type, seen_by_user, date, ticketid)" +  " VALUES ('" + notif.getNotifyUser() + "', '" + notif.getEventUser() + "', '" + notif.getEventType() + "', '"  + notif.getSeenNotif() + "', '" + notif.getDate() + "', '"   + notif.getTicketid() + "')";
             System.out.println(qry);
             myStmt.executeUpdate(qry);
             System.out.println("Entry added");            
@@ -132,14 +132,14 @@ public class Data_Notification implements Data<NotificationInfo> {
             if (myConn != null) try { myConn.close(); } catch (SQLException e) {e.printStackTrace();}        
         }        
     } 
-        public void editRow(String table, NotificationInfo notif)
+        public void editRow(String parameter, NotificationInfo notif)
     {
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();
-            String qry = "UPDATE " + table + " SET seen_by_user = " + notif.getSeenNotif() + "' WHERE id = " + "'" + notif.getId() + "'";
-            System.out.println(qry);
-            myStmt.executeUpdate(qry);
+            //String qry = "UPDATE " + table + " SET seen_by_user = " + notif.getSeenNotif() + "' WHERE id = " + "'" + notif.getId() + "'";
+            System.out.println(parameter);
+            myStmt.executeUpdate(parameter);
             myStmt.close();
             System.out.println("Entry updated");            
         }

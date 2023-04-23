@@ -1,5 +1,7 @@
 package MyApp;
 
+import java.awt.Color;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -20,6 +22,15 @@ public class Item extends javax.swing.JPanel {
         lbTime.setText(time);
     }
 
+    public Item(String desc, String time, int flag) {
+        initComponents();
+        lbDesc.setText(desc);
+        lbTime.setText(time);
+        lbDesc.setForeground(Color.LIGHT_GRAY);
+        lbTime.setForeground(Color.LIGHT_GRAY);
+        jLabel1.setEnabled(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,6 +45,7 @@ public class Item extends javax.swing.JPanel {
         lbTime = new javax.swing.JLabel();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/notif.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lbDesc.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lbDesc.setText("Notif:");

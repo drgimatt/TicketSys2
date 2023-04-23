@@ -5,6 +5,8 @@
 
 package MyApp;
 
+import Database.Data_Notification;
+import Database.NotificationInfo;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -12,6 +14,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -22,12 +25,21 @@ import net.miginfocom.swing.MigLayout;
  */
 public class Notification extends javax.swing.JPanel {
 
+    String name;
     /** Creates new form Notification */
     public Notification() {
         initComponents();
         setOpaque(false);
         panel.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
     }
+    
+    public Notification(String informant) {
+        initComponents();
+        setOpaque(false);
+        panel.setLayout(new MigLayout("inset 0, fillx, wrap", "[fill]"));
+        name = informant;
+    }
+    
     public Notification(String info, String date) {
         initComponents();
         setOpaque(false);
@@ -39,6 +51,11 @@ public class Notification extends javax.swing.JPanel {
         //panel.add(new Item("User A assigned Task 1","2 hours ago"));
         panel.add(new Item(info,date));
     }
+    
+    public void loadNotifLighten(String info, String date){
+        //panel.add(new Item("User A assigned Task 1","2 hours ago"));
+        panel.add(new Item(info,date, 1));
+    }    
     
     @Override
     protected void paintComponent(Graphics grphcs){
@@ -97,9 +114,14 @@ public class Notification extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 204));
-        jButton1.setText("Show All");
+        jButton1.setText("Clear");
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -125,6 +147,17 @@ public class Notification extends javax.swing.JPanel {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Data_Notification notify = new Data_Notification();
+        ArrayList<NotificationInfo> notif;
+        notif = notify.ShowRec("SELECT * FROM notification WHERE user_to_notify = '" + name + "' AND seen_by_user != '" + 2 + "' ORDER BY date DESC");        
+        for(NotificationInfo n: notif){
+        notify.editRow("UPDATE notification SET seen_by_user = '2' WHERE id = '" + n.getId() + "'", n);
+        }
+        //insert code to remove the panel
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

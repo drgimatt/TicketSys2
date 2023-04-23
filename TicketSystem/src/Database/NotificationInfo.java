@@ -17,24 +17,27 @@ public class NotificationInfo {
     private String eventType;
     private int seenNotif;
     private String date;
+    private String ticketid;
 
     // Constructor for creating a NotificationInfo with all attributes    
 
-    public NotificationInfo(String id, String notifyUser, String eventUser, String eventType, int seenNotif, String date) {
+    public NotificationInfo(String id, String notifyUser, String eventUser, String eventType, int seenNotif, String date, String ticketid) {
         this.id = id;
         this.notifyUser = notifyUser;
         this.eventUser = eventUser;
         this.eventType = eventType;
         this.seenNotif = seenNotif;
         this.date = date;
+        this.ticketid = ticketid;
     }
 
-    public NotificationInfo(String notifyUser, String eventUser, String eventType, int seenNotif, String date) {
+    public NotificationInfo(String notifyUser, String eventUser, String eventType, int seenNotif, String date, String ticketid) {
         this.notifyUser = notifyUser;
         this.eventUser = eventUser;
         this.eventType = eventType;
         this.seenNotif = seenNotif;
         this.date = date;
+        this.ticketid = ticketid;
     }
     
     public String getId() {
@@ -59,6 +62,10 @@ public class NotificationInfo {
     
     public String getDate(){
         return date;
+    }
+
+    public String getTicketid() {
+        return ticketid;
     }
 
     
