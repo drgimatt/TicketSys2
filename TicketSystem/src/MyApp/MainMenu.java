@@ -230,7 +230,6 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         optionsPanel.setBackground(new java.awt.Color(13, 124, 207));
-        optionsPanel.setForeground(new java.awt.Color(0, 0, 0));
         optionsPanel.setMaximumSize(new java.awt.Dimension(179, 563));
         optionsPanel.setMinimumSize(new java.awt.Dimension(179, 563));
 
@@ -241,64 +240,72 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        myTicketsBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/myticketsButton.png"))); // NOI18N
+        myTicketsBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/10.png"))); // NOI18N
         myTicketsBttn.setBorder(null);
+        myTicketsBttn.setContentAreaFilled(false);
         myTicketsBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myTicketsBttnActionPerformed(evt);
             }
         });
 
-        allTicketsBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/allticketsButton.png"))); // NOI18N
+        allTicketsBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/11.png"))); // NOI18N
         allTicketsBttn.setBorder(null);
+        allTicketsBttn.setContentAreaFilled(false);
         allTicketsBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 allTicketsBttnActionPerformed(evt);
             }
         });
 
-        solvedTickets.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/solvedticketsButton.png"))); // NOI18N
+        solvedTickets.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/13.png"))); // NOI18N
         solvedTickets.setBorder(null);
+        solvedTickets.setContentAreaFilled(false);
         solvedTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 solvedTicketsActionPerformed(evt);
             }
         });
 
-        createTicket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/createticketButton.png"))); // NOI18N
+        createTicket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/14.png"))); // NOI18N
         createTicket.setBorder(null);
+        createTicket.setContentAreaFilled(false);
         createTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createTicketActionPerformed(evt);
             }
         });
 
-        logoutBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logoutButton.png"))); // NOI18N
+        logoutBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/16.png"))); // NOI18N
         logoutBttn.setBorder(null);
+        logoutBttn.setContentAreaFilled(false);
         logoutBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutBttnActionPerformed(evt);
             }
         });
 
-        manageUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/manageUserButton.png"))); // NOI18N
+        manageUserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/15.png"))); // NOI18N
         manageUserButton.setBorder(null);
+        manageUserButton.setContentAreaFilled(false);
         manageUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageUserButtonActionPerformed(evt);
             }
         });
 
-        assignedTicketsBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/assTicketsButton.png"))); // NOI18N
+        assignedTicketsBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/12.png"))); // NOI18N
         assignedTicketsBttn.setBorder(null);
+        assignedTicketsBttn.setContentAreaFilled(false);
         assignedTicketsBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignedTicketsBttnActionPerformed(evt);
             }
         });
 
-        homeBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/homeBttn.png"))); // NOI18N
+        homeBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/17.png"))); // NOI18N
         homeBttn.setBorder(null);
+        homeBttn.setContentAreaFilled(false);
         homeBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeBttnActionPerformed(evt);
@@ -309,26 +316,26 @@ public class MainMenu extends javax.swing.JFrame {
         optionsPanel.setLayout(optionsPanelLayout);
         optionsPanelLayout.setHorizontalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(homeBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(logoutBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(solvedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(assignedTicketsBttn)
-                    .addComponent(allTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
             .addGroup(optionsPanelLayout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(homeBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(allTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(solvedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(assignedTicketsBttn))
+                .addGap(15, 15, 15))
         );
         optionsPanelLayout.setVerticalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(myTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(allTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,10 +348,10 @@ public class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageUserButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logoutBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logoutBttn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(homeBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

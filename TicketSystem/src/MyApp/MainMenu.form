@@ -34,9 +34,6 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cf" green="7c" red="d" type="rgb"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
-        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[179, 563]"/>
         </Property>
@@ -53,30 +50,30 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="homeBttn" alignment="2" min="-2" pref="109" max="-2" attributes="0"/>
-                      <Component id="logoutBttn" alignment="2" min="-2" pref="141" max="-2" attributes="0"/>
-                      <Component id="manageUserButton" alignment="2" min="-2" pref="142" max="-2" attributes="0"/>
-                      <Component id="createTicket" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
-                      <Component id="solvedTickets" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
-                      <Component id="assignedTicketsBttn" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="allTicketsBttn" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
-                      <Component id="myTicketsBttn" alignment="2" min="-2" pref="148" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel4" min="-2" pref="183" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="homeBttn" alignment="2" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Component id="myTicketsBttn" alignment="2" min="-2" pref="148" max="-2" attributes="0"/>
+                      <Component id="allTicketsBttn" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="solvedTickets" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="createTicket" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="logoutBttn" alignment="2" min="-2" pref="141" max="-2" attributes="0"/>
+                      <Component id="manageUserButton" alignment="2" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Component id="assignedTicketsBttn" alignment="2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="myTicketsBttn" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="allTicketsBttn" min="-2" pref="38" max="-2" attributes="0"/>
@@ -84,15 +81,15 @@
                   <Component id="assignedTicketsBttn" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="solvedTickets" min="-2" pref="41" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="createTicket" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="manageUserButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="logoutBttn" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="logoutBttn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="homeBttn" min="-2" pref="34" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="187" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -116,11 +113,12 @@
         <Component class="javax.swing.JButton" name="myTicketsBttn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/myticketsButton.png"/>
+              <Image iconType="3" name="/Image/10.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myTicketsBttnActionPerformed"/>
@@ -129,11 +127,12 @@
         <Component class="javax.swing.JButton" name="allTicketsBttn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/allticketsButton.png"/>
+              <Image iconType="3" name="/Image/11.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="allTicketsBttnActionPerformed"/>
@@ -142,11 +141,12 @@
         <Component class="javax.swing.JButton" name="solvedTickets">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/solvedticketsButton.png"/>
+              <Image iconType="3" name="/Image/13.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solvedTicketsActionPerformed"/>
@@ -155,11 +155,12 @@
         <Component class="javax.swing.JButton" name="createTicket">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/createticketButton.png"/>
+              <Image iconType="3" name="/Image/14.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createTicketActionPerformed"/>
@@ -168,11 +169,12 @@
         <Component class="javax.swing.JButton" name="logoutBttn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/logoutButton.png"/>
+              <Image iconType="3" name="/Image/16.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutBttnActionPerformed"/>
@@ -181,11 +183,12 @@
         <Component class="javax.swing.JButton" name="manageUserButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/manageUserButton.png"/>
+              <Image iconType="3" name="/Image/15.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageUserButtonActionPerformed"/>
@@ -194,11 +197,12 @@
         <Component class="javax.swing.JButton" name="assignedTicketsBttn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/assTicketsButton.png"/>
+              <Image iconType="3" name="/Image/12.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="assignedTicketsBttnActionPerformed"/>
@@ -207,11 +211,12 @@
         <Component class="javax.swing.JButton" name="homeBttn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/homeBttn.png"/>
+              <Image iconType="3" name="/Image/17.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="homeBttnActionPerformed"/>
