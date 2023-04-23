@@ -35,8 +35,8 @@ public class MySQLConnector {
             dataSource.setUsername(username);
             dataSource.setPassword(password);
  
-            dataSource.setMinIdle(5);
-            dataSource.setMaxIdle(10);
+            dataSource.setMinIdle(10);
+            dataSource.setMaxIdle(20);
             dataSource.setMaxOpenPreparedStatements(50);
   
     }

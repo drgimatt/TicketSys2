@@ -160,7 +160,7 @@ public class Data_Credentials implements Data<Credentials>{
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();
-            String qry = "DELETE FROM " + table + "WHERE num = " + parameters + "";
+            String qry = "DELETE FROM " + table + " WHERE num = " + parameters + "";
             System.out.println(qry);
             myStmt.executeUpdate(qry);
             myStmt.close();
