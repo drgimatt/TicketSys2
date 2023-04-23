@@ -32,7 +32,10 @@
     <Container class="javax.swing.JPanel" name="optionsPanel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="dc" green="94" red="44" type="rgb"/>
+          <Color blue="cf" green="7c" red="d" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[179, 563]"/>
@@ -50,48 +53,36 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="assignedTicketsBttn" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                      <Component id="allTicketsBttn" min="-2" pref="145" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="myTicketsBttn" min="-2" pref="148" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="solvedTickets" alignment="1" min="-2" pref="145" max="-2" attributes="0"/>
-                              <Component id="createTicket" alignment="1" min="-2" pref="145" max="-2" attributes="0"/>
-                              <Component id="manageUserButton" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
-                              <Component id="logoutBttn" alignment="1" min="-2" pref="141" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="homeBttn" min="-2" pref="109" max="-2" attributes="0"/>
-                      </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="homeBttn" alignment="2" min="-2" pref="109" max="-2" attributes="0"/>
+                      <Component id="logoutBttn" alignment="2" min="-2" pref="141" max="-2" attributes="0"/>
+                      <Component id="manageUserButton" alignment="2" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Component id="createTicket" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="solvedTickets" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="assignedTicketsBttn" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="allTicketsBttn" alignment="2" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="myTicketsBttn" alignment="2" min="-2" pref="148" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel4" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel4" min="-2" pref="183" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Component id="myTicketsBttn" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="allTicketsBttn" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="assignedTicketsBttn" min="-2" pref="38" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="solvedTickets" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="createTicket" min="-2" pref="44" max="-2" attributes="0"/>
@@ -99,10 +90,10 @@
                   <Component id="manageUserButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="logoutBttn" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="homeBttn" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel4" pref="178" max="32767" attributes="0"/>
+                  <Component id="homeBttn" min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                  <Component id="jLabel4" min="-2" pref="187" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,12 +104,12 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Image/winrockLogo3.png"/>
             </Property>
-            <Property name="verticalAlignment" type="int" value="3"/>
+            <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
@@ -259,7 +250,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="182" max="32767" attributes="0"/>
+                      <EmptySpace pref="212" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -290,7 +281,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="cmd" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="47" max="32767" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jSeparator2" alignment="1" min="-2" pref="13" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="1" min="-2" pref="34" max="-2" attributes="0"/>

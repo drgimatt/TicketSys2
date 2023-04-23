@@ -89,7 +89,7 @@ public class Data_Notification implements Data<NotificationInfo> {
             System.out.println(parameters);
 	    while(myRes.next())
             {
-                notif.add(new NotificationInfo(myRes.getString("id"),myRes.getString("user_to_notify"),myRes.getString("user_who_fired_event"),myRes.getInt("event_id"),myRes.getInt("seen_by_user"),myRes.getString("date")));
+                notif.add(new NotificationInfo(myRes.getString("id"),myRes.getString("user_to_notify"),myRes.getString("user_who_fired_event"),myRes.getString("event_type"),myRes.getInt("seen_by_user"),myRes.getString("date")));
             }				
         }
 	catch(SQLException ex)
@@ -113,7 +113,7 @@ public class Data_Notification implements Data<NotificationInfo> {
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();
-            String qry = "INSERT INTO " + table + "(user_to_notify, user_who_fired_event, event_id, seen_by_user, date)" +  " VALUES ('" + notif.getNotifyUser() + "', '" + notif.getEventUser() + "', '" + notif.getEventID() + "', '"  + notif.getSeenNotif() + "', '"  + notif.getDate() + "')";
+            String qry = "INSERT INTO " + table + "(user_to_notify, user_who_fired_event, event_id, seen_by_user, date)" +  " VALUES ('" + notif.getNotifyUser() + "', '" + notif.getEventUser() + "', '" + notif.getEventType() + "', '"  + notif.getSeenNotif() + "', '"  + notif.getDate() + "')";
             System.out.println(qry);
             myStmt.executeUpdate(qry);
             System.out.println("Entry added");            

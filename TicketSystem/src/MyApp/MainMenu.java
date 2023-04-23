@@ -45,7 +45,7 @@ import raven.glasspanepopup.GlassPanePopup;
  * 
  */
 public class MainMenu extends javax.swing.JFrame {
-
+ @SuppressWarnings("unchecked")
     /**
      * Creates new form MainMenu
      */
@@ -229,15 +229,16 @@ public class MainMenu extends javax.swing.JFrame {
         setBackground(new java.awt.Color(68, 148, 220));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        optionsPanel.setBackground(new java.awt.Color(68, 148, 220));
+        optionsPanel.setBackground(new java.awt.Color(13, 124, 207));
+        optionsPanel.setForeground(new java.awt.Color(0, 0, 0));
         optionsPanel.setMaximumSize(new java.awt.Dimension(179, 563));
         optionsPanel.setMinimumSize(new java.awt.Dimension(179, 563));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/winrockLogo3.png"))); // NOI18N
-        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel4.setAlignmentY(0.0F);
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         myTicketsBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/myticketsButton.png"))); // NOI18N
@@ -308,39 +309,32 @@ public class MainMenu extends javax.swing.JFrame {
         optionsPanel.setLayout(optionsPanelLayout);
         optionsPanelLayout.setHorizontalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(homeBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(solvedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(assignedTicketsBttn)
+                    .addComponent(allTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(optionsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(assignedTicketsBttn)
-                            .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(optionsPanelLayout.createSequentialGroup()
-                                    .addGap(4, 4, 4)
-                                    .addComponent(allTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(myTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(solvedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(createTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(logoutBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(optionsPanelLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(homeBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 24, Short.MAX_VALUE))
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         optionsPanelLayout.setVerticalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(myTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(allTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(assignedTicketsBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(solvedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,10 +342,10 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(manageUserButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoutBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(homeBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, Short.MAX_VALUE))
+                .addComponent(homeBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(optionsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 570));
@@ -407,7 +401,7 @@ public class MainMenu extends javax.swing.JFrame {
         defPanelLayout.setHorizontalGroup(
             defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(defPanelLayout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
+                .addContainerGap(212, Short.MAX_VALUE)
                 .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defPanelLayout.createSequentialGroup()
                         .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -431,7 +425,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(defPanelLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(cmd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1998,21 +1992,21 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         Notification test = new Notification();
         
-        Data_Notification notify = new Data_Notification();
-        ArrayList<NotificationInfo> notif;
-        notif = notify.ShowRec("SELECT * FROM notification WHERE user_to_notify = '" + getFirstname() + " " + getLastname() + "' AND seen_by_user = '" + 0 + "'");
-        for (NotificationInfo n : notif){
-            if(n.getEventID() == 1){
-            test.loadNotif("A new ticket has been assigned. Check the Assigned Tickets table.", n.getDate());
-            }
-            else if(n.getEventID() == 2){
-            test.loadNotif("Your created ticket has been closed. Check the My Tickets table.", n.getDate());
-            }
-            else if(n.getEventID() == 3){
-            test.loadNotif("Your ticket has been created successfully. Check the My Ticket table for its status.", n.getDate());
-            }
-        }
-        GlassPanePopup.showPopup(test);
+//        Data_Notification notify = new Data_Notification();
+//        ArrayList<NotificationInfo> notif;
+//        notif = notify.ShowRec("SELECT * FROM notification WHERE user_to_notify = '" + getFirstname() + " " + getLastname() + "' AND seen_by_user = '" + 0 + "'");
+//        for (NotificationInfo n : notif){
+//            if(n.getEventID() == 1){
+//            test.loadNotif("A new ticket has been assigned. Check the Assigned Tickets table.", n.getDate());
+//            }
+//            else if(n.getEventID() == 2){
+//            test.loadNotif("Your created ticket has been closed. Check the My Tickets table.", n.getDate());
+//            }
+//            else if(n.getEventID() == 3){
+//            test.loadNotif("Your ticket has been created successfully. Check the My Ticket table for its status.", n.getDate());
+//            }
+//        }
+//        GlassPanePopup.showPopup(test);
     }//GEN-LAST:event_cmdActionPerformed
 
     private void homeBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBttnActionPerformed
@@ -2658,10 +2652,10 @@ public class MainMenu extends javax.swing.JFrame {
             case "Create":
                 ticket.addRow("alltickets", information);
                 ticket.addRow("masterrecord", information);
-                notif = new NotificationInfo(AssignedPersonnel, getFirstname() + " " + getLastname(), 1, 0, DateUpdated);
-                notify.addRow("notification", notif);
-                notif = new NotificationInfo(getFirstname() + " " + getLastname(), getFirstname() + " " + getLastname(), 3, 0, DateUpdated);
-                notify.addRow("notification", notif);                
+//                notif = new NotificationInfo(AssignedPersonnel, getFirstname() + " " + getLastname(), 1, 0, DateUpdated);
+//                notify.addRow("notification", notif);
+//                notif = new NotificationInfo(getFirstname() + " " + getLastname(), getFirstname() + " " + getLastname(), 3, 0, DateUpdated);
+//                notify.addRow("notification", notif);                
                 JOptionPane.showMessageDialog(null, "Ticket has been created. Your ticket number is " + TicketID + ".","Ticket Created",JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "Update":
