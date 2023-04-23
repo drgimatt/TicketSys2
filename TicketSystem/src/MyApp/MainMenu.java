@@ -352,11 +352,11 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(optionsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 580));
+        getContentPane().add(optionsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 570));
 
-        parentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         parentPanel.setLayout(new java.awt.CardLayout());
 
+        defPanel.setBackground(new java.awt.Color(248, 244, 244));
         defPanel.setForeground(new java.awt.Color(0, 153, 255));
         defPanel.setPreferredSize(new java.awt.Dimension(610, 349));
 
@@ -388,8 +388,12 @@ public class MainMenu extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(0, 102, 102));
         jSeparator2.setForeground(new java.awt.Color(0, 102, 102));
 
+        cmd.setBackground(new java.awt.Color(248, 244, 244));
+        cmd.setForeground(new java.awt.Color(248, 244, 244));
         cmd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/notif.png"))); // NOI18N
         cmd.setBorder(null);
+        cmd.setBorderPainted(false);
+        cmd.setContentAreaFilled(false);
         cmd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdActionPerformed(evt);
@@ -425,7 +429,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(defPanelLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(cmd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(defPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -608,7 +612,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(searchBox)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateCreatedEnd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(dateCreatedEnd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                     .addComponent(dateUpdatedEnd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(allTicketsPanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -622,7 +626,7 @@ public class MainMenu extends javax.swing.JFrame {
         allTicketsPanelLayout.setVerticalGroup(
             allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allTicketsPanelLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(allTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -749,7 +753,7 @@ public class MainMenu extends javax.swing.JFrame {
         userManagementPanelLayout.setHorizontalGroup(
             userManagementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userManagementPanelLayout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(createUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -939,7 +943,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(solvedTicketsPanelLayout.createSequentialGroup()
                 .addGap(376, 376, 376)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 303, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
                 .addComponent(refreshTableButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
             .addGroup(solvedTicketsPanelLayout.createSequentialGroup()
@@ -949,7 +953,7 @@ public class MainMenu extends javax.swing.JFrame {
         solvedTicketsPanelLayout.setVerticalGroup(
             solvedTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, solvedTicketsPanelLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(solvedTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(refreshTableButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1434,7 +1438,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap(53, Short.MAX_VALUE)
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ticketNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1476,7 +1480,7 @@ public class MainMenu extends javax.swing.JFrame {
         );
         indivTicketPanelLayout.setVerticalGroup(
             indivTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1612,7 +1616,7 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(assignedTicketsPanelLayout.createSequentialGroup()
                         .addGap(383, 383, 383)
                         .addComponent(jLabel23)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         assignedTicketsPanelLayout.setVerticalGroup(
             assignedTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1620,7 +1624,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel23)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(assignedTicketsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(refreshTableButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1632,7 +1636,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         parentPanel.add(assignedTicketsPanel, "card4");
 
-        getContentPane().add(parentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 0, 980, 575));
+        getContentPane().add(parentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 0, 970, 570));
 
         pack();
         setLocationRelativeTo(null);
