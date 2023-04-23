@@ -14,6 +14,8 @@ import Database.Tickets;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -1646,8 +1648,15 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
         // TODO add your handling code here:
-        newUser = new NewUser(getAcctype(),getDepartment());
-        newUser.setVisible(true);
+        try {
+                newUser = newUser.getInstance(getAcctype(),getDepartment());
+            } catch (IOException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            newUser.setVisible(true); 
+
     }//GEN-LAST:event_createUserButtonActionPerformed
 
     private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
@@ -1679,7 +1688,13 @@ public class MainMenu extends javax.swing.JFrame {
         model = (DefaultTableModel) userManagerTable.getModel();
         int selectedRow = userManagerTable.getSelectedRow();
         if (userManagerTable.getSelectedRowCount()==1){
-            updateUser = new UpdateUser(getAcctype(),getDepartment());
+            try {
+                updateUser = UpdateUser.getInstance(getAcctype(),getDepartment());
+            } catch (IOException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
             updateUser.setVisible(true);        
         try {
             updateUser.populateflds((userManagerTable.getValueAt(selectedRow, 0).toString()));

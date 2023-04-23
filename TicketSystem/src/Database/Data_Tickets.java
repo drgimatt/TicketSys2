@@ -82,7 +82,7 @@ public class Data_Tickets implements Data<Tickets> {
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();	
             String qry = "SELECT * FROM alltickets";
-            if(parameters.isBlank()){
+            if(parameters.isEmpty()){
             parameters = qry;
             }
 	    myRes = myStmt.executeQuery(parameters);

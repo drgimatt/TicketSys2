@@ -82,7 +82,7 @@ public class Data_Notification implements Data<NotificationInfo> {
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();	
             String qry = "SELECT * FROM notification";
-            if(parameters.isBlank()){
+            if(parameters.isEmpty()){
             parameters = qry;
             }
 	    myRes = myStmt.executeQuery(parameters);

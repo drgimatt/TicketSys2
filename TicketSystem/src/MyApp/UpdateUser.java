@@ -8,6 +8,8 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import Database.Credentials;
 import Database.Data_Credentials;
 import Database.EncryptionDecryption;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
@@ -32,13 +34,25 @@ public class UpdateUser extends javax.swing.JFrame {
     /**
      * Creates new form NewUser
      */
-    public UpdateUser() {
+    
+    private static UpdateUser instance = null;
+    
+    public static UpdateUser getInstance(String privilage, String department) throws IOException, PropertyVetoException {
+        if (instance == null) {
+            instance = new UpdateUser(privilage, department);
+            return instance;
+        } else {
+            return instance;
+        }
+    }
+    
+    private UpdateUser() {
         initComponents();
         FrameCenter.centerJFrame(this);
         setResizable(false);
     }
     
-    public UpdateUser(String privilage, String department){
+    private UpdateUser(String privilage, String department){
         this.privilage = privilage;
         this.department = department;
         initComponents();
@@ -46,6 +60,8 @@ public class UpdateUser extends javax.swing.JFrame {
         setResizable(false);
         setInterface(privilage);
     }
+    
+    
     
     private String privilage, firstname, lastname, department, empid, username;
     Data_Credentials creds = new Data_Credentials();
