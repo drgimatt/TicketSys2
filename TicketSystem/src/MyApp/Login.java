@@ -10,6 +10,9 @@ import Database.EncryptionDecryption;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -36,7 +39,7 @@ public class Login extends javax.swing.JFrame {
     Data_Credentials login = new Data_Credentials();
     ArrayList<Credentials> user;
     String username, password, accType, fname, lname, dept, empID = "";
-    
+    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +50,7 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Loadtext = new javax.swing.JLabel();
         titleText = new javax.swing.JLabel();
         LoginText = new javax.swing.JLabel();
         descriptionText = new javax.swing.JLabel();
@@ -64,6 +68,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(Loadtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 60, 20));
 
         titleText.setFont(new java.awt.Font("Myanmar Text", 1, 100)); // NOI18N
         titleText.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,7 +142,10 @@ public class Login extends javax.swing.JFrame {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
+        Loadtext.setText("Loading...");
+        //executorService.scheduleWithFixedDelay(Login::executeLogin, 0, 2, TimeUnit.SECONDS);
         executeLogin();
+        
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -148,10 +156,12 @@ public class Login extends javax.swing.JFrame {
     private void executeLogin (){
         username = usernameFld.getText();
         password = passwordFld.getText();
+        
 
         // Check if the username and password fields are not blank
         if (username.trim().isEmpty()|| password.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
+            Loadtext.setText("");
         } 
         else {
             try {
@@ -177,18 +187,21 @@ public class Login extends javax.swing.JFrame {
                             if (accType.equals("Administrator") || accType.equals("Employee") || accType.equals("Superadmin")) {
                                 menu = new MainMenu(accType,fname,lname,dept,empID);
                                 menu.show();
-                                dispose();
+                                //dispose();
                                 break;
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, "Account Type is not supported", "Information Test", JOptionPane.INFORMATION_MESSAGE);
+                                Loadtext.setText("");
                                 break;
                             }
                         }
+                        
                     } else {
                         JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
                         usernameFld.setText("");
                         passwordFld.setText("");
+                        Loadtext.setText("");
                     }
 
             } catch (Exception ex) {
@@ -205,6 +218,7 @@ public class Login extends javax.swing.JFrame {
     private void usernameFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFldKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            Loadtext.setText("Loading...");
             executeLogin();
         }
     }//GEN-LAST:event_usernameFldKeyPressed
@@ -212,6 +226,7 @@ public class Login extends javax.swing.JFrame {
     private void passwordFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFldKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            Loadtext.setText("Loading...");
             executeLogin();
         }
     }//GEN-LAST:event_passwordFldKeyPressed
@@ -257,6 +272,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Loadtext;
     private javax.swing.JLabel LoginBackground;
     private javax.swing.JLabel LoginText;
     private javax.swing.JLabel descriptionText;

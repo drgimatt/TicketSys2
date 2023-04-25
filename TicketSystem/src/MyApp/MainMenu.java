@@ -1934,26 +1934,34 @@ public class MainMenu extends javax.swing.JFrame {
         notif = notify.ShowRec("SELECT * FROM notification WHERE user_to_notify = '" + name + "' AND seen_by_user != '" + 2 + "' ORDER BY date DESC");
         for (NotificationInfo n : notif){
             if(n.getSeenNotif() == 0){
-            if(n.getEventType().equals("assign")){
-            test.loadNotif(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getId() +".", n.getDate());
-            }
-            else if(n.getEventType().equals("close")){
-            test.loadNotif("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
-            }
-            else if(n.getEventType().equals("followup")){
-            test.loadNotif("Ticket Number " + n.getTicketid() + " has been followed up by " + n.getEventUser() + "." , n.getDate());
-            }
+                switch (n.getEventType()) {
+                    case "assign":
+                        test.loadNotif(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getId() +".", n.getDate());
+                        break;
+                    case "close":
+                        test.loadNotif("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
+                        break;
+                    case "followup":
+                        test.loadNotif("Ticket Number " + n.getTicketid() + " has been followed up by " + n.getEventUser() + "." , n.getDate());
+                        break;
+                    default:
+                        break;
+                }
             }
             else if(n.getSeenNotif() == 1){
-            if(n.getEventType().equals("assign")){
-            test.loadNotifLighten(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getId() +".", n.getDate());
-            }
-            else if(n.getEventType().equals("close")){
-            test.loadNotifLighten("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
-            }
-            else if(n.getEventType().equals("followup")){
-            test.loadNotifLighten("Ticket Number " + n.getTicketid() + " has been followed up by " + n.getEventUser() + "." , n.getDate());
-            }
+                switch (n.getEventType()) {
+                    case "assign":
+                        test.loadNotifLighten(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getId() +".", n.getDate());
+                        break;
+                    case "close":
+                        test.loadNotifLighten("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
+                        break;
+                    case "followup":
+                        test.loadNotifLighten("Ticket Number " + n.getTicketid() + " has been followed up by " + n.getEventUser() + "." , n.getDate());
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         GlassPanePopup.showPopup(test);
@@ -2411,28 +2419,30 @@ public class MainMenu extends javax.swing.JFrame {
         System.out.println("Last Name: " + getLastname());
         System.out.println("Department: " + getDepartment());
         System.out.println("Employee ID: " + getEmpid());
-        if ("Employee".equals(x)) {
-            manageUserButton.setVisible(false);
-            assigneeComboBox1.setVisible(false);
-            assigneeComboBox.setEnabled(false);
-            depComboBox.setEnabled(false);
-            jLabel17.setVisible(false);
-            
-            dept.setEnabled(false);
-            dept.setSelectedItem(getDepartment());
-        }
-        else if ("Administrator".equals(x)) {
-            manageUserButton.setVisible(true);
-            depComboBox.setEnabled(false);
-            credTableParam = "credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
-            
-            dept.setEnabled(false);
-            dept.setSelectedItem(getDepartment());
-        }
-        else if ("Superadmin".equals(x)) {
-            manageUserButton.setVisible(true);
-            credTableParam = "credentials";
-        }
+        if (null != x) switch (x) {
+         case "Employee":
+             manageUserButton.setVisible(false);
+             assigneeComboBox1.setVisible(false);
+             assigneeComboBox.setEnabled(false);
+             depComboBox.setEnabled(false);
+             jLabel17.setVisible(false);
+             dept.setEnabled(false);
+             dept.setSelectedItem(getDepartment());
+             break;
+         case "Administrator":
+             manageUserButton.setVisible(true);
+             depComboBox.setEnabled(false);
+             credTableParam = "credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
+             dept.setEnabled(false);
+             dept.setSelectedItem(getDepartment());
+             break;
+         case "Superadmin":
+             manageUserButton.setVisible(true);
+             credTableParam = "credentials";
+             break;
+         default:
+             break;
+     }
         jLabel3.setText("Are you ready to work on your tickets, " + getFirstname() + " " + getLastname() + "?");
     }
     
@@ -2465,7 +2475,7 @@ public class MainMenu extends javax.swing.JFrame {
 //    for (Tickets t : followuptickets) {
 //    model.addRow(new Object[]{t.getId(), t.getTitle(), t.getType(), t.getPriority(), t.getDepartment(), t.getDateCreated(), t.getDateUpdated()});
 //    }
-    solvedtickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';");
+    solvedtickets = mySql.ShowRec("SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed' AND AssignedDepartment = '" + getDepartment() + "';");
     model = (DefaultTableModel) solvedTicketsTable.getModel();
     model.setRowCount(0);
     for (Tickets t : solvedtickets) {
