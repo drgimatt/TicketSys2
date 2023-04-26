@@ -41,10 +41,9 @@ public class Data_Credentials implements Data<Credentials>{
         }
 	catch(SQLException ex)
 	{
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-	} catch (IOException ex) {
-            Logger.getLogger(Data_Credentials.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PropertyVetoException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+                  
+	} catch (IOException | PropertyVetoException ex) {
             Logger.getLogger(Data_Credentials.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{

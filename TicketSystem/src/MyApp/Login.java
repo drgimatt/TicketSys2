@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 /**
@@ -38,7 +39,7 @@ public class Login extends javax.swing.JFrame {
     MainMenu menu;
     Data_Credentials login = new Data_Credentials();
     ArrayList<Credentials> user;
-    String username, password, accType, fname, lname, dept, empID = "";
+    String username, password, accType, fname, lname, dept, empID , uname, pass = "";
     ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,21 +144,26 @@ public class Login extends javax.swing.JFrame {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
         Loadtext.setText("Loading...");
-        //executorService.scheduleWithFixedDelay(Login::executeLogin, 0, 2, TimeUnit.SECONDS);
-        executeLogin();
-        
+        executorService.schedule((Runnable) () -> executeLogin(), 3, TimeUnit.SECONDS);  
+        //executorService.shutdownNow();
     }//GEN-LAST:event_loginBtnActionPerformed
 
+    private void debugTest(){
+        System.out.println("tst");
+    }
+    
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void executeLogin (){
+        boolean btn = false;
+        System.out.println("Login SQL process initiated");
         username = usernameFld.getText();
         password = passwordFld.getText();
-        
-
+        loginBtn.setDisabledIcon(loginBtn.getIcon());
+        loginBtn.setEnabled(btn);
         // Check if the username and password fields are not blank
         if (username.trim().isEmpty()|| password.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "All fields must not be blank!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -175,34 +181,43 @@ public class Login extends javax.swing.JFrame {
                 lname = "";
                 dept = "";
                 empID = "";
+                uname = "napakahabakasetesterasf";
+                pass = "napakahabakasetesterasf";
                 try {
                     user = login.ShowRec(qry);
-                    if (!user.isEmpty()) {
                         for(Credentials u: user){
                             accType = u.getActType();
                             fname = u.getF_name();
                             lname = u.getL_name();
                             dept = u.getDepartment();
-                            empID = u.getEmpnum();            
+                            empID = u.getEmpnum();
+                            uname = u.getU_name();
+                            pass = u.getPass();
                             if (accType.equals("Administrator") || accType.equals("Employee") || accType.equals("Superadmin")) {
                                 menu = new MainMenu(accType,fname,lname,dept,empID);
                                 menu.show();
-                                //dispose();
+                                dispose();
                                 break;
-                            }
-                            else{
+                            }                        
+
+                            else if (!accType.equals("Administrator") || !accType.equals("Employee") || !accType.equals("Superadmin")){
                                 JOptionPane.showMessageDialog(null, "Account Type is not supported", "Information Test", JOptionPane.INFORMATION_MESSAGE);
                                 Loadtext.setText("");
                                 break;
                             }
                         }
-                        
-                    } else {
-                        JOptionPane.showMessageDialog(null, "The credentials provided doesn't match!", "Error", JOptionPane.ERROR_MESSAGE);
+                        if (login.ShowRec("credentials").isEmpty()){
+                            JOptionPane.showMessageDialog(null, "Cannot connect to database. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                            
+                        }                        
+                        else if (user.isEmpty()){
+                            JOptionPane.showMessageDialog(null, "The credentials dooesn't match!", "Error", JOptionPane.ERROR_MESSAGE);                            
+                        }
+
                         usernameFld.setText("");
                         passwordFld.setText("");
-                        Loadtext.setText("");
-                    }
+                        Loadtext.setText("");  
+                    
 
             } catch (Exception ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,21 +228,25 @@ public class Login extends javax.swing.JFrame {
             }                 
 
         }
+        btn = true;
+        loginBtn.setEnabled(btn);
 }
     
     private void usernameFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFldKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            Loadtext.setText("Loading...");
-            executeLogin();
+        Loadtext.setText("Loading...");
+        executorService.schedule((Runnable) () -> executeLogin(), 3, TimeUnit.SECONDS);  
+        //executorService.shutdownNow();
         }
     }//GEN-LAST:event_usernameFldKeyPressed
 
     private void passwordFldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFldKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            Loadtext.setText("Loading...");
-            executeLogin();
+        Loadtext.setText("Loading...");
+        executorService.schedule((Runnable) () -> executeLogin(), 3, TimeUnit.SECONDS);  
+        //executorService.shutdownNow();
         }
     }//GEN-LAST:event_passwordFldKeyPressed
 
