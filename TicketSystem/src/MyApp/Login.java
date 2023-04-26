@@ -176,7 +176,7 @@ public class Login extends javax.swing.JFrame {
                 // Encrypt the password
                 // Check if encryption was successful
                 // Query the credentials table to check if the entered username and encrypted password match
-                String qry = "SELECT * from credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
+                String qry = "SELECT * FROM credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
                 accType = "";
                 fname = "";
                 lname = "";
@@ -207,7 +207,7 @@ public class Login extends javax.swing.JFrame {
                                 break;
                             }
                         }
-                        if (login.ShowRec("credentials").isEmpty()){
+                        if (login.ShowRec("SELECT * FROM credentials").isEmpty()){
                             JOptionPane.showMessageDialog(null, "Cannot connect to database. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                             
                         }                        

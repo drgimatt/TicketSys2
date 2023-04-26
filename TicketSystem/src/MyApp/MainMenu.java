@@ -1637,7 +1637,7 @@ public class MainMenu extends javax.swing.JFrame {
         int selectedRow = userManagerTable.getSelectedRow();
         if (userManagerTable.getSelectedRowCount()==1){
             try {
-                updateUser = UpdateUser.getInstance(getAcctype(),getDepartment());
+                updateUser = UpdateUser.getInstance(getAcctype(),getDepartment(),getEmpid());
             } catch (IOException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             } catch (PropertyVetoException ex) {
@@ -2442,7 +2442,7 @@ public class MainMenu extends javax.swing.JFrame {
          case "Superadmin":
              solvedTicksParam = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';";
              manageUserButton.setVisible(true);
-             credTableParam = "SELECT * from credentials";
+             credTableParam = "SELECT * FROM credentials";
              break;
          default:
              break;

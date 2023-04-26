@@ -38,9 +38,9 @@ public class UpdateUser extends javax.swing.JFrame {
     
     private static UpdateUser instance = null;
     
-    public static UpdateUser getInstance(String privilage, String department) throws IOException, PropertyVetoException {
+    public static UpdateUser getInstance(String privilage, String department, String id) throws IOException, PropertyVetoException {
         if (instance == null) {
-            instance = new UpdateUser(privilage, department);
+            instance = new UpdateUser(privilage, department, id);
             return instance;
         } else {
             return instance;
@@ -53,13 +53,13 @@ public class UpdateUser extends javax.swing.JFrame {
         setResizable(false);
     }
     
-    private UpdateUser(String privilage, String department){
+    private UpdateUser(String privilage, String department, String empid){
         this.privilage = privilage;
         this.department = department;
         initComponents();
         FrameCenter.centerJFrame(this);
         setResizable(false);
-        setInterface(privilage);
+        setInterface(privilage, empid);
     }
     
     
@@ -551,15 +551,25 @@ public class UpdateUser extends javax.swing.JFrame {
 
     private void acctypeSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acctypeSelActionPerformed
         // TODO add your handling code here:
+        Data_Credentials creds = new Data_Credentials();
+        ArrayList<Credentials> user = null;
         if (enableAccType == true){
         if(acctypeSel.getSelectedItem() == "Superadmin"){
-        String qry = "SELECT COUNT(*) FROM credentials WHERE acctype='Superadmin'";
+        String qry = "SELECT * FROM credentials WHERE acctype='Superadmin'";
         try {
-            user = creds.ShowRec(qry);          
-                if (!user.isEmpty() && user.get(1).equals("0")) {
+            user = creds.ShowRec(qry);
+            for (Credentials u: user){
+//                if((acctypeSel.getSelectedItem().toString().equals("Administrator") || acctypeSel.getSelectedItem().toString().equals("Employee"))){
+//                        JOptionPane.showMessageDialog(null, "Superadmin cannot downgrade their account.", "Error", JOptionPane.ERROR_MESSAGE);
+//                        acctypeSel.setSelectedIndex(2);
+//                        break;
+//                }
+                if (!getPrivilage().equals("Superadmin") && !user.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
                         acctypeSel.setSelectedIndex(0);
-                }        
+                        break;
+                }
+            }
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -680,7 +690,7 @@ public class UpdateUser extends javax.swing.JFrame {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ArrayList<Credentials> userinfo;
             Data_Credentials creds = new Data_Credentials();
-            String parameters = "credentials WHERE empnum = '" + t + "'";
+            String parameters = "SELECT * FROM credentials WHERE empnum = '" + t + "'";
             userinfo = creds.ShowRec(parameters);
             
             for(Credentials u: userinfo){
@@ -711,9 +721,11 @@ public class UpdateUser extends javax.swing.JFrame {
         }
     }
     
-    private void setInterface(String x) {
+    private void setInterface(String x, String y) {
         System.out.println("User Type: " + x);
         System.out.println("Department: " + getDepartment());
+        y = empid;
+        
         if ("Administrator".equals(x)) {
             deptFld.setSelectedItem(getDepartment());
             deptFld.setEnabled(false);
