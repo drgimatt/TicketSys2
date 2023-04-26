@@ -10,6 +10,7 @@ import Database.Data_Credentials;
 import Database.EncryptionDecryption;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
@@ -120,6 +121,7 @@ public class NewUser extends javax.swing.JFrame {
         dateStart = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(NewUser.class.getResource("/Image/Icon.jpg")));
 
         resetBttn.setBackground(new java.awt.Color(204, 153, 0));
         resetBttn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N

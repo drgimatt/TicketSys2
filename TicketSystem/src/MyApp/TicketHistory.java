@@ -9,6 +9,7 @@ import Database.Tickets;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.util.ArrayList;
 import javax.swing.UIManager;
+import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -63,6 +64,7 @@ public class TicketHistory extends javax.swing.JFrame {
         Creator = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(TicketHistory.class.getResource("/Image/Icon.jpg")));
 
         ticketHistoryTable.setAutoCreateRowSorter(true);
         ticketHistoryTable.setModel(new javax.swing.table.DefaultTableModel(

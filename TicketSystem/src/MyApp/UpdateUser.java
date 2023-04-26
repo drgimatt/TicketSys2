@@ -16,6 +16,7 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -120,6 +121,7 @@ public class UpdateUser extends javax.swing.JFrame {
         dateStart = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(UpdateUser.class.getResource("/Image/Icon.jpg")));
 
         resetBttn.setBackground(new java.awt.Color(204, 153, 0));
         resetBttn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
