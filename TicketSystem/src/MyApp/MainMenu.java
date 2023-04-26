@@ -87,7 +87,7 @@ public class MainMenu extends javax.swing.JFrame {
     UpdateUser updateUser;
     MySQLConnector connector;
     private String acctype, firstname, lastname, department, empid;
-    private String credTableParam = "credentials";
+    private String credTableParam = "SELECT * FROM credentials";
     private String solvedTicksParam = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed' AND AssignedDepartment = '" + getDepartment() + "';";
     private Data_Tickets mySql = new Data_Tickets();
     private ArrayList<Tickets> alltickets, solvedtickets, assignedtickets, mytickets, tickethistory, followuptickets;
@@ -2435,7 +2435,7 @@ public class MainMenu extends javax.swing.JFrame {
          case "Administrator":
              manageUserButton.setVisible(true);
              depComboBox.setEnabled(false);
-             credTableParam = "credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
+             credTableParam = "SELECT * FROM credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
              dept.setEnabled(false);
              dept.setSelectedItem(getDepartment());
              break;

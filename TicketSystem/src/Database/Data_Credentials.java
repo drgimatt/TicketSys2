@@ -31,7 +31,7 @@ public class Data_Credentials implements Data<Credentials>{
         try{
             myConn = MySQLConnector.getInstance().getConnection();
             myStmt=myConn.createStatement();		
-            String qry = "SELECT * FROM " + table;
+            String qry = table;
 	    myRes = myStmt.executeQuery(qry);
             System.out.println(qry);
 	    while(myRes.next())
