@@ -505,7 +505,7 @@ public class UpdateUser extends javax.swing.JFrame {
             boolean passAreEqual = pass.equals(conpass);
             if (passAreEqual && emailAddCorFormat && checkFields(array).equals("valid")){ //add appropriate checks for user-provided data
                 pass = hash.encrypt(pass);
-                String table = "credentials";
+                String table = "SELECT * from credentials";
                 Data_Credentials creds = new Data_Credentials();
                 Credentials information = new Credentials (num,empnum,uname,pass,email,fname,mname,lname,age,bday,mnum,gender,resi,acttyp,sdate,dep,pos);
                 creds.editRow(table,information);

@@ -2442,7 +2442,7 @@ public class MainMenu extends javax.swing.JFrame {
          case "Superadmin":
              solvedTicksParam = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';";
              manageUserButton.setVisible(true);
-             credTableParam = "credentials";
+             credTableParam = "SELECT * from credentials";
              break;
          default:
              break;

@@ -176,7 +176,7 @@ public class Login extends javax.swing.JFrame {
                 // Encrypt the password
                 // Check if encryption was successful
                 // Query the credentials table to check if the entered username and encrypted password match
-                String qry = "credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
+                String qry = "SELECT * from credentials WHERE username='" + username + "' && password = '" + hash.encrypt(password) + "'";
                 accType = "";
                 fname = "";
                 lname = "";

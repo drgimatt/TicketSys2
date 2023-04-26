@@ -503,7 +503,7 @@ public class NewUser extends javax.swing.JFrame {
         List<String> array = Arrays.asList(empnum, uname, pass, email, fname, mname, lname, mnum, gender, resi, pos, bday, sdate);
         if (passAreEqual && emailAddCorFormat && checkFields(array).equals("valid") ){ //add appropriate checks for user-provided data
             pass = hash.encrypt(pass);
-            String table = "credentials";
+            String table = "SELECT * from credentials";
             Data_Credentials creds = new Data_Credentials();
             Credentials information = new Credentials (empnum,uname,pass,email,fname,mname,lname,age,bday,mnum,gender,resi,acttyp,sdate,dep,pos);
             creds.addRow(table,information);
