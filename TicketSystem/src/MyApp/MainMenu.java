@@ -2077,7 +2077,9 @@ public class MainMenu extends javax.swing.JFrame {
         } else {
             ticketType.setSelectedIndex(0);
             priority.setSelectedIndex(0);
+            if(getDepartment().equals("Superadmin")){
             dept.setSelectedIndex(0);
+            }
             status.setSelectedIndex(0);
             allTicketTable.setRowSorter(null);
             dateCreatedStart.setCalendar(null);

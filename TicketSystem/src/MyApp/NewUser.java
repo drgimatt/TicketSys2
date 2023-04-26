@@ -160,7 +160,7 @@ public class NewUser extends javax.swing.JFrame {
         acctypeSel.setBackground(new java.awt.Color(0, 102, 204));
         acctypeSel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acctypeSel.setForeground(new java.awt.Color(255, 255, 255));
-        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator", "Superadmin" }));
+        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator" }));
         acctypeSel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         acctypeSel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -548,18 +548,18 @@ public class NewUser extends javax.swing.JFrame {
 
     private void acctypeSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acctypeSelActionPerformed
         // TODO add your handling code here:
-        if(acctypeSel.getSelectedItem() == "Superadmin"){
-        String qry = "SELECT COUNT(*) FROM credentials WHERE acctype='Superadmin'";
-        try {
-            user = creds.ShowRec(qry);          
-                if (!user.isEmpty() && user.get(1).equals("0")) {
-                        JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
-                        acctypeSel.setSelectedIndex(0);
-                }        
-        } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        if(acctypeSel.getSelectedItem() == "Superadmin"){
+//        String qry = "SELECT COUNT(*) FROM credentials WHERE acctype='Superadmin'";
+//        try {
+//            user = creds.ShowRec(qry);          
+//                if (!user.isEmpty() && user.get(1).equals("0")) {
+//                        JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
+//                        acctypeSel.setSelectedIndex(0);
+//                }        
+//        } catch (Exception ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
     }//GEN-LAST:event_acctypeSelActionPerformed
 
     /**
