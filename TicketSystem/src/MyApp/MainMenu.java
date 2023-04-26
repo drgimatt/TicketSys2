@@ -1951,7 +1951,7 @@ public class MainMenu extends javax.swing.JFrame {
             else if(n.getSeenNotif() == 1){
                 switch (n.getEventType()) {
                     case "assign":
-                        test.loadNotifLighten(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getId() +".", n.getDate());
+                        test.loadNotifLighten(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getTicketid() +".", n.getDate());
                         break;
                     case "close":
                         test.loadNotifLighten("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
