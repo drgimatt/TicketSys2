@@ -1945,7 +1945,7 @@ public class MainMenu extends javax.swing.JFrame {
                         test.loadNotif("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
                         break;
                     case "followup":
-                        test.loadNotif("Ticket Number " + n.getTicketid() + " has been followed up by " + n.getEventUser() + "." , n.getDate());
+                        test.loadNotif(n.getEventUser() + "requested a followup on Ticket Number: " + n.getTicketid() + ". Check the Assigned Tickets table and finish working on the ticket.", n.getDate());
                         break;
                     default:
                         break;
@@ -1960,7 +1960,7 @@ public class MainMenu extends javax.swing.JFrame {
                         test.loadNotifLighten("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
                         break;
                     case "followup":
-                        test.loadNotifLighten("Ticket Number " + n.getTicketid() + " has been followed up by " + n.getEventUser() + "." , n.getDate());
+                        test.loadNotifLighten(n.getEventUser() + "requested a followup on Ticket Number: " + n.getTicketid() + ". Check the Assigned Tickets table and finish working on the ticket.", n.getDate());
                         break;
                     default:
                         break;
