@@ -126,7 +126,7 @@ public class NewUser extends javax.swing.JFrame {
         resetBttn.setBackground(new java.awt.Color(204, 153, 0));
         resetBttn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         resetBttn.setForeground(new java.awt.Color(255, 255, 255));
-        resetBttn.setText("Reset");
+        resetBttn.setText("RESET");
         resetBttn.setBorder(new javax.swing.border.MatteBorder(null));
         resetBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +160,7 @@ public class NewUser extends javax.swing.JFrame {
         acctypeSel.setBackground(new java.awt.Color(0, 102, 204));
         acctypeSel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acctypeSel.setForeground(new java.awt.Color(255, 255, 255));
-        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator" }));
+        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator", "Superadmin" }));
         acctypeSel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         acctypeSel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,7 +183,7 @@ public class NewUser extends javax.swing.JFrame {
         createAccountBttn.setBackground(new java.awt.Color(0, 153, 51));
         createAccountBttn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         createAccountBttn.setForeground(new java.awt.Color(255, 255, 255));
-        createAccountBttn.setText("Create New Account");
+        createAccountBttn.setText("CREATE NEW ACCOUNT");
         createAccountBttn.setBorder(new javax.swing.border.MatteBorder(null));
         createAccountBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,7 +192,7 @@ public class NewUser extends javax.swing.JFrame {
         });
 
         cancelBttn1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        cancelBttn1.setText("Cancel");
+        cancelBttn1.setText("CANCEL");
         cancelBttn1.setBorder(new javax.swing.border.MatteBorder(null));
         cancelBttn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,13 +313,13 @@ public class NewUser extends javax.swing.JFrame {
                             .addComponent(deptFld, 0, 176, Short.MAX_VALUE))
                         .addGap(54, 54, 54))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(createAccountBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createAccountBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(resetBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(cancelBttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(227, 227, 227))
+                .addComponent(cancelBttn1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(212, 212, 212))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

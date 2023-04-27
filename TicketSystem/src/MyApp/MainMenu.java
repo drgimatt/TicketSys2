@@ -88,7 +88,7 @@ public class MainMenu extends javax.swing.JFrame {
     MySQLConnector connector;
     private String acctype, firstname, lastname, department, empid;
     private String credTableParam = "SELECT * FROM credentials";
-    private String solvedTicksParam = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed' AND AssignedDepartment = '" + getDepartment() + "';";
+    private String solvedTicksParam = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed';";
     private Data_Tickets mySql = new Data_Tickets();
     private ArrayList<Tickets> alltickets, solvedtickets, assignedtickets, mytickets, tickethistory, followuptickets;
     private Data_Credentials creds = new Data_Credentials();
@@ -1939,7 +1939,7 @@ public class MainMenu extends javax.swing.JFrame {
             if(n.getSeenNotif() == 0){
                 switch (n.getEventType()) {
                     case "assign":
-                        test.loadNotif(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getId() +".", n.getDate());
+                        test.loadNotif(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getTicketid() +".", n.getDate());
                         break;
                     case "close":
                         test.loadNotif("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
@@ -1954,7 +1954,7 @@ public class MainMenu extends javax.swing.JFrame {
             else if(n.getSeenNotif() == 1){
                 switch (n.getEventType()) {
                     case "assign":
-                        test.loadNotifLighten(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getId() +".", n.getDate());
+                        test.loadNotifLighten(n.getEventUser() + " assigned you to a new ticket. Check the Assigned Tickets table for Ticket ID: " + n.getTicketid() +".", n.getDate());
                         break;
                     case "close":
                         test.loadNotifLighten("Your created ticket, " + n.getTicketid() + " has been closed. Check the My Tickets table.", n.getDate());
@@ -2433,11 +2433,13 @@ public class MainMenu extends javax.swing.JFrame {
              jLabel17.setVisible(false);
              dept.setEnabled(false);
              dept.setSelectedItem(getDepartment());
+             solvedTicksParam = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed' AND AssignedDepartment = '" + getDepartment() + "';";
              break;
          case "Administrator":
              manageUserButton.setVisible(true);
              depComboBox.setEnabled(false);
              credTableParam = "SELECT * FROM credentials WHERE department = '" + getDepartment() + "' AND acctype != 'Superadmin'";
+             solvedTicksParam = "SELECT m1.* FROM masterrecord m1 LEFT JOIN masterrecord m2 ON (m1.TicketID = m2.TicketID and m1.RevisionCount < m2.RevisionCount) WHERE m2.RevisionCount IS NULL HAVING Status = 'Closed' AND AssignedDepartment = '" + getDepartment() + "';";
              dept.setEnabled(false);
              dept.setSelectedItem(getDepartment());
              break;
@@ -2450,6 +2452,7 @@ public class MainMenu extends javax.swing.JFrame {
              break;
      }
         jLabel3.setText("Are you ready to work on your tickets, " + getFirstname() + " " + getLastname() + "?");
+        updateTableDisplay();
     }
     
     private void updateTableDisplay(){   
