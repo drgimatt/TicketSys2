@@ -160,7 +160,6 @@ public class UpdateUser extends javax.swing.JFrame {
         acctypeSel.setBackground(new java.awt.Color(0, 102, 204));
         acctypeSel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acctypeSel.setForeground(new java.awt.Color(255, 255, 255));
-        acctypeSel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Administrator" }));
         acctypeSel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         acctypeSel.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -204,6 +203,8 @@ public class UpdateUser extends javax.swing.JFrame {
                 cancelBttn1ActionPerformed(evt);
             }
         });
+
+        empIDFld.setEditable(false);
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel12.setText("Employee ID:");
@@ -551,30 +552,30 @@ public class UpdateUser extends javax.swing.JFrame {
 
     private void acctypeSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acctypeSelActionPerformed
         // TODO add your handling code here:
-        Data_Credentials creds = new Data_Credentials();
-        ArrayList<Credentials> user = null;
-        if (enableAccType == true){
-        if(acctypeSel.getSelectedItem() == "Superadmin"){
-        String qry = "SELECT * FROM credentials WHERE acctype='Superadmin'";
-        try {
-            user = creds.ShowRec(qry);
-            for (Credentials u: user){
-//                if((acctypeSel.getSelectedItem().toString().equals("Administrator") || acctypeSel.getSelectedItem().toString().equals("Employee"))){
+//        Data_Credentials creds = new Data_Credentials();
+//        ArrayList<Credentials> user;
+//        if (enableAccType == true){
+//        String qry = "SELECT * FROM credentials WHERE acctype = 'Superadmin'";
+//        try {
+//            user = creds.ShowRec(qry);
+//            for (Credentials u: user){
+//                System.out.println("Employee Number: " + u.getEmpnum());
+//                if((acctypeSel.getSelectedItem() == "Administrator" || acctypeSel.getSelectedItem() == "Employee" ) && u.getEmpnum().equals(empIDFld.getText())){ // gumagana pero nagfafall apart if nagtransition from admin to superadmin
 //                        JOptionPane.showMessageDialog(null, "Superadmin cannot downgrade their account.", "Error", JOptionPane.ERROR_MESSAGE);
 //                        acctypeSel.setSelectedIndex(2);
 //                        break;
 //                }
-                if (!getPrivilage().equals("Superadmin") && !user.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
-                        acctypeSel.setSelectedIndex(0);
-                        break;
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }       
-      } 
+//                if ((acctypeSel.getSelectedItem() == "Superadmin" && !u.getEmpnum().equals(empIDFld.getText())) && !user.isEmpty() ) {
+//                        JOptionPane.showMessageDialog(null, "There is already a Superadmin account", "Error", JOptionPane.ERROR_MESSAGE);
+//                        acctypeSel.setSelectedIndex(0);
+//                        break;
+//                }                
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//     
+//      } 
     }//GEN-LAST:event_acctypeSelActionPerformed
 
     private void acctypeSelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_acctypeSelItemStateChanged
@@ -685,6 +686,24 @@ public class UpdateUser extends javax.swing.JFrame {
     }
     
     public void populateflds(String t) throws ParseException{
+        String qry = "SELECT * FROM credentials WHERE empnum = '" + t + "' AND acctype = 'Superadmin'";
+        try {
+            user = creds.ShowRec(qry);
+            for (Credentials u: user){
+                System.out.println("Employee Number: " + u.getEmpnum());
+                
+                if(u.getEmpnum().equals(t)){
+                    acctypeSel.removeAllItems();
+                    acctypeSel.addItem("Superadmin");                 
+                }
+                               
+            }        
+        if(user.isEmpty()){
+                    acctypeSel.removeAllItems();
+                    acctypeSel.addItem("Employee");
+                    acctypeSel.addItem("Administrator");        
+        }
+            
         try {
             EncryptionDecryption hash = new EncryptionDecryption();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -719,6 +738,20 @@ public class UpdateUser extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(UpdateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     
+
+        
+        
+        
+        
+        
+        
     }
     
     private void setInterface(String x, String y) {
